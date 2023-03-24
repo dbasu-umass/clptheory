@@ -1,4 +1,4 @@
-#' Circulating capital model using the Standard Interpretation.
+#' Circulating capital model 1 using the Standard Interpretation.
 #'
 #' This function computes the uniform rate of profit, prices of production and labor values for a basic circulating capital model using the Standard Interpretation. The model has uniform wage rates across industries and does not take into account unproductive labor for labor value calculations.
 #'
@@ -52,7 +52,7 @@
 #' # Direct labor input vector (simple)
 #' l_simple <- l
 #' # Compute prices of production
-#' si1 <- ppstdint1(A = A,l = l,b = b,Q = Q,l_simple = l)
+#' ppstdint1(A = A,l = l,b = b,Q = Q,l_simple = l)
 #'
 ppstdint1 <- function(A, l, b, Q, l_simple){
 
