@@ -90,3 +90,84 @@ si1$ppabs
 #>           [,1]      [,2]     [,3]
 #> [1,] 0.5703988 0.2388832 1.341621
 ```
+
+### New Interpretation
+
+This is a basic example which shows you how to compute the uniform rate
+of profit and the vectors of labor values and prices of production for a
+basic circulating capital model using the New Interpretation:
+
+``` r
+library(clptheory)
+
+# ------ Data
+
+# Input-output matrix
+A <- matrix(
+  data = c(0.265,0.968,0.00681,0.0121,0.391,0.0169,0.0408,0.808,0.165),
+  nrow=3, ncol=3, byrow = TRUE
+)
+
+# Direct labor input vector
+l <- matrix(
+  data = c(0.193, 3.562, 0.616),
+  nrow=1
+)
+
+# Real wage bundle vector
+b <- matrix(
+  data = c(0.0109, 0.0275, 0.296),
+  ncol=1
+)
+
+# Gross output vector
+Q <- matrix(
+  data = c(26530, 18168, 73840),
+  ncol=1
+)
+
+# Market prices vector
+m <- matrix(
+  data = c(4, 60, 7),
+  nrow=1
+)
+
+# Uniform nominal wage rate
+wavg <- m%*%b
+
+# Value of labor power
+v <- 2/3
+
+# Estimate circulating capital model with NI
+ni1 <- ppnewint1(
+  A = A,
+  l = l,
+  w = wavg[1,1],
+  v = v,
+  Q = Q,
+  l_simple = l
+)
+```
+
+What is the uniform rate of profit?
+
+``` r
+ni1$urop
+#> [1] 0.2116339
+```
+
+What is the vector of labor values?
+
+``` r
+ni1$lvalues
+#>           [,1]     [,2]      [,3]
+#> [1,] 0.4398417 7.739431 0.8979541
+```
+
+What is the vector of prices of production (absolute)?
+
+``` r
+ni1$ppabs
+#>          [,1]     [,2]     [,3]
+#> [1,] 2.621517 45.47507 4.703682
+```
