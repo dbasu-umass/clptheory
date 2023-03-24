@@ -99,7 +99,7 @@ ppnewint1 <- function(A, l, w, v, Q, l_simple){
     # Find root to get uniform rate of profit
     # Note: upper bound should be kept less than
     # R because the function blows up at R
-    r <- uniroot(myfunc,c(0,(R-0.00001)))$root
+    r <- stats::uniroot(myfunc,c(0,(R-0.00001)))$root
     
     # ----- Solve for price of production vector
     p_abs <- (1+r)*(w*l)%*%solve(I-(1+r)*A)
