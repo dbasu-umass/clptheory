@@ -1,6 +1,6 @@
 #' Circulating capital model using the Standard Interpretation.
 #'
-#' This function computes the uniform rate of profit, prices of production and labor values for a circulating capital model with uniform wage rates across industries and not taking account of unproductive labor for labor value calculations.
+#' This function computes the uniform rate of profit, prices of production and labor values for a basic circulating capital model using the Standard Interpretation. The model has uniform wage rates across industries and does not take into account unproductive labor for labor value calculations.
 #'
 #' @param A n x n input-output matrix.
 #' @param l 1 x n vector of complex labor input.
