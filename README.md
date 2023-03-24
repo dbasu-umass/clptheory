@@ -23,9 +23,11 @@ devtools::install_github("dbasu-umass/clptheory")
 
 ## Example
 
+### Standard Interpretation
+
 This is a basic example which shows you how to compute the uniform rate
 of profit and the vectors of labor values and prices of production for a
-basic circulating capital model:
+basic circulating capital model using the Standard Interpretation:
 
 ``` r
 library(clptheory)
@@ -57,44 +59,34 @@ Q <- matrix(
 )
 
 # Estimate circulating capital model with SI
-# and see results on screen
-ppstdint1(
+si1 <- ppstdint1(
   A = A,
   l = l,
   b = b,
   Q = Q,
   l_simple = l
 )
-#> $meig
-#> [1] 0.7205731
-#> 
-#> $urop
+```
+
+What is the uniform rate of profit?
+
+``` r
+si1$urop
 #> [1] 0.3877843
-#> 
-#> $mrop
-#> [1] 1.024939
-#> 
-#> $ppabs
-#>           [,1]      [,2]     [,3]
-#> [1,] 0.5703988 0.2388832 1.341621
-#> 
-#> $pprel
-#> [1] 0.3861133 0.1617044 0.9081675
-#> 
-#> $lvalues
+```
+
+What is the vector of labor values?
+
+``` r
+si1$lvalues
 #>           [,1]     [,2]      [,3]
 #> [1,] 0.4398417 7.739431 0.8979541
-#> 
-#> $dprice
-#>          [,1]     [,2]      [,3]
-#> [1,] 0.238526 4.197091 0.4869603
-#> 
-#> $mevg
-#> [1] 0.5422997
-#> 
-#> $mnonneg
-#> [1] 1
-#> 
-#> $mirred
-#> [1] 1
+```
+
+What is the vector of prices of production (absolute)?
+
+``` r
+si1$ppabs
+#>           [,1]      [,2]     [,3]
+#> [1,] 0.5703988 0.2388832 1.341621
 ```
