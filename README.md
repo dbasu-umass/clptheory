@@ -139,6 +139,47 @@ nregtestrel(
 #> [1] 0.9881081
 ```
 
+Let us now compute the various non-regression-based measures of
+deviation between the vector of all possible relative labor values and
+the vector of all possible relative prices of production.
+
+``` r
+regtestrel(x=si1$ppabs,y=si1$lvalues)
+#> $a0lg
+#> (Intercept) 
+#>  -0.8107143 
+#> 
+#> $a1lg
+#>  log(relv) 
+#> -0.5054946 
+#> 
+#> $r2lg
+#> [1] 0.9289345
+#> 
+#> $fstatlg
+#> [1] 58.02628
+#> 
+#> $pvallg
+#> [1] 0.0924
+#> 
+#> $a0lv
+#> (Intercept) 
+#>    1.473692 
+#> 
+#> $a1lv
+#>       relv 
+#> -0.1560277 
+#> 
+#> $r2lv
+#> [1] 0.3863259
+#> 
+#> $fstatlv
+#> [1] 20.81069
+#> 
+#> $pvallv
+#> [1] 0.1532
+```
+
 ### New Interpretation
 
 This is a basic example which shows you how to compute the uniform rate
@@ -241,4 +282,45 @@ nregtestrel(
 #> 
 #> $distangle
 #> [1] 0.06141188
+```
+
+Let us now compute the various regression-based measures of deviation
+between the vector of all possible relative labor values and the vector
+of all possible relative prices of production.
+
+``` r
+regtestrel(x=ni1$ppabs,y=ni1$lvalues)
+#> $a0lg
+#> (Intercept) 
+#>  0.09496661 
+#> 
+#> $a1lg
+#> log(relv) 
+#>  1.018689 
+#> 
+#> $r2lg
+#> [1] 0.9997416
+#> 
+#> $fstatlg
+#> [1] 3.915071
+#> 
+#> $pvallg
+#> [1] 0.3365
+#> 
+#> $a0lv
+#>  (Intercept) 
+#> 0.0007242004 
+#> 
+#> $a1lv
+#>     relv 
+#> 1.121668 
+#> 
+#> $r2lv
+#> [1] 0.9999983
+#> 
+#> $fstatlv
+#> [1] 5618.79
+#> 
+#> $pvallv
+#> [1] 0.0094
 ```

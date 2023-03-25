@@ -112,6 +112,10 @@ nregtestrel(
   Q = Q
 )
 ```
+Let us now compute the various non-regression-based measures of deviation between the vector of all possible relative labor values and the vector of all possible relative prices of production.
+```{r}
+regtestrel(x=si1$ppabs,y=si1$lvalues)
+```
 
 
 ### New Interpretation
@@ -183,5 +187,8 @@ nregtestrel(
   Q=Q
   )
 ```
-
+Let us now compute the various regression-based measures of deviation between the vector of all possible relative labor values and the vector of all possible relative prices of production.
+```{r}
+regtestrel(x=ni1$ppabs,y=ni1$lvalues)
+```
 
