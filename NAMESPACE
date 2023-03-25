@@ -3,6 +3,7 @@
 export(nregtestrel)
 export(ppnewint1)
 export(ppstdint1)
+export(ppstdint3)
 export(regtestrel)
 importFrom(car,linearHypothesis)
 importFrom(popdemo,isIrreducible)
