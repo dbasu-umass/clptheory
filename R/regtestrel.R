@@ -8,6 +8,7 @@
 #' @importFrom car linearHypothesis
 #' @importFrom utils combn
 #' @importFrom stats lm
+#' @importFrom stats nobs
 #' 
 #' @return A list with the following elements:
 #' \item{a0lg}{Intercept in the log-log regression}
