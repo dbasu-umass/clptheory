@@ -7,9 +7,9 @@
 regtestrel(x, y)
 }
 \arguments{
-\item{x}{1 x n price vector.}
+\item{x}{price vector (1 x n).}
 
-\item{y}{1 x n value vector.}
+\item{y}{value vector (1 x n).}
 }
 \value{
 A list with the following elements:
@@ -18,14 +18,16 @@ A list with the following elements:
 \item{r2lg}{R-squared in the log-log regression}
 \item{fstatlg}{F-stat of the null hypothesis that a0=0 and a1=1 in the log-log regression}
 \item{pvallg}{P-value of the null hypothesis that a0=0 and a1=1 in the log-log regression}
+\item{nlg}{Number of observations in the log-log regression}
 \item{a0lv}{Intercept in the level-level regression}
 \item{a1lv}{Slope in the level-level regression}
 \item{r2lv}{R-squared in the level-level regression}
 \item{fstatlv}{F-stat of the null hypothesis that a0=0 and a1=1 in the level-level regression}
 \item{pvallv}{P-value of the null hypothesis that a0=0 and a1=1 in the level-level regression}
+\item{nlv}{Number of observations in the level-level regression}
 }
 \description{
-This function computes various regression based measures of deviation between the vector of all possible relative labor values and the vector of all possible relative prices of production.
+This function computes various regression based measures of deviation between the vector of all possible relative labor values and the vector of all possible relative prices of production. It runs a log-log and a level-level regression of relative prices on relative values and test the joint null hypothesis that the intercept is 0 and the slope is 1.
 }
 \examples{
 
