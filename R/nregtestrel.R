@@ -9,7 +9,9 @@
 #' @param Q n x 1 gross output vector.
 #' @param mev monetary expression of value using gross output
 #'
-#'
+#' @importFrom stats sd
+#' @importFrom utils combn
+#' 
 #' @return A list with the following elements:
 #' \item{rmse}{Root mean squared error}
 #' \item{mad}{Mean absolute distance}
@@ -75,11 +77,11 @@ nregtestrel <- function(x,y,w,w_avg,mev,Q){
   # ---------- Relative vectors (All Combinations) -------- #
   
   # All possible relative prices
-  x2 <- combn(mydat1$x, 2)
+  x2 <- utils::combn(mydat1$x, 2)
   relp_all <- x2[1,]/x2[2,]
   
   # All possible relative values
-  y2 <- combn(mydat1$y, 2)
+  y2 <- utils::combn(mydat1$y, 2)
   relv_all <- y2[1,]/y2[2,]
   
   # ------------- Measures ---------------------- #
@@ -92,17 +94,17 @@ nregtestrel <- function(x,y,w,w_avg,mev,Q){
   # --- Classical distance measure (CDM)
   # Relative wage vector
   w_rel <- mydat1$w/w_avg
-  w_comb <- combn(w_rel, 2)
+  w_comb <- utils::combn(w_rel, 2)
   rel_w <- w_comb[1,]/w_comb[2,]
   
   # d vector
   d_j <- w_rel * mydat1$y
-  d_comb <- combn(d_j, 2)
+  d_comb <- utils::combn(d_j, 2)
   rel_d <- d_comb[1,]/d_comb[2,]
   
   # Vector of weights
   omega_j <- mydat1$Q/sum(mydat1$Q)
-  omega_2 <- combn(omega_j, 2)
+  omega_2 <- utils::combn(omega_j, 2)
   rel_omega <- omega_2[1,]*omega_2[2,]
   
   # CDM
@@ -113,7 +115,7 @@ nregtestrel <- function(x,y,w,w_avg,mev,Q){
   
   # --- Angle in degrees
   z <- relp_all/relv_all
-  tan_alpha <- (sd(z)/mean(z))
+  tan_alpha <- (stats::sd(z)/mean(z))
   alpha_rel_all <- (atan(tan_alpha))*(180/pi)
   
   # -- Distance using angle
