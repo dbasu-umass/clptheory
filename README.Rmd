@@ -34,7 +34,7 @@ These are examples of a 3-industry economy which shows you how to:
 - compute the uniform rate of profit and the vectors of labor values and prices of production for a basic circulating capital model using the Standard Interpretation; and
 - compute regression- and non-regression-based measures of deviation between the vector of _all possible_ relative prices of production and the vector of _all possible_ relative labor values.
 
-This example was presented on pages 46-57 of E. M. Ochoa's dissertation (Ochoa, E. M. 1984. Labor-Value and Prices of Production: An Interindustry Study of the U.S. Economy, 1947–1972. PhD thesis, New School for Social Research, New York, NY.). This example has also been discussed in Appendix B of Basu and Moraitis, 2023. (Basu, Deepankar and Moraitis, Athanasios, "Alternative Approaches to Labor Values andPrices of Production: Theory and Evidence" (2023). Economics Department Working Paper Series. 347. UMass Amherst. URL: https://scholarworks.umass.edu/econ_workingpaper/347/)
+This example was presented on pages 46-57 of E. M. Ochoa's dissertation (Ochoa, E. M. 1984. Labor-Value and Prices of Production: An Interindustry Study of the U.S. Economy, 1947–1972. PhD thesis, _New School for Social Research_, New York, NY.). This example has also been discussed in Appendix B of Basu and Moraitis, 2023. (Basu, Deepankar and Moraitis, Athanasios, "Alternative Approaches to Labor Values and Prices of Production: Theory and Evidence" (2023). Economics Department Working Paper Series. 347. _UMass Amherst_. URL: https://scholarworks.umass.edu/econ_workingpaper/347/)
 
 ### The Data
 Let us load the library and create the data for our examples.
