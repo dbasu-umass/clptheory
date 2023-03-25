@@ -52,11 +52,14 @@
 #' m <- matrix(data = c(4, 60, 7),nrow=1)
 #' # Uniform nominal wage rate
 #' wavg <- m%*%b
+#' # Vector of nominal wage rates
+#' w <- matrix(data=rep(wavg,3),nrow=1)
 #' # Value of labor power
 #' v <- 2/3
 #' # Compute prices of production
 #' ni1 <- ppnewint1(A = A,l = l,w = wavg[1,1],v=v,Q = Q,l_simple = l)
-#'
+#' # Nonregression-based measures of deviation
+#' nregtestrel(x=ni1$ppabs,y=ni1$lvalues,w=w,w_avg=wavg[1,1],mev=ni1$mevg,Q=Q)
 
 nregtestrel <- function(x,y,w,w_avg,mev,Q){
   
