@@ -25,7 +25,7 @@ ppstdint3(A, l, b, Q, D, K, t, l_simple)
 }
 \value{
 A list with the following elements:
-\item{meig}{Maximum eigen value of M}
+\item{meig}{Maximum eigen value of N}
 \item{urop}{Uniform rate of profit (as a fraction)}
 \item{mrop}{Maximum rate of profit (as a fraction)}
 \item{ppabs}{Price of production vector (absolute)}
