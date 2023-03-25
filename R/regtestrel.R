@@ -7,6 +7,7 @@
 #' 
 #' @importFrom car linearHypothesis
 #' @importFrom utils combn
+#' @importFrom stats lm
 #' 
 #' @return A list with the following elements:
 #' \item{a0lg}{Intercept in the log-log regression}
@@ -79,8 +80,8 @@ regtestrel <- function(x,y){
   relv <- y2[1,]/y2[2,]
   
   # Run regression
-  dev1 <- lm(log(relp) ~ log(relv))
-  dev2 <- lm(relp ~ relv)
+  dev1 <- stats::lm(log(relp) ~ log(relv))
+  dev2 <- stats::lm(relp ~ relv)
   
   # Conduct F-test
   l1 <- car::linearHypothesis(dev1, c("(Intercept)=0","log(relv)=1"))
