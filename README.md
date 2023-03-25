@@ -36,6 +36,16 @@ non-regression-based measures of deviation between the vector of *all
 possible* relative prices of production and the vector of *all possible*
 relative labor values.
 
+This example was presented on pages 46-57 of E. M. Ochoa’s dissertation
+(Ochoa, E. M. 1984. Labor-Value and Prices of Production: An
+Interindustry Study of the U.S. Economy, 1947–1972. PhD thesis, New
+School for Social Research, New York, NY.). This example has also been
+discussed in Appendix B of Basu and Moraitis, 2023. (Basu, Deepankar and
+Moraitis, Athanasios, “Alternative Approaches to Labor Values andPrices
+of Production: Theory and Evidence” (2023). Economics Department Working
+Paper Series. 347. UMass Amherst. URL:
+<https://scholarworks.umass.edu/econ_workingpaper/347/>)
+
 ### The Data
 
 Let us load the library and create the data for our examples.
