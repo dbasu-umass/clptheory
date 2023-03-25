@@ -2,12 +2,12 @@
 #'
 #' This function computes various non-regression based measures of deviation between the vector of all possible relative labor values and the vector of all possible relative prices of production.
 #'
-#' @param x 1 x n price vector.
-#' @param y 1 x n value vector.
-#' @param w 1 X n nominal wage rate vector.
+#' @param x price vector (1 x n).
+#' @param y value vector (1 x n).
+#' @param w nominal wage rate vector (1 x n).
 #' @param w_avg average nominal wage rate (scalar)
-#' @param Q n x 1 gross output vector.
-#' @param mev monetary expression of value using gross output
+#' @param Q gross output vector (n x 1).
+#' @param mev monetary expression of value using gross output (scalar)
 #'
 #' @importFrom stats sd
 #' @importFrom utils combn
