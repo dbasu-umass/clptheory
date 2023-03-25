@@ -27,7 +27,7 @@ A list with the following elements:
 \item{nlv}{Number of observations in the level-level regression}
 }
 \description{
-This function computes various regression based measures of deviation between the vector of all possible relative labor values and the vector of all possible relative prices of production. It runs a log-log and a level-level regression of relative prices on relative values and test the joint null hypothesis that the intercept is 0 and the slope is 1.
+This function computes various regression based measures of deviation between the vector of all possible relative labor values and the vector of all possible relative prices of production. It runs a log-log and a level-level regression of relative prices on relative values and tests the joint null hypothesis that the intercept is 0 and the slope is 1.
 }
 \examples{
 
