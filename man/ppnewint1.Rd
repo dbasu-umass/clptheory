@@ -7,17 +7,17 @@
 ppnewint1(A, l, w, v, Q, l_simple)
 }
 \arguments{
-\item{A}{n x n input-output matrix.}
+\item{A}{input-output matrix (n x n).}
 
-\item{l}{1 x n vector of complex labor input.}
+\item{l}{vector of complex labor input (1 x n).}
 
 \item{w}{uniform nominal wage rate (scalar).}
 
 \item{v}{value of labor power (scalar)}
 
-\item{Q}{n x 1 gross output vector.}
+\item{Q}{gross output vector (n x 1).}
 
-\item{l_simple}{1 x n vector of simple labor input}
+\item{l_simple}{vector of simple labor input (1 x n).}
 }
 \value{
 A list with the following elements:
