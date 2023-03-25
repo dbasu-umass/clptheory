@@ -2,11 +2,11 @@
 #'
 #' This function computes the uniform rate of profit, prices of production and labor values for a basic circulating capital model using the Standard Interpretation. The model has uniform wage rates across industries and does not take into account unproductive labor for labor value calculations.
 #'
-#' @param A n x n input-output matrix.
-#' @param l 1 x n vector of complex labor input.
-#' @param b n x 1 vector real wage bundle.
-#' @param Q n x 1 gross output vector.
-#' @param l_simple 1 x n vector of simple labor input
+#' @param A input-output matrix (n x n).
+#' @param l vector of complex labor input (1 x n).
+#' @param b vector real wage bundle (n x 1).
+#' @param Q gross output vector (n x 1).
+#' @param l_simple vector of simple labor input (1 x n).
 #'
 #' @importFrom popdemo isIrreducible
 #'
