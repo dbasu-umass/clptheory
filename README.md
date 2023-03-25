@@ -474,8 +474,133 @@ rni1 <- regtestrel(x=ni1$ppabs,y=ni1$lvalues)
 #> [1] 3
 ```
 
-We can compare the results for the analysis of the circulating capital
-model from the SI approach and the NI approach for the
+#### Capital Stock Model
+
+``` r
+ni2 <- ppnewint5(
+  A = A,
+  l = l,
+  v = v,
+  w = wavg[1,1],
+  Q = Q,
+  D = D,
+  K = K,
+  t = t,
+  l_simple = l
+)
+```
+
+What is the uniform rate of profit?
+
+``` r
+ni2$urop
+#> [1] 0.1569311
+```
+
+What is the vector of labor values?
+
+``` r
+ni2$lvalues
+#>           [,1]     [,2]      [,3]
+#> [1,] 0.5192079 8.309406 0.9407729
+```
+
+What is the vector of prices of production (absolute)?
+
+``` r
+ni2$ppabs
+#>         [,1]    [,2]     [,3]
+#> [1,] 3.90503 48.3282 5.017568
+```
+
+Let us now compute the various non-regression-based measures of
+deviation between the vector of all possible relative labor values and
+the vector of all possible relative prices of production.
+
+``` r
+nrni2 <- nregtestrel(
+  x=ni2$ppabs,
+  y=ni2$lvalues,
+  w=w,
+  w_avg=wavg[1,1],
+  mev=ni2$mevg,
+  Q=Q
+  )
+(nrni2)
+#> $rmse
+#> [1] 0.295736
+#> 
+#> $mad
+#> [1] 0.2646106
+#> 
+#> $mawd
+#> [1] 0.07588155
+#> 
+#> $cdm
+#> [1] 0.07588155
+#> 
+#> $angle
+#> [1] 7.288633
+#> 
+#> $distangle
+#> [1] 0.1271249
+#> 
+#> $lrelpplv
+#> [1] 3
+```
+
+Let us now compute the various regression-based measures of deviation
+between the vector of all possible relative labor values and the vector
+of all possible relative prices of production.
+
+``` r
+rni2 <- regtestrel(x=ni2$ppabs,y=ni2$lvalues)
+(rni1)
+#> $a0lg
+#> (Intercept) 
+#>  0.09496661 
+#> 
+#> $a1lg
+#> log(relv) 
+#>  1.018689 
+#> 
+#> $r2lg
+#> [1] 0.9997416
+#> 
+#> $fstatlg
+#> [1] 3.915071
+#> 
+#> $pvallg
+#> [1] 0.3365
+#> 
+#> $nlg
+#> [1] 3
+#> 
+#> $a0lv
+#>  (Intercept) 
+#> 0.0007242004 
+#> 
+#> $a1lv
+#>     relv 
+#> 1.121668 
+#> 
+#> $r2lv
+#> [1] 0.9999983
+#> 
+#> $fstatlv
+#> [1] 5618.79
+#> 
+#> $pvallv
+#> [1] 0.0094
+#> 
+#> $nlv
+#> [1] 3
+```
+
+## Comparison of SI and NI
+
+We can compare the results for the analysis of the *circulating capital
+model* from the SI approach and the NI approach for the
 non-regression-based measures of deviation between relative prices of
 production and relative values.
 
@@ -490,5 +615,24 @@ colnames(comp1) <- c("SI","NI")
 #> cdm       1.51884   0.03132663
 #> angle     59.21479  3.519195  
 #> distangle 0.9881081 0.06141188
+#> lrelpplv  3         3
+```
+
+We can compare the results for the analysis of the *capital stock model*
+from the SI approach and the NI approach for the non-regression-based
+measures of deviation between relative prices of production and relative
+values.
+
+``` r
+comp2 <- cbind(nrsi2,nrni2)
+colnames(comp2) <- c("SI","NI")
+(comp2)
+#>           SI        NI        
+#> rmse      1.152957  0.295736  
+#> mad       1.031963  0.2646106 
+#> mawd      0.2125032 0.07588155
+#> cdm       0.2125032 0.07588155
+#> angle     51.23735  7.288633  
+#> distangle 0.8647594 0.1271249 
 #> lrelpplv  3         3
 ```
