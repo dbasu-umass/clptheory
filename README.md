@@ -28,13 +28,15 @@ devtools::install_github("dbasu-umass/clptheory")
 
 ## Examples
 
-These are examples of a 3-industry economy which shows you how to: 1.
-compute the uniform rate of profit and the vectors of labor values and
-prices of production for a basic circulating capital model using the
-Standard Interpretation; and 2. compute regression- and
-non-regression-based measures of deviation between the vector of *all
-possible* relative prices of production and the vector of *all possible*
-relative labor values.
+These are examples of a 3-industry economy which shows you how to:
+
+1.  compute the uniform rate of profit and the vectors of labor values
+    and prices of production for a basic circulating capital model using
+    the Standard Interpretation; and
+
+2.  compute regression- and non-regression-based measures of deviation
+    between the vector of *all possible* relative prices of production
+    and the vector of *all possible* relative labor values.
 
 This example was presented on pages 46-57 of E. M. Ochoa’s dissertation
 (Ochoa, E. M. 1984. Labor-Value and Prices of Production: An
