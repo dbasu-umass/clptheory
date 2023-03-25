@@ -2,8 +2,8 @@
 #'
 #' This function computes various regression based measures of deviation between the vector of all possible relative labor values and the vector of all possible relative prices of production.
 #'
-#' @param x 1 x n price vector.
-#' @param y 1 x n value vector.
+#' @param x price vector (1 x n).
+#' @param y value vector (1 x n).
 #' 
 #' @importFrom car linearHypothesis
 #' @importFrom utils combn
