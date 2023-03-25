@@ -7,17 +7,17 @@
 nregtestrel(x, y, w, w_avg, mev, Q)
 }
 \arguments{
-\item{x}{1 x n price vector.}
+\item{x}{price vector (1 x n).}
 
-\item{y}{1 x n value vector.}
+\item{y}{value vector (1 x n).}
 
-\item{w}{1 X n nominal wage rate vector.}
+\item{w}{nominal wage rate vector (1 x n).}
 
 \item{w_avg}{average nominal wage rate (scalar)}
 
-\item{mev}{monetary expression of value using gross output}
+\item{mev}{monetary expression of value using gross output (scalar)}
 
-\item{Q}{n x 1 gross output vector.}
+\item{Q}{gross output vector (n x 1).}
 }
 \value{
 A list with the following elements:
@@ -27,6 +27,7 @@ A list with the following elements:
 \item{cdm}{Classical distance measure}
 \item{angle}{Angle between the two vectors (in degrees)}
 \item{distangle}{Distance computed using the angle}
+\item{lrelpplv}{Length of the relative price of production (or labor value) vector}
 }
 \description{
 This function computes various non-regression based measures of deviation between the vector of all possible relative labor values and the vector of all possible relative prices of production.
