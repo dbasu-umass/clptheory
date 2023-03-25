@@ -25,7 +25,7 @@
 #'
 #' @examples
 #'
-#' # ------ Data
+#' 
 #' # Input-output matrix
 #' A <- matrix(
 #' data = c(0.265,0.968,0.00681,0.0121,0.391,0.0169,0.0408,0.808,0.165),
@@ -56,7 +56,7 @@
 #' w <- matrix(data=rep(wavg,3),nrow=1)
 #' # Value of labor power
 #' v <- 2/3
-#' # Compute prices of production
+#' # Compute prices of production using NI
 #' ni1 <- ppnewint1(A = A,l = l,w = wavg[1,1],v=v,Q = Q,l_simple = l)
 #' # Nonregression-based measures of deviation
 #' nregtestrel(x=ni1$ppabs,y=ni1$lvalues,w=w,w_avg=wavg[1,1],mev=ni1$mevg,Q=Q)
