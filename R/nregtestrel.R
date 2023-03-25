@@ -19,6 +19,7 @@
 #' \item{cdm}{Classical distance measure}
 #' \item{angle}{Angle between the two vectors (in degrees)}
 #' \item{distangle}{Distance computed using the angle}
+#' \item{lrelpplv}{Length of the relative price of production (or labor value) vector}
 #' 
 #'
 #'@references Basu, Deepankar and Moraitis, Athanasios, "Alternative Approaches to Labor Values andPrices of Production: Theory and Evidence" (2023). Economics Department Working Paper Series. 347. URL: https://scholarworks.umass.edu/econ_workingpaper/347/
@@ -84,6 +85,9 @@ nregtestrel <- function(x,y,w,w_avg,mev,Q){
   y2 <- utils::combn(mydat1$y, 2)
   relv_all <- y2[1,]/y2[2,]
   
+  # Length of relative price/value vectors
+  lrelp <- length(relp_all)
+  
   # ------------- Measures ---------------------- #
   # --- RMSE%
   rmse_rel_all <- sqrt(mean(((relp_all/relv_all)-1)^2))
@@ -131,7 +135,8 @@ nregtestrel <- function(x,y,w,w_avg,mev,Q){
       mawd = mawd_rel_all, 
       cdm = cdm_rel_all,
       angle = alpha_rel_all,
-      distangle = d_rel_all
+      distangle = d_rel_all,
+      lrelpplv = lrelp
     )
   )
   
