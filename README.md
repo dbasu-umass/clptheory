@@ -7,9 +7,14 @@
 <!-- badges: end -->
 
 The goal of clptheory (*classical price theory*) is to create a suite of
-functions to compute the uniform rate of profit, the vector of price of
+functions to implement the classical theory of prices. The functions in
+this package computes the uniform rate of profit, the vector of price of
 production and the vector of labor values for different specifications
-of the circulating capital model and the capital stock model.
+of the circulating capital model and the capital stock model. The
+functions also computes various regression- and non-regression-based
+measures of deviation between the vector of *all possible* relative
+prices of production and the vector of *all possible* relative labor
+values.
 
 ## Installation
 
@@ -25,9 +30,13 @@ devtools::install_github("dbasu-umass/clptheory")
 
 ### Standard Interpretation
 
-This is a basic example which shows you how to compute the uniform rate
-of profit and the vectors of labor values and prices of production for a
-basic circulating capital model using the Standard Interpretation:
+This is an example of a 3-industry economy which shows you how to: -
+compute the uniform rate of profit and the vectors of labor values and
+prices of production for a basic circulating capital model using the
+Standard Interpretation; and - compute regression- and
+non-regression-based measures of deviation between the vector of *all
+possible* relative prices of production and the vector of *all possible*
+relative labor values.
 
 ``` r
 library(clptheory)
@@ -112,7 +121,7 @@ deviation between the vector of all possible relative labor values and
 the vector of all possible relative prices of production.
 
 ``` r
-nregtestrel(
+nrsi1 <- nregtestrel(
   x = si1$ppabs,
   y = si1$lvalues,
   w = w,
@@ -120,6 +129,7 @@ nregtestrel(
   mev = si1$mevg,
   Q = Q
 )
+(nrsi1)
 #> $rmse
 #> [1] 23.68697
 #> 
@@ -137,6 +147,9 @@ nregtestrel(
 #> 
 #> $distangle
 #> [1] 0.9881081
+#> 
+#> $lrelpplv
+#> [1] 3
 ```
 
 Let us now compute the various non-regression-based measures of
@@ -144,7 +157,8 @@ deviation between the vector of all possible relative labor values and
 the vector of all possible relative prices of production.
 
 ``` r
-regtestrel(x=si1$ppabs,y=si1$lvalues)
+rsi1 <- regtestrel(x=si1$ppabs,y=si1$lvalues)
+(rsi1)
 #> $a0lg
 #> (Intercept) 
 #>  -0.8107143 
@@ -162,6 +176,9 @@ regtestrel(x=si1$ppabs,y=si1$lvalues)
 #> $pvallg
 #> [1] 0.0924
 #> 
+#> $nlg
+#> [1] 3
+#> 
 #> $a0lv
 #> (Intercept) 
 #>    1.473692 
@@ -178,13 +195,19 @@ regtestrel(x=si1$ppabs,y=si1$lvalues)
 #> 
 #> $pvallv
 #> [1] 0.1532
+#> 
+#> $nlv
+#> [1] 3
 ```
 
 ### New Interpretation
 
-This is a basic example which shows you how to compute the uniform rate
-of profit and the vectors of labor values and prices of production for a
-basic circulating capital model using the New Interpretation:
+We continue with the 3-industry example to - compute the uniform rate of
+profit and the vectors of labor values and prices of production for a
+basic circulating capital model using the New Interpretation; - and
+compute regression- and non-regression-based measures of deviation
+between the vector of *all possible* relative prices of production and
+the vector of *all possible* relative labor values.
 
 ``` r
 library(clptheory)
@@ -257,7 +280,7 @@ deviation between the vector of all possible relative labor values and
 the vector of all possible relative prices of production.
 
 ``` r
-nregtestrel(
+nrni1 <- nregtestrel(
   x=ni1$ppabs,
   y=ni1$lvalues,
   w=w,
@@ -265,6 +288,7 @@ nregtestrel(
   mev=ni1$mevg,
   Q=Q
   )
+(nrni1)
 #> $rmse
 #> [1] 0.1064786
 #> 
@@ -282,6 +306,9 @@ nregtestrel(
 #> 
 #> $distangle
 #> [1] 0.06141188
+#> 
+#> $lrelpplv
+#> [1] 3
 ```
 
 Let us now compute the various regression-based measures of deviation
@@ -289,7 +316,8 @@ between the vector of all possible relative labor values and the vector
 of all possible relative prices of production.
 
 ``` r
-regtestrel(x=ni1$ppabs,y=ni1$lvalues)
+rni1 <- regtestrel(x=ni1$ppabs,y=ni1$lvalues)
+(rni1)
 #> $a0lg
 #> (Intercept) 
 #>  0.09496661 
@@ -307,6 +335,9 @@ regtestrel(x=ni1$ppabs,y=ni1$lvalues)
 #> $pvallg
 #> [1] 0.3365
 #> 
+#> $nlg
+#> [1] 3
+#> 
 #> $a0lv
 #>  (Intercept) 
 #> 0.0007242004 
@@ -323,4 +354,25 @@ regtestrel(x=ni1$ppabs,y=ni1$lvalues)
 #> 
 #> $pvallv
 #> [1] 0.0094
+#> 
+#> $nlv
+#> [1] 3
+```
+
+We can compare the results from the SI and the NI for the
+non-regression-based measures of deviation between relative prices of
+production and relative values.
+
+``` r
+comp1 <- cbind(nrsi1,nrni1)
+colnames(comp1) <- c("SI","NI")
+(comp1)
+#>           SI        NI        
+#> rmse      23.68697  0.1064786 
+#> mad       14.04216  0.09129555
+#> mawd      1.51884   0.03132663
+#> cdm       1.51884   0.03132663
+#> angle     59.21479  3.519195  
+#> distangle 0.9881081 0.06141188
+#> lrelpplv  3         3
 ```
