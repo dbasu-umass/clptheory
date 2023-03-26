@@ -50,6 +50,14 @@ This package provides the following functions.
     (allows differential wage rates across industries + not taking
     account of unproductive industries) with the New Interpretation;
 
+6.  `nregtestrel`: a function that computes various non-regression-based
+    measures of deviation between the vector of *relative* prices of
+    production and the vector of *relative* labor values;
+
+7.  `regtestrel`: a function that computes various regression-based
+    measures of deviation between the vector of *relative* prices of
+    production and the vector of *relative* labor values;
+
 ## Examples
 
 These are examples of a 3-industry economy which shows you how to:
