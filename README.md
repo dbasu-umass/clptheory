@@ -34,37 +34,41 @@ This package provides the following functions.
     model (uniform wage rates across industries + not taking account of
     unproductive industries) with the Standard Interpretation;
 
-2.  `ppnewint1`: a function to estimate a basic circulating capital
-    model (uniform wage rates across industries + not taking account of
-    unproductive industries) with the New Interpretation;
+2.  `ppstdint2`: a function to estimate a circulating capital model
+    (uniform wage rates across industries + takes account of
+    unproductive industries) with the Standard Interpretation;
 
 3.  `ppstdint3`: a function to estimate a basic capital stock model
     (uniform wage rates across industries + not taking account of
     unproductive industries) with the Standard Interpretation;
 
-4.  `ppnewint5`: a function to estimate a basic capital stock model
-    (uniform wage rates across industries + not taking account of
+4.  `ppnewint1`: a function to estimate a basic circulating capital
+    model (uniform wage rates across industries + not taking account of
     unproductive industries) with the New Interpretation;
 
 5.  `ppnewint2`: a function to estimate a circulating capital model
     (allows differential wage rates across industries + not taking
     account of unproductive industries) with the New Interpretation;
 
-6.  `nregtestrel`: a function that computes various non-regression-based
-    measures of deviation between the vector of *relative* prices of
-    production and the vector of *relative* labor values;
-
-7.  `regtestrel`: a function that computes various regression-based
-    measures of deviation between the vector of *relative* prices of
-    production and the vector of *relative* labor values;
-
-8.  `ppnewint3`: a function to estimate a circulating capital model
+6.  `ppnewint3`: a function to estimate a circulating capital model
     (uniform wage rates across industries + takes account of
     unproductive industries) with the New Interpretation;
 
-9.  `ppnewint4`: a function to estimate a circulating capital model
+7.  `ppnewint4`: a function to estimate a circulating capital model
     (allows differential wage rates across industries + takes account of
     unproductive industries) with the New Interpretation;
+
+8.  `ppnewint5`: a function to estimate a basic capital stock model
+    (uniform wage rates across industries + not taking account of
+    unproductive industries) with the New Interpretation;
+
+9.  `nregtestrel`: a function that computes various non-regression-based
+    measures of deviation between the vector of *relative* prices of
+    production and the vector of *relative* labor values;
+
+10. `regtestrel`: a function that computes various regression-based
+    measures of deviation between the vector of *relative* prices of
+    production and the vector of *relative* labor values;
 
 ## Examples
 
