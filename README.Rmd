@@ -28,6 +28,18 @@ You can install the development version of clptheory from [GitHub](https://githu
 # install.packages("devtools")
 devtools::install_github("dbasu-umass/clptheory")
 ```
+## Main Functions
+This package provides the following functions.
+
+1. `ppstdint1`: a function to estimate a basic circulating capital model (uniform wage rates across industries + not taking account of unproductive industries) with the Standard Interpretation;
+
+2. `ppnewint1`: a function to estimate a basic circulating capital model (uniform wage rates across industries + not taking account of unproductive industries) with the New Interpretation;
+
+3. `ppstdint3`: a function to estimate a basic capital stock model (uniform wage rates across industries + not taking account of unproductive industries) with the Standard Interpretation;
+
+4. `ppnewint5`: a function to estimate a basic capital stock model (uniform wage rates across industries + not taking account of unproductive industries) with the New Interpretation;
+
+5. `ppnewint2`: a function to estimate a circulating capital model (allows differential wage rates across industries + not taking account of unproductive industries) with the New Interpretation;
 
 ## Examples
 These are examples of a 3-industry economy which shows you how to: 
