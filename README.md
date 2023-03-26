@@ -58,6 +58,10 @@ This package provides the following functions.
     measures of deviation between the vector of *relative* prices of
     production and the vector of *relative* labor values;
 
+8.  `ppnewint3`: a function to estimate a circulating capital model
+    (uniform wage rates across industries + takes account of
+    unproductive industries) with the New Interpretation;
+
 ## Examples
 
 These are examples of a 3-industry economy which shows you how to:

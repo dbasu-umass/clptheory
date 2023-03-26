@@ -45,6 +45,9 @@ This package provides the following functions.
 
 7. `regtestrel`: a function that computes various regression-based measures of deviation between the vector of _relative_ prices of production and the vector of _relative_ labor values;
 
+8. `ppnewint3`: a function to estimate a circulating capital model (uniform wage rates across industries + takes account of unproductive industries) with the New Interpretation;
+
+
 ## Examples
 These are examples of a 3-industry economy which shows you how to: 
 
