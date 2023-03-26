@@ -62,7 +62,7 @@
 #' # Value of labor power
 #' v <- 2/3
 #' # Compute prices of production
-#' ppnewint2(A = A,l = l,w = w,v=v,Q = Q,l_simple = l)
+#' ppnewint2(A = A,l = l,w = w[1,],v=v,Q = Q,l_simple = l)
 #'
 
 ppnewint2 <- function(A, l, w, v, Q, l_simple){

@@ -2,6 +2,7 @@
 
 export(nregtestrel)
 export(ppnewint1)
+export(ppnewint2)
 export(ppnewint5)
 export(ppstdint1)
 export(ppstdint3)
@@ -11,4 +12,5 @@ importFrom(popdemo,isIrreducible)
 importFrom(stats,lm)
 importFrom(stats,nobs)
 importFrom(stats,sd)
+importFrom(stats,uniroot)
 importFrom(utils,combn)
