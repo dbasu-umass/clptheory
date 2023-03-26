@@ -62,6 +62,10 @@ This package provides the following functions.
     (uniform wage rates across industries + takes account of
     unproductive industries) with the New Interpretation;
 
+9.  `ppnewint4`: a function to estimate a circulating capital model
+    (allows differential wage rates across industries + takes account of
+    unproductive industries) with the New Interpretation;
+
 ## Examples
 
 These are examples of a 3-industry economy which shows you how to:
