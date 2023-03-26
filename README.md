@@ -62,11 +62,23 @@ This package provides the following functions.
     (uniform wage rates across industries + not taking account of
     unproductive industries) with the New Interpretation;
 
-9.  `nregtestrel`: a function that computes various non-regression-based
+9.  `ppnewint6`: a function to estimate a capital stock model (allows
+    differential wage rates across industries + not taking account of
+    unproductive industries) with the New Interpretation;
+
+10. `ppnewint7`: a function to estimate a capital stock model (uniform
+    wage rates across industries + takes account of unproductive
+    industries) with the New Interpretation;
+
+11. `ppnewint8`: a function to estimate a capital stock model (allows
+    differential wage rates across industries + takes account of
+    unproductive industries) with the New Interpretation;
+
+12. `nregtestrel`: a function that computes various non-regression-based
     measures of deviation between the vector of *relative* prices of
     production and the vector of *relative* labor values;
 
-10. `regtestrel`: a function that computes various regression-based
+13. `regtestrel`: a function that computes various regression-based
     measures of deviation between the vector of *relative* prices of
     production and the vector of *relative* labor values;
 
