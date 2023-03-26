@@ -3,6 +3,7 @@
 export(nregtestrel)
 export(ppnewint1)
 export(ppnewint2)
+export(ppnewint3)
 export(ppnewint5)
 export(ppstdint1)
 export(ppstdint3)
