@@ -63,7 +63,9 @@ The package contains the following three datasets.
 
 2. `usaiot`: input-output tables for the USA extracted from the 2016 release of the World Input Output Database; this data set contains 53-industry input-output tables for the USA for 15 years, 2000-2014;
 
-3.  `usarwb`: personal consumption expenditure on the output of the 53 industries of the input-output tables for the USA extracted from the 2016 release of the World Input Output Database; this data set contains data for 15 years, 2000-2014;
+3.  `usarwb`: personal consumption expenditure on the output of the 53 industries of the input-output tables for the USA extracted from the 2016 release of the World Input Output Database; this data set contains data for 15 years, 2000-2014.
+
+
 ## Examples
 These are examples of a 3-industry economy which shows you how to: 
 
