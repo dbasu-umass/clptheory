@@ -82,15 +82,28 @@ This package provides the following functions.
     measures of deviation between the vector of *relative* prices of
     production and the vector of *relative* labor values;
 
-## Examples
+The package contains the following three datasets.
 
-These are examples of a 3-industry economy which shows you how to:
+1.  `usasea`: the socio economic accounts for the USA extracted from the
+    2016 release of the World Input Output Database; this data set
+    contains industry-level variables (53 industries) for the USA for 15
+    years, 2000-2014;
 
-1.  compute the uniform rate of profit and the vectors of labor values
+2.  `usaiot`: input-output tables for the USA extracted from the 2016
+    release of the World Input Output Database; this data set contains
+    53-industry input-output tables for the USA for 15 years, 2000-2014;
+
+3.  `usarwb`: personal consumption expenditure on the output of the 53
+    industries of the input-output tables for the USA extracted from the
+    2016 release of the World Input Output Database; this data set
+    contains data for 15 years, 2000-2014; \## Examples These are
+    examples of a 3-industry economy which shows you how to:
+
+4.  compute the uniform rate of profit and the vectors of labor values
     and prices of production for a basic circulating capital model using
     the Standard Interpretation; and
 
-2.  compute regression- and non-regression-based measures of deviation
+5.  compute regression- and non-regression-based measures of deviation
     between the vector of *all possible* relative prices of production
     and the vector of *all possible* relative labor values.
 
