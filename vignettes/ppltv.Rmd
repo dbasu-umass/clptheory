@@ -1,0 +1,127 @@
+---
+title: "Price of Production and Labor Values"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Price of Production and Labor Values}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Circulating Capital Model
+Consider a circulating capital model of a capitalist economy, where technology of production is captured by the $n \times n$ input-output matrix, $\hat{A}$, and the $1 \times n$ direct labor input vector, $\hat{l}$. The $i,j$-th element of the input-output matrix, $\hat{a}_{ij}$, and the $i$-th  element of the direct labor vector, $\hat{l}_i$, denote, respectively, the dollars of commodity $i$ and the amount of direct labor input (e.g., measured in hours) needed to produce one dollar of commodity $j$.
+
+The direct labor input vector, $\hat{l}$, is the vector of what the Marxian tradition calls _complex labor_. This labor input registers the differentials in average levels of skills and training associated with the labor inputs across industries. Thus, the direct labor input vector, measured in hours, will represent hours of labor of different degrees of complexity. We can contrast complex labor with _simple labor_, which is the labor performed by workers with basic skills available at any point in time to all members of a society. Complex labor, then, requires additional skill acquisition and training, in comparison to simple labor. We can convert the vector of complex labor, $\hat{l}$, into the vector of simple labor, $\hat{l}_s$, by multiplying each element of the former with the ratio of that industry's average wage rate and the minimum of the average nominal wage rate across industries, i.e.
+	\begin{equation}
+		\hat{l}_{s,i} = \left( \frac{w_i}{w_{min}}\right)  \hat{l}_i,
+	\end{equation}
+where $i=1,2, \ldots, n$, denotes the $i$-th industry and the minimum is taken over all $i$.
+
+### Labor Value	
+The vector of labor values of the commodities is given by
+\begin{equation}\label{value-def1}
+		\lambda = \lambda \hat{A} + \hat{l}_s,
+	\end{equation}
+where $\lambda$ is the labor value vector per US dollar (or any other national currency) of gross output.
+
+
+### Price of Production
+Mobility of capital across the $n$ industries will give rise to a long run tendency for the rate of profit to equalize across industries. The set of long run equilibrium prices that ensure the same, uniform rate of profit across industries are known as prices of production. The $1 \times n$ vector of prices of production, $p$, is given by
+	\begin{equation}
+		p = \left( 1+r\right) \left( p \hat{A} + w \hat{l}\right), 
+	\end{equation} 
+where $p$ is the price of production vector per US dollar (or any other national currency) of gross output.
+
+### Standard Interpretation
+Scholars following the standard interpretation (SI) take the $n \times 1$ vector of _nominal_ consumption expenditure on the $n$ commodities by the average worker per hour of labor input, $\hat{b}$, _as given_. Using the classical savings assumption, they posit that workers spend their wage income completely on consumption, so that
+	\begin{equation}
+		w = p \hat{b}, 
+	\end{equation}
+	where $B$ is the $n \times 1$ vector of total (personal) consumption and $L = \sum_i L_i$ is the (scalar) sum of total labor inputs (measured in hours) across all industries. Substituting the expression for $w$ in the price of production system, we get
+	\begin{equation}
+		p = \left( 1+r\right) p \hat{M},  
+	\end{equation} 
+	where 
+	\begin{equation}\label{def-M}
+		\hat{M} = \hat{A} + \hat{b} \hat{l}
+	\end{equation}
+	is the augmented input matrix per US dollar of gross output. 
+	
+If $\hat{M}$ is nonnegative and irreducible, then we can apply the Perron-Frobenius theorem to get
+	\begin{equation}
+		r = \frac{1}{\rho (\hat{M}) } - 1,
+	\end{equation}
+where $\rho (\hat{M})$ refers to the maximal eigenvalue of the matrix $\hat{M}$. The eigenvector of $\hat{M}$ corresponding to $\rho (\hat{M})$ gives the _relative_ price of production vector, $p_{rel}$. The vector of _absolute_ prices of production is then arrived at by multiplying the relative price vector with the following constant:
+	\begin{equation}
+	\kappa = \frac{X}{p_{rel}X}.
+	\end{equation}
+Here, $\kappa$ is the ratio of the nominal gross output vector, $X$, aggregated with the vector market prices (the numerator) and the same vector, $X$, aggregated with the relative price vector (the denominator). In the numerator, the vector of market prices is just the unit vector--because $X$ is already expressed in market prices. Thus,
+	\begin{equation}
+		p^{SI} = \kappa p_{rel},
+	\end{equation}
+where $p^{SI}$ is the $1 \times n$ vector of absolute prices of production estimated by following the SI.
+
+### New Interpretation
+In the New Interpretation (NI) of Marx's labor theory of value, the value of labor power, $v$, and the uniform nominal wage rate, $w$, are _taken as given_, instead of the consumption bundle $\hat{b}$. The value of labor power is the product of the nominal wage rate and the value of money: 
+	\begin{equation}
+		v = w \times \mu^{NI}.
+	\end{equation}
+In contrast to the SI, the NI defines the value of money with the net output vector measured in monetary units, $Y$:
+	\begin{equation}
+		\mu^{NI} = \frac{\lambda Y}{p^{NI} Y} =  \frac{\hat{l}_s \left( I-\hat{A}\right)^{-1}  Y}{p^{NI} Y} = \frac{\hat{l}_s X}{p^{NI} Y},
+	\end{equation}
+	where $Y$ and $X$ are the $n \times 1$ vectors of net and gross outputs in monetary units, $p^{NI}$ and $\mu^{NI}$ denote, respectively, the absolute price of production vector and the value of money, according to the NI. This definition embeds an invariance principle with respect to the net output: the vector of net output aggregated with the prices of production and multiplied with the value of money (to covert it into units of labor hours) gives the same magnitude as when the net output vector is aggregated with labor values. The price of production system can, in turn, be written as
+	\begin{equation}
+		p^{NI} = \left( 1+r\right) \left( p^{NI} \hat{A} + w \hat{l}\right), 
+	\end{equation}
+	and so the NI can be captured by the above two equation systems. We can now solve this equation system for the uniform rate of profit, $r$, and the price of production vector, $p^{NI}$, using the 3-step algorithm given in Appendix 7.A.4 in Basu (2021).
+	
+The first step of the algorithm involves computing the maximal rate of profit, $R$. If $\hat{A}$ is nonnegative and irreducible, then we can use the Perron-Frobenius theorem on the price of production system of equations to get $R = (1/\rho(\hat{A}))-1$, where $\rho(\hat{A})$ is the maximal eigenvalue of the matrix $A$. 
+	
+In the second step of the algorithm, we define the following univariate function of $r$,
+	\begin{equation}
+		f(r) = \left( 1+r\right)w\hat{l}\left[ I - \left( 1+r\right) \hat{A}\right]^{-1}\left( I - \hat{A}\right)X - \frac{w \hat{l}_s X}{v},   
+	\end{equation}
+	and find the unique zero of this function over the range, $0 \leq r < R$, i.e. the value of $r=r^*$ for which $f(r^*)=0$; this gives us the uniform rate of profit, $r^*$. To understand why, note that the price of production system gives us
+	\[
+	p^{NI} = \left( 1+r\right)w\hat{l}\left[ I - \left( 1+r\right) \hat{A}\right]^{-1}
+	\]
+	and since, using the definition of the value of labor power, we have $\mu^{NI} w = v$, using the expression for $\mu^{NI}$ and the expression for the price of production above, we get
+	\[
+	\left( 1+r\right)w\hat{l}\left[ I - \left( 1+r\right) \hat{A}\right]^{-1}\left( I - \hat{A}\right)X = \frac{w \hat{l}_s X}{v}.
+	\]
+	This implies that the uniform rate of profit is the zero of the univariate function $f(.)$. To see why this is unique, note that if the value of labor power, $v$, satisfies,
+		\[
+		0< v< \frac{\hat{l}_sX}{\hat{l}X},
+		\]
+		where $X$ is the vector of nominal gross outputs, then $f(0)=w (\hat{l} X- (\hat{l}_s X/v))<0$, $\lim_{r \to R} f(r) = +\infty$ and $f'>0$. That is why there is a unique value of $r=r^*>0$ at which $f(r^*)=0$.
+	
+In the third, and final, step of the algorithm, we solve for the absolute price of production vector as
+	\[
+	p^{NI} = \left( 1+r^*\right)w\hat{l}\left[ I - \left( 1+r^*\right) \hat{A}\right]^{-1}
+	\]
+using the uniform rate of profit that we got in the previous step.
+	
+## Implementing SI and NI	
+
+## The Data Set
+Let us load the package
+```{r setup}
+library(clptheory)
+
+```
+and note that three data sets are included in the package: 
+
+-  `usasea`: the socio economic accounts for the USA of the 2016 release of the World Input Output Database (WIOD); 
+
+-  `usaiot`: the input-output table for the USA of the 2016 release of the World Input Output Database (WIOD); and 
+
+-  `usarwb`: the personal consumption expenditure vector for the USA of the 2016 release of the World Input Output Database (WIOD).  
+
+## Constructing the Variables
