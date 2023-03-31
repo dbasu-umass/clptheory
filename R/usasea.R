@@ -28,5 +28,5 @@
 #' \item{NOMEXCH}{Nominal exchange rate between the national currency and the US dollar.}
 #' }
 #' @examples
-#' data(usasea)
+#' summary(usasea$COMP)
 "usasea"
