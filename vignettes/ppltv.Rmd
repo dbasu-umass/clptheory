@@ -1,6 +1,6 @@
 ---
 title: "Prices of Production and Labor Values"
-output: pdf_document
+output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Prices of Production and Labor Values}
   %\VignetteEngine{knitr::rmarkdown}
@@ -113,19 +113,141 @@ In the third, and final, step of the algorithm, we solve for the absolute price 
 using the uniform rate of profit that we got in the previous step.
 	
 ## Implementing SI and NI	
+Let us now use the functions and data sets available in the package `clptheory` to implement the SI and NI methodologies to computing prices of production, uniform rate of profit and labor values.
 
 ## The Data Set
 Let us load the package
-```{r setup}
+```{r}
 library(clptheory)
 
 ```
-and note that three data sets are included in the package: 
+and note that data sets for Australia (AUS) and the United States of America (USA) are included in the package: 
 
--  `usasea`: the socio economic accounts for the USA of the 2016 release of the World Input Output Database (WIOD); 
+-  `aussea`: the socio economic accounts for AUS of the 2016 release of the World Input Output Database (WIOD); 
 
--  `usaiot`: the input-output table for the USA of the 2016 release of the World Input Output Database (WIOD); and 
+-  `ausiot`: the input-output table for AUS of the 2016 release of the World Input Output Database (WIOD); 
+
+-  `usasea`: the socio economic accounts for USA of the 2016 release of the World Input Output Database (WIOD); 
+
+-  `usaiot`: the input-output table for USA of the 2016 release of the World Input Output Database (WIOD). 
+
+There is an additional data set that we will not use:
 
 -  `usarwb`: the personal consumption expenditure vector for the USA of the 2016 release of the World Input Output Database (WIOD).  
 
-## Constructing the Variables
+The socio economic accounts provide industry-level data on many macroeconomic variables like employment, value added, gross output, employee compensation. All variables, other than employment, are in units of millions of US dollars; employment and hours are in units of thousands. Let us see the names of all the variables in the socio economic accounts data set.
+```{r}
+names(aussea)
+```
+
+The input-output tables provide data on the transaction flows between industries, i.e. how much inputs does any industry purchase from any other industry. Entries in the input-output table are in units of millions of local currency. As an example, let us extract the input output table for Australia for 2010 and see its dimensions.
+```{r}
+dim(ausiot[ausiot$Year==2010,])
+```
+It is not yet a square matrix because the columns on the far left are for year, industry code, etc; and the columns in the far right are the aggregate expenditure categories like personal consumption, investment, etc. Using the `createdata` function below, we will be able to extract the relevant columns and rows to ensure that it becomes a square matrix.
+
+## Analysis for Australia (AUS)
+Let us create the data objects for AUS for the year 2010 (we can choose any year between 2000 and 2014).
+```{r}
+ausdata <- clptheory::createdata(
+  country = "AUS", year = 2010, 
+  datasea = aussea, dataio = ausiot
+  )
+```
+The function `createdata` creates `ausdata` as a list
+```{r}
+class(ausdata)
+
+```
+which contains all the data objects that we need. 
+```{r}
+names(ausdata)
+```
+In this object we have: `Ahat`, the input-output matrix; `l`, the direct (complex) labor input vector; `l_simple`, the direct (simple labor input vector); `Q`, the gross output vector; `wavg`, the uniform (average) nominal wage rate; `wagevector_all`, the vector of nominal wage rates; `vlp`, the value of labor power; and `pshare`, the average profit share.
+
+What is the dimension of the the input-output matrix?
+```{r}
+dim(ausdata$Ahat)
+```
+It is indeed a _square_ matrix and is of size 48 by 48.
+
+### Standard Interpretation
+Since the WIOD does not contain data on capital stock, we can only estimate the circulating capital model. Let us estimate the circulating capital model with SI.
+```{r}
+si1 <- clptheory::ppstdint1(
+  A = ausdata$Ahat,
+  l = ausdata$l,
+  b = ausdata$b,
+  Q = ausdata$Q,
+  l_simple = ausdata$l_simple
+)
+```
+The function `ppstdint1` implements the SI approach for a basic circulating capital model and the output is a list.
+```{r}
+class(si1)
+names(si1)
+```
+In the object `si1` we have: `meig`, the maximum eigenvalue of the augmented input-output matrix, $M$; `urop`, the uniform rate of profit; `mrop`, the maximal rate of profit (if the wage rate were zero); `ppabs`, the vector of absolute prices of production; `pprel`, the vector of relative prices of production (which is `ppabs` divided by the first element of `ppabs`); `lvalues`, the vector of labor values; `dprice`, the vector of direct prices, i.e. prices proportional to labor values; and `mevg`, the monetary expression of value using the gross output; `mnonneg`, dummy variable for whether M is nonnegative (1 = nonnegative; 0 = not nonnegative); `mirred`, dummy variable for whether M is irreducible (1 = irreducile; 0 = not irreducible).
+
+### New Interpretation
+Let us now estimate the circulating capital model with NI.
+```{r}
+ni1 <- clptheory::ppnewint1(
+  A = ausdata$Ahat,
+  l = ausdata$l,
+  w = ausdata$wavg,
+  v = ausdata$vlp,
+  Q = ausdata$Q,
+  l_simple = ausdata$l_simple
+)
+```
+The function `ppnewint1` implements the NI approach for a basic circulating capital model and the output is a list.
+```{r}
+class(ni1)
+names(ni1)
+```
+In the object `ni1` we have: `meig`, the maximum eigenvalue of the input-output matrix, $A$; `urop`, the uniform rate of profit; `mrop`, the maximal rate of profit (if the wage rate were zero); `ppabs`, the vector of absolute prices of production; `pprel`, the vector of relative prices of production (which is `ppabs` divided by the first element of `ppabs`); `lvalues`, the vector of labor values; `mevn`, the monetary expression of value using the net output; `mevg`, the monetary expression of value using the gross output; `Anonneg`, dummy variable for whether A is nonnegative (1 = nonnegative; 0 = not nonnegative); and `Airred`, dummy variable for whether A is irreducible (1 = irreducile; 0 = not irreducible).
+
+### Results: Uniform Rate of Profit
+Let us see the uniform profit rate.
+```{r}
+cbind(si1$urop,ni1$urop)
+```
+
+### Results: Deviation between Labor Values and Prices of Production
+Let us compute various non-regression-based measures of the deviation between the vector of _relative_ labor values and the vector of _relative_ prices of production for the SI.
+```{r}
+nrsi1 <- clptheory::nregtestrel(
+  x = si1$ppabs,
+  y = si1$lvalues,
+  w = ausdata$wagevector_all,
+  w_avg = ausdata$wavg,
+  mev = si1$mevg,
+  Q = ausdata$Q
+)
+```
+Let us do the same computation for the NI.
+```{r}
+nrni1 <- clptheory::nregtestrel(
+  x=ni1$ppabs,
+  y=ni1$lvalues,
+  w=ausdata$wagevector_all,
+  w_avg=ausdata$wavg,
+  mev=ni1$mevg,
+  Q=ausdata$Q
+  )
+```
+We can now compare the results for the analysis of the _circulating capital model_ from the SI approach and the NI approach for the non-regression-based measures of deviation between relative prices of production and relative values.
+```{r}
+comp1 <- cbind(nrsi1,nrni1)
+colnames(comp1) <- c("SI","NI")
+(comp1)
+```
+In the results above, we see the magnitudes of six different measures of the deviation between the vector of _relative_ prices of production and the vector of _relative_ labor values: root mean squared error (RMSE), meann absolute distance (MAD), mean absolute weighted distance (MAWD), classical distance measure (CDM), angle between the two vectors (angle in degrees), and distance computed using angle (distance).
+
+As an example, we can see that the CDM for SI is 0.789 and for NI is 0.647. This can be interpreted as showing that the deviation between the vector of _relative_ prices of production and the vector of _relative_ labor values is 79 percent and 65 percent of the relative value vector according to the SI and NI methodology, respectively.
+
+The last row of the above results shows the length of (number of observations in) the vector of _relative_ prices of production or the vector of _relative_ labor values. Recall that the input-output matrix is 48 by 48. Hence, the _absolute_ value and price of production vectors will each be of size 48. Thus, the size of the vector of _relative_ prices of production (or labor value) should be $(48 \times 47)/2=1128$. 
+
+## References
+* Basu, D. and Moraitis, T. (2023). Alternative Approaches to Labor Values and Prices of Production: Theory and Evidence. _Economics Department Working Paper Series_. 347. University of Massachusetts Amherst. Retrieved from https://scholarworks.umass.edu/econ_workingpaper/347  
