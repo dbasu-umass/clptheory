@@ -4,18 +4,16 @@
 \alias{createdata}
 \title{Create data set for analysis.}
 \usage{
-createdata(country, year, data_sea, data_io, rwb)
+createdata(country, year, datasea, dataio)
 }
 \arguments{
 \item{country}{country code as a character (e.g. "USA").}
 
 \item{year}{year (eg. 2000).}
 
-\item{data_sea}{the socio economic accounts (data frame).}
+\item{datasea}{the socio economic accounts (data frame).}
 
-\item{data_io}{the input-output (data frame).}
-
-\item{rwb}{personal consumption expenditure (data frame).}
+\item{dataio}{the input-output (data frame).}
 }
 \value{
 A list with the following elements:
@@ -34,7 +32,7 @@ This function creates the data objects (matrices, vectors and scalars) necessary
 }
 \examples{
 
-createdata(country="USA",year=2014,data_sea=usasea,data_io=usaiot,rwb=usarwb)
+createdata(country="USA",year=2010,datasea=usasea,dataio=usaiot)
 
 
 }
