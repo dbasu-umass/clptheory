@@ -1,8 +1,8 @@
 ---
-title: "Price of Production and Labor Values"
+title: "Prices of Production and Labor Values"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Price of Production and Labor Values}
+  %\VignetteIndexEntry{Prices of Production and Labor Values}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -15,6 +15,10 @@ knitr::opts_chunk$set(
 ```
 
 ## Circulating Capital Model
+
+<!-- badges: start -->
+<!-- badges: end -->
+
 Consider a circulating capital model of a capitalist economy, where technology of production is captured by the $n \times n$ input-output matrix, $\hat{A}$, and the $1 \times n$ direct labor input vector, $\hat{l}$. The $i,j$-th element of the input-output matrix, $\hat{a}_{ij}$, and the $i$-th  element of the direct labor vector, $\hat{l}_i$, denote, respectively, the dollars of commodity $i$ and the amount of direct labor input (e.g., measured in hours) needed to produce one dollar of commodity $j$.
 
 The direct labor input vector, $\hat{l}$, is the vector of what the Marxian tradition calls _complex labor_. This labor input registers the differentials in average levels of skills and training associated with the labor inputs across industries. Thus, the direct labor input vector, measured in hours, will represent hours of labor of different degrees of complexity. We can contrast complex labor with _simple labor_, which is the labor performed by workers with basic skills available at any point in time to all members of a society. Complex labor, then, requires additional skill acquisition and training, in comparison to simple labor. We can convert the vector of complex labor, $\hat{l}$, into the vector of simple labor, $\hat{l}_s$, by multiplying each element of the former with the ratio of that industry's average wage rate and the minimum of the average nominal wage rate across industries, i.e.
