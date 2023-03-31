@@ -17,6 +17,6 @@ usaiot
 Input Output Tables for the US economy from the World Input Output Database.
 }
 \examples{
-data(usaiot)
+usaiot[1:3,1:3]
 }
 \keyword{datasets}
