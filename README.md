@@ -87,16 +87,26 @@ This package provides the following functions.
 
 The package contains the following three datasets.
 
-1.  `usasea`: the socio economic accounts for the USA extracted from the
+1.  `aussea`: the socio economic accounts for the Australian economy
+    extracted from the 2016 release of the World Input Output Database;
+    this data set contains industry-level variables (53 industries) for
+    the USA for 15 years, 2000-2014;
+
+2.  `ausiot`: input-output tables for the Australian economy extracted
+    from the 2016 release of the World Input Output Database; this data
+    set contains 53-industry input-output tables for the USA for 15
+    years, 2000-2014;
+
+3.  `usasea`: the socio economic accounts for the USA extracted from the
     2016 release of the World Input Output Database; this data set
     contains industry-level variables (53 industries) for the USA for 15
     years, 2000-2014;
 
-2.  `usaiot`: input-output tables for the USA extracted from the 2016
+4.  `usaiot`: input-output tables for the USA extracted from the 2016
     release of the World Input Output Database; this data set contains
     53-industry input-output tables for the USA for 15 years, 2000-2014;
 
-3.  `usarwb`: personal consumption expenditure on the output of the 53
+5.  `usarwb`: personal consumption expenditure on the output of the 53
     industries of the input-output tables for the USA extracted from the
     2016 release of the World Input Output Database; this data set
     contains data for 15 years, 2000-2014. (Note: This data set is not
@@ -725,34 +735,47 @@ colnames(comp2) <- c("SI","NI")
 #> lrelpplv  3         3
 ```
 
-## Analysis for USA
+## Analysis for Australia
 
 Let us create the data objects.
 
 ``` r
-usadata <- createdata(
-  country = "USA", year = 2000, 
-  datasea = usasea, dataio = usaiot
+ausdata <- createdata(
+  country = "AUS", year = 2000, 
+  datasea = aussea, dataio = ausiot
   )
-#> "U"
+#> c("C33", "M71", "M72", "M73", "M74_M75", "U")
+```
+
+Let us now estimate the circulating capital model with SI.
+
+``` r
+siaus <- ppstdint1(
+  A = ausdata$Ahat,
+  l = ausdata$l,
+  b = ausdata$b,
+  Q = ausdata$Q,
+  l_simple = ausdata$l_simple
+)
 ```
 
 Let us now estimate the circulating capital model with NI.
 
 ``` r
-niusa <- ppnewint1(
-  A = usadata$Ahat,
-  l = usadata$l,
-  w = usadata$wavg,
-  v = usadata$vlp,
-  Q = usadata$Q,
-  l_simple = usadata$l_simple
+niaus <- ppnewint1(
+  A = ausdata$Ahat,
+  l = ausdata$l,
+  w = ausdata$wavg,
+  v = ausdata$vlp,
+  Q = ausdata$Q,
+  l_simple = ausdata$l_simple
 )
 ```
 
 Let us see the uniform profit rate.
 
 ``` r
-(niusa$urop)
-#> [1] 2.607979
+cbind(siaus$urop,niaus$urop)
+#>          [,1]     [,2]
+#> [1,] 1.467627 1.735584
 ```
