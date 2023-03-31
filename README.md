@@ -99,7 +99,8 @@ The package contains the following three datasets.
 3.  `usarwb`: personal consumption expenditure on the output of the 53
     industries of the input-output tables for the USA extracted from the
     2016 release of the World Input Output Database; this data set
-    contains data for 15 years, 2000-2014.
+    contains data for 15 years, 2000-2014. (Note: This data set is not
+    necessary for the analysis.)
 
 ## Examples
 
@@ -722,4 +723,36 @@ colnames(comp2) <- c("SI","NI")
 #> angle     51.23735  7.288633  
 #> distangle 0.8647594 0.1271249 
 #> lrelpplv  3         3
+```
+
+## Analysis for USA
+
+Let us create the data objects.
+
+``` r
+usadata <- createdata(
+  country = "USA", year = 2000, 
+  datasea = usasea, dataio = usaiot
+  )
+#> "U"
+```
+
+Let us now estimate the circulating capital model with NI.
+
+``` r
+niusa <- ppnewint1(
+  A = usadata$Ahat,
+  l = usadata$l,
+  w = usadata$wavg,
+  v = usadata$vlp,
+  Q = usadata$Q,
+  l_simple = usadata$l_simple
+)
+```
+
+Let us see the uniform profit rate.
+
+``` r
+(niusa$urop)
+#> [1] 2.607979
 ```

@@ -65,7 +65,7 @@ The package contains the following three datasets.
 
 2. `usaiot`: input-output tables for the USA extracted from the 2016 release of the World Input Output Database; this data set contains 53-industry input-output tables for the USA for 15 years, 2000-2014;
 
-3.  `usarwb`: personal consumption expenditure on the output of the 53 industries of the input-output tables for the USA extracted from the 2016 release of the World Input Output Database; this data set contains data for 15 years, 2000-2014.
+3.  `usarwb`: personal consumption expenditure on the output of the 53 industries of the input-output tables for the USA extracted from the 2016 release of the World Input Output Database; this data set contains data for 15 years, 2000-2014. (Note: This data set is not necessary for the analysis.)
 
 
 ## Examples
@@ -339,5 +339,29 @@ We can compare the results for the analysis of the _capital stock model_ from th
 comp2 <- cbind(nrsi2,nrni2)
 colnames(comp2) <- c("SI","NI")
 (comp2)
+```
+
+## Analysis for USA
+Let us create the data objects.
+```{r}
+usadata <- createdata(
+  country = "USA", year = 2000, 
+  datasea = usasea, dataio = usaiot
+  )
+```
+Let us now estimate the circulating capital model with NI.
+```{r}
+niusa <- ppnewint1(
+  A = usadata$Ahat,
+  l = usadata$l,
+  w = usadata$wavg,
+  v = usadata$vlp,
+  Q = usadata$Q,
+  l_simple = usadata$l_simple
+)
+```
+Let us see the uniform profit rate.
+```{r}
+(niusa$urop)
 ```
 
