@@ -1,6 +1,6 @@
 ---
 title: "Prices of Production and Labor Values"
-output: rmarkdown::html_vignette
+output: pdf_document
 vignette: >
   %\VignetteIndexEntry{Prices of Production and Labor Values}
   %\VignetteEngine{knitr::rmarkdown}
