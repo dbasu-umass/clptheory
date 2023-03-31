@@ -7,6 +7,7 @@
 #' \describe{
 #' \item{country}{Country code.}
 #' \item{code}{Industry code.}
+#' \item{description}{Description of the industry.}
 #' \item{variable}{One of the following variables:}
 #' \item{GO}{Gross output by industry at current basic prices (in millions of national currency).}
 #' \item{II}{Intermediate inputs at current purchasers' prices (in millions of national currency).}
@@ -24,6 +25,7 @@
 #' \item{GO_QI}{Gross output, volume indices, 2010=100.}
 #' \item{II_QI}{Intermediate inputs, volume indices, 2010=100.}
 #' \item{VA_QI}{Value added, volume indices, 2010=100.}
+#' \item{NOMEXCH}{Nominal exchange rate between the national currency and the US dollar.}
 #' }
 #' @examples
 #' data(usasea)
