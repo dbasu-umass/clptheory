@@ -82,6 +82,9 @@ This package provides the following functions.
     measures of deviation between the vector of *relative* prices of
     production and the vector of *relative* labor values;
 
+14. `createdata`: a function to create the data objects (matrices,
+    vectors and scalars) necessary to implement the SI and NI.
+
 The package contains the following three datasets.
 
 1.  `usasea`: the socio economic accounts for the USA extracted from the
