@@ -1,0 +1,250 @@
+---
+title: "Labor Values and Prices of Production"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Labor Values and Prices of Production}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Circulating Capital Model
+
+Consider a circulating capital model of a capitalist economy, where technology of production is captured by the $n \times n$ input-output matrix, $\hat{A}$, and the $1 \times n$ direct labor input vector, $\hat{l}$. The $i,j$-th element of the input-output matrix, $\hat{a}_{ij}$, and the $i$-th  element of the direct labor vector, $\hat{l}_i$, denote, respectively, the dollars of commodity $i$ and the amount of direct labor input (e.g., measured in hours) needed to produce one dollar of commodity $j$.
+
+The direct labor input vector, $\hat{l}$, is the vector of what the Marxian tradition calls _complex labor_. This labor input registers the differentials in average levels of skills and training associated with the labor inputs across industries. Thus, the direct labor input vector, measured in hours, will represent hours of labor of different degrees of complexity. We can contrast complex labor with _simple labor_, which is the labor performed by workers with basic skills available at any point in time to all members of a society. Complex labor, then, requires additional skill acquisition and training, in comparison to simple labor. We can convert the vector of complex labor, $\hat{l}$, into the vector of simple labor, $\hat{l}_s$, by multiplying each element of the former with the ratio of that industry's average wage rate and the minimum of the average nominal wage rate across industries, i.e.
+	\begin{equation}
+		\hat{l}_{s,i} = \left( \frac{w_i}{w_{min}}\right)  \hat{l}_i,
+	\end{equation}
+where $i=1,2, \ldots, n$, denotes the $i$-th industry and the minimum is taken over all $i$.
+
+### Labor Value	
+The vector of labor values of the commodities is given by
+\begin{equation}\label{value-def1}
+		\lambda = \lambda \hat{A} + \hat{l}_s,
+	\end{equation}
+where $\lambda$ is the labor value vector per US dollar (or any other national currency) of gross output.
+
+
+### Price of Production
+Mobility of capital across the $n$ industries will give rise to a long run tendency for the rate of profit to equalize across industries. The set of long run equilibrium prices that ensure the same, uniform rate of profit across industries are known as prices of production. The $1 \times n$ vector of prices of production, $p$, is given by
+	\begin{equation}
+		p = \left( 1+r\right) \left( p \hat{A} + w \hat{l}\right), 
+	\end{equation} 
+where $p$ is the price of production vector per US dollar (or any other national currency) of gross output.
+
+### Standard Interpretation
+Scholars following the standard interpretation (SI) take the $n \times 1$ vector of _nominal_ consumption expenditure on the $n$ commodities by the average worker per hour of labor input, $\hat{b}$, _as given_. Using the classical savings assumption, they posit that workers spend their wage income completely on consumption, so that
+	\begin{equation}
+		w = p \hat{b}, 
+	\end{equation}
+	where $B$ is the $n \times 1$ vector of total (personal) consumption and $L = \sum_i L_i$ is the (scalar) sum of total labor inputs (measured in hours) across all industries. Substituting the expression for $w$ in the price of production system, we get
+	\begin{equation}
+		p = \left( 1+r\right) p \hat{M},  
+	\end{equation} 
+	where 
+	\begin{equation}\label{def-M}
+		\hat{M} = \hat{A} + \hat{b} \hat{l}
+	\end{equation}
+	is the augmented input matrix per US dollar of gross output. 
+	
+If $\hat{M}$ is nonnegative and irreducible, then we can apply the Perron-Frobenius theorem to get
+	\begin{equation}
+		r = \frac{1}{\rho (\hat{M}) } - 1,
+	\end{equation}
+where $\rho (\hat{M})$ refers to the maximal eigenvalue of the matrix $\hat{M}$. The eigenvector of $\hat{M}$ corresponding to $\rho (\hat{M})$ gives the _relative_ price of production vector, $p_{rel}$. The vector of _absolute_ prices of production is then arrived at by multiplying the relative price vector with the following constant:
+	\begin{equation}
+	\kappa = \frac{X}{p_{rel}X}.
+	\end{equation}
+Here, $\kappa$ is the ratio of the nominal gross output vector, $X$, aggregated with the vector market prices (the numerator) and the same vector, $X$, aggregated with the relative price vector (the denominator). In the numerator, the vector of market prices is just the unit vector--because $X$ is already expressed in market prices. Thus,
+	\begin{equation}
+		p^{SI} = \kappa p_{rel},
+	\end{equation}
+where $p^{SI}$ is the $1 \times n$ vector of absolute prices of production estimated by following the SI.
+
+### New Interpretation
+In the New Interpretation (NI) of Marx's labor theory of value, the value of labor power, $v$, and the uniform nominal wage rate, $w$, are _taken as given_, instead of the consumption bundle $\hat{b}$. The value of labor power is the product of the nominal wage rate and the value of money: 
+	\begin{equation}
+		v = w \times \mu^{NI}.
+	\end{equation}
+In contrast to the SI, the NI defines the value of money with the net output vector measured in monetary units, $Y$:
+	\begin{equation}
+		\mu^{NI} = \frac{\lambda Y}{p^{NI} Y} =  \frac{\hat{l}_s \left( I-\hat{A}\right)^{-1}  Y}{p^{NI} Y} = \frac{\hat{l}_s X}{p^{NI} Y},
+	\end{equation}
+	where $Y$ and $X$ are the $n \times 1$ vectors of net and gross outputs in monetary units, $p^{NI}$ and $\mu^{NI}$ denote, respectively, the absolute price of production vector and the value of money, according to the NI. This definition embeds an invariance principle with respect to the net output: the vector of net output aggregated with the prices of production and multiplied with the value of money (to covert it into units of labor hours) gives the same magnitude as when the net output vector is aggregated with labor values. The price of production system can, in turn, be written as
+	\begin{equation}
+		p^{NI} = \left( 1+r\right) \left( p^{NI} \hat{A} + w \hat{l}\right), 
+	\end{equation}
+	and so the NI can be captured by the above two equation systems. We can now solve this equation system for the uniform rate of profit, $r$, and the price of production vector, $p^{NI}$, using the 3-step algorithm given in Appendix 7.A.4 in Basu (2021).
+	
+The first step of the algorithm involves computing the maximal rate of profit, $R$. If $\hat{A}$ is nonnegative and irreducible, then we can use the Perron-Frobenius theorem on the price of production system of equations to get $R = (1/\rho(\hat{A}))-1$, where $\rho(\hat{A})$ is the maximal eigenvalue of the matrix $A$. 
+	
+In the second step of the algorithm, we define the following univariate function of $r$,
+	\begin{equation}
+		f(r) = \left( 1+r\right)w\hat{l}\left[ I - \left( 1+r\right) \hat{A}\right]^{-1}\left( I - \hat{A}\right)X - \frac{w \hat{l}_s X}{v},   
+	\end{equation}
+	and find the unique zero of this function over the range, $0 \leq r < R$, i.e. the value of $r=r^*$ for which $f(r^*)=0$; this gives us the uniform rate of profit, $r^*$. To understand why, note that the price of production system gives us
+	\[
+	p^{NI} = \left( 1+r\right)w\hat{l}\left[ I - \left( 1+r\right) \hat{A}\right]^{-1}
+	\]
+	and since, using the definition of the value of labor power, we have $\mu^{NI} w = v$, using the expression for $\mu^{NI}$ and the expression for the price of production above, we get
+	\[
+	\left( 1+r\right)w\hat{l}\left[ I - \left( 1+r\right) \hat{A}\right]^{-1}\left( I - \hat{A}\right)X = \frac{w \hat{l}_s X}{v}.
+	\]
+	This implies that the uniform rate of profit is the zero of the univariate function $f(.)$. To see why this is unique, note that if the value of labor power, $v$, satisfies,
+		\[
+		0< v< \frac{\hat{l}_sX}{\hat{l}X},
+		\]
+		where $X$ is the vector of nominal gross outputs, then $f(0)=w (\hat{l} X- (\hat{l}_s X/v))<0$, $\lim_{r \to R} f(r) = +\infty$ and $f'>0$. That is why there is a unique value of $r=r^*>0$ at which $f(r^*)=0$.
+	
+In the third, and final, step of the algorithm, we solve for the absolute price of production vector as
+	\[
+	p^{NI} = \left( 1+r^*\right)w\hat{l}\left[ I - \left( 1+r^*\right) \hat{A}\right]^{-1}
+	\]
+using the uniform rate of profit that we got in the previous step.
+	
+## Implementing SI and NI	
+Let us now use the functions and data sets available in the package `clptheory` to implement the SI and NI methodologies to computing prices of production, uniform rate of profit and labor values.
+
+## The Data Set
+Let us load the package
+```{r}
+library(clptheory)
+
+```
+and note that data sets for Australia (AUS) and the United States of America (USA) are included in the package: 
+
+-  `aussea`: the socio economic accounts for AUS of the 2016 release of the World Input Output Database (WIOD); 
+
+-  `ausiot`: the input-output table for AUS of the 2016 release of the World Input Output Database (WIOD); 
+
+-  `usasea`: the socio economic accounts for USA of the 2016 release of the World Input Output Database (WIOD); 
+
+-  `usaiot`: the input-output table for USA of the 2016 release of the World Input Output Database (WIOD). 
+
+There is an additional data set that we will not use:
+
+-  `usarwb`: the personal consumption expenditure vector for the USA of the 2016 release of the World Input Output Database (WIOD).  
+
+The socio economic accounts provide industry-level data on many macroeconomic variables like employment, value added, gross output, employee compensation. All variables, other than employment, are in units of millions of US dollars; employment and hours are in units of thousands. Let us see the names of all the variables in the socio economic accounts data set.
+```{r}
+names(aussea)
+```
+
+The input-output tables provide data on the transaction flows between industries, i.e. how much inputs does any industry purchase from any other industry. Entries in the input-output table are in units of millions of local currency. As an example, let us extract the input output table for Australia for 2010 and see its dimensions.
+```{r}
+dim(ausiot[ausiot$Year==2010,])
+```
+It is not yet a square matrix because the columns on the far left are for year, industry code, etc; and the columns in the far right are the aggregate expenditure categories like personal consumption, investment, etc. Using the `createdata` function below, we will be able to extract the relevant columns and rows to ensure that it becomes a square matrix.
+
+## Analysis for Australia (AUS)
+Let us create the data objects for AUS for the year 2010 (we can choose any year between 2000 and 2014).
+```{r}
+ausdata <- clptheory::createdata(
+  country = "AUS", year = 2010, 
+  datasea = aussea, dataio = ausiot
+  )
+```
+The function `createdata` creates `ausdata` as a list
+```{r}
+class(ausdata)
+
+```
+which contains all the data objects that we need. 
+```{r}
+names(ausdata)
+```
+In this object we have: `Ahat`, the input-output matrix; `l`, the direct (complex) labor input vector; `l_simple`, the direct (simple labor input vector); `Q`, the gross output vector; `wavg`, the uniform (average) nominal wage rate; `wagevector_all`, the vector of nominal wage rates; `vlp`, the value of labor power; and `pshare`, the average profit share.
+
+What is the dimension of the the input-output matrix?
+```{r}
+dim(ausdata$Ahat)
+```
+It is indeed a _square_ matrix and is of size 48 by 48.
+
+### Standard Interpretation
+Since the WIOD does not contain data on capital stock, we can only estimate the circulating capital model. Let us estimate the circulating capital model with SI.
+```{r}
+si1 <- clptheory::ppstdint1(
+  A = ausdata$Ahat,
+  l = ausdata$l,
+  b = ausdata$b,
+  Q = ausdata$Q,
+  l_simple = ausdata$l_simple
+)
+```
+The function `ppstdint1` implements the SI approach for a basic circulating capital model and the output is a list.
+```{r}
+class(si1)
+names(si1)
+```
+In the object `si1` we have: `meig`, the maximum eigenvalue of the augmented input-output matrix, $M$; `urop`, the uniform rate of profit; `mrop`, the maximal rate of profit (if the wage rate were zero); `ppabs`, the vector of absolute prices of production; `pprel`, the vector of relative prices of production (which is `ppabs` divided by the first element of `ppabs`); `lvalues`, the vector of labor values; `dprice`, the vector of direct prices, i.e. prices proportional to labor values; and `mevg`, the monetary expression of value using the gross output; `mnonneg`, dummy variable for whether M is nonnegative (1 = nonnegative; 0 = not nonnegative); `mirred`, dummy variable for whether M is irreducible (1 = irreducile; 0 = not irreducible).
+
+### New Interpretation
+Let us now estimate the circulating capital model with NI.
+```{r}
+ni1 <- clptheory::ppnewint1(
+  A = ausdata$Ahat,
+  l = ausdata$l,
+  w = ausdata$wavg,
+  v = ausdata$vlp,
+  Q = ausdata$Q,
+  l_simple = ausdata$l_simple
+)
+```
+The function `ppnewint1` implements the NI approach for a basic circulating capital model and the output is a list.
+```{r}
+class(ni1)
+names(ni1)
+```
+In the object `ni1` we have: `meig`, the maximum eigenvalue of the input-output matrix, $A$; `urop`, the uniform rate of profit; `mrop`, the maximal rate of profit (if the wage rate were zero); `ppabs`, the vector of absolute prices of production; `pprel`, the vector of relative prices of production (which is `ppabs` divided by the first element of `ppabs`); `lvalues`, the vector of labor values; `mevn`, the monetary expression of value using the net output; `mevg`, the monetary expression of value using the gross output; `Anonneg`, dummy variable for whether A is nonnegative (1 = nonnegative; 0 = not nonnegative); and `Airred`, dummy variable for whether A is irreducible (1 = irreducile; 0 = not irreducible).
+
+### Results: Uniform Rate of Profit
+Let us see the uniform profit rate.
+```{r}
+cbind(si1$urop,ni1$urop)
+```
+
+### Results: Deviation between Labor Values and Prices of Production
+Let us compute various non-regression-based measures of the deviation between the vector of _relative_ labor values and the vector of _relative_ prices of production for the SI.
+```{r}
+nrsi1 <- clptheory::nregtestrel(
+  x = si1$ppabs,
+  y = si1$lvalues,
+  w = ausdata$wagevector_all,
+  w_avg = ausdata$wavg,
+  mev = si1$mevg,
+  Q = ausdata$Q
+)
+```
+Let us do the same computation for the NI.
+```{r}
+nrni1 <- clptheory::nregtestrel(
+  x=ni1$ppabs,
+  y=ni1$lvalues,
+  w=ausdata$wagevector_all,
+  w_avg=ausdata$wavg,
+  mev=ni1$mevg,
+  Q=ausdata$Q
+  )
+```
+We can now compare the results for the analysis of the _circulating capital model_ from the SI approach and the NI approach for the non-regression-based measures of deviation between relative prices of production and relative values.
+```{r}
+comp1 <- cbind(nrsi1,nrni1)
+colnames(comp1) <- c("SI","NI")
+(comp1)
+```
+In the results above, we see the magnitudes of six different measures of the deviation between the vector of _relative_ prices of production and the vector of _relative_ labor values: root mean squared error (RMSE), meann absolute distance (MAD), mean absolute weighted distance (MAWD), classical distance measure (CDM), angle between the two vectors (angle in degrees), and distance computed using angle (distance).
+
+As an example, we can see that the CDM for SI is 0.789 and for NI is 0.647. This can be interpreted as showing that the deviation between the vector of _relative_ prices of production and the vector of _relative_ labor values is 79 percent and 65 percent of the relative value vector according to the SI and NI methodology, respectively.
+
+The last row of the above results shows the length of (number of observations in) the vector of _relative_ prices of production or the vector of _relative_ labor values. Recall that the input-output matrix is 48 by 48. Hence, the _absolute_ value and price of production vectors will each be of size 48. Thus, the size of the vector of _relative_ prices of production (or labor value) should be $(48 \times 47)/2=1128$. 
+
+## References
+* Basu, D. and Moraitis, T. (2023). Alternative Approaches to Labor Values and Prices of Production: Theory and Evidence. _Economics Department Working Paper Series_. 347. University of Massachusetts Amherst. Retrieved from https://scholarworks.umass.edu/econ_workingpaper/347  
