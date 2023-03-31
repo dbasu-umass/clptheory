@@ -4,9 +4,8 @@
 #'
 #' @param country country code as a character (e.g. "USA").
 #' @param year year (eg. 2000).
-#' @param data_sea the socio economic accounts (data frame).
-#' @param data_io the input-output (data frame).
-#' @param rwb personal consumption expenditure (data frame).
+#' @param datasea the socio economic accounts (data frame).
+#' @param dataio the input-output (data frame).
 #'
 #' @import dplyr 
 #' @import magrittr
@@ -28,25 +27,69 @@
 #'
 #' @examples
 #'
-#' createdata(country="USA",year=2014,data_sea=usasea,data_io=usaiot,rwb=usarwb)
+#' createdata(country="USA",year=2010,datasea=usasea,dataio=usaiot)
 #' 
 #'
 
-createdata <- function(country,year,data_sea,data_io,rwb){
+createdata <- function(country,year,datasea,dataio){
   
   # ---- The inputs
   # Country
   ctry <- country
   # Year
   yr <- year
-  # SEA data
-  # SEA data set
-  d1 <- data_sea
   # National IO data
-  d2 <- data_io
-  
+  d2 <- dataio
   
   # ----------- Using SEA Data --------------------- #
+  
+  # Create variables and store in data frame
+  d1 <- datasea  %>%
+    # Drop CHN, TWN because of missing observations of COMP
+    dplyr::filter(
+      country!="CHN" & country!="TWN"
+    ) %>%
+    # Convert variables into US dollars
+    dplyr::mutate(
+      # Compensation of employees (million USD)
+      COMP_USD = COMP/NOMEXCH,
+      # Total compensation (million )
+      LAB_USD = LAB/NOMEXCH,
+      VA_USD = VA/NOMEXCH,
+      GO_USD = GO/NOMEXCH
+    ) %>%
+    dplyr::mutate(
+      # Nominal wage rate (dollar/hour)
+      WAGE = COMP_USD/H_EMPE,
+      # Wage share in value added (fraction)
+      WSHARE = LAB_USD/VA_USD
+    ) %>%
+    dplyr::group_by(country,year) %>%
+    dplyr::mutate(
+      # Average nominal wage (across industries) in dollar/hour
+      AVGWAGE = mean(WAGE, na.rm = TRUE),
+      # Minimum nominal wage (across industries) in dollar/hour
+      MINWAGE = ifelse(length(WAGE)>0,min(WAGE, na.rm = TRUE),Inf),
+      # Average wage share (across industries)
+      AVGWSHARE = mean(WSHARE, na.rm = TRUE),
+      # Total profit share (over all industries)
+      PSHARE_TOTAL = 1-(sum(LAB_USD)/sum(VA_USD))
+    ) %>%
+    dplyr::mutate(
+      # Relative wage
+      relwage1 = WAGE/AVGWAGE,
+      relwage2 = WAGE/MINWAGE,
+      # Labor input in hours accounting for skill
+      # Unit: million hours of simple labor
+      HRS1 = H_EMPE*relwage1,
+      HRS2 = H_EMPE*relwage2,
+      # Labor input in number of employees accounting for skill
+      EMP1 = EMPE*relwage1,
+      EMP2 = EMPE*relwage2
+    ) %>%
+    arrange(country,year) %>%
+    as.data.frame()
+  
   
   # Industry codes and gross output
   X1 <- d1 %>%
@@ -189,6 +232,14 @@ createdata <- function(country,year,data_sea,data_io,rwb){
   
   # ----------- Using IO Data --------------------- #
   
+  # Prepare IO data for use and save as data frame
+  d2 <- dataio %>%
+    dplyr::select(
+      -c("Description","Origin",
+         "CONS_h", "CONS_np","CONS_g","GFCF","INVEN","EXP","GO")
+    ) %>%
+    as.data.frame()
+  
   # --- All sectors
   # Remove rows and columns for industries: 
   # (a) with zero gross output, (b) which are not profit making
@@ -227,6 +278,12 @@ createdata <- function(country,year,data_sea,data_io,rwb){
   Q <- matrix(data=X_temp[,2], ncol=1)
   
   # --- Consumption bundle (millions of USD)
+  rwb <- dataio %>%
+    dplyr::select(
+      c("Year","Code","CONS_h")
+    ) %>%
+    as.data.frame()
+  
   # Remove rows and columns for industries: 
   # (a) with zero gross output, (b) which are nonprivate sector
   d4 <- rwb %>%
@@ -247,7 +304,7 @@ createdata <- function(country,year,data_sea,data_io,rwb){
   b <-  matrix(data=d5,ncol = 1)/sum(Lh_temp[,2])
   
   
-  # Return list of data objects
+  # ---- Return list of data objects
   return(
     list(
       "Ahat" = A_hat,
