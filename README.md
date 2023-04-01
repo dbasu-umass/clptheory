@@ -779,3 +779,23 @@ cbind(siaus$urop,niaus$urop)
 #>          [,1]     [,2]
 #> [1,] 1.467627 1.735584
 ```
+
+## Analysis for Australia
+
+Let us create the data objects.
+
+``` r
+usadata <- createdata(
+  country = "USA", year = 2000, 
+  datasea = usasea, dataio = usaiot
+  )
+#> "U"
+```
+
+Let us test if $M$ is irreducible.
+
+``` r
+M <- (usadata$Ahat + usadata$b%*%usadata$l)
+popdemo::isIrreducible(M)
+#> [1] TRUE
+```

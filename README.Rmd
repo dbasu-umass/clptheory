@@ -380,3 +380,16 @@ Let us see the uniform profit rate.
 cbind(siaus$urop,niaus$urop)
 ```
 
+## Analysis for Australia
+Let us create the data objects.
+```{r}
+usadata <- createdata(
+  country = "USA", year = 2000, 
+  datasea = usasea, dataio = usaiot
+  )
+```
+Let us test if $M$ is irreducible.
+```{r}
+M <- (usadata$Ahat + usadata$b%*%usadata$l)
+popdemo::isIrreducible(M)
+```
