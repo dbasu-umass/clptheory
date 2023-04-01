@@ -249,5 +249,20 @@ As an example, we can see that the CDM for SI is 0.789 and for NI is 0.647. This
 
 The last row of the above results shows the length of (number of observations in) the vector of _relative_ prices of production or the vector of _relative_ labor values. Recall that the input-output matrix is 48 by 48. Hence, the _absolute_ value and price of production vectors will each be of size 48. Thus, the size of the vector of _relative_ prices of production (or labor value) should be $(48 \times 47)/2=1128$. 
 
+## Analysis for USA
+Let us create the data objects for USA for the year 2010 (we can choose any year between 2000 and 2014).
+```{r}
+usadata <- clptheory::createdata(
+  country = "USA", year = 2010, 
+  datasea = usasea, dataio = usaiot
+  )
+```
+Let us test if $M$ is irreducible.
+```{r}
+M <- (usadata$Ahat + usadata$b%*%usadata$l)
+popdemo::isIrreducible(M)
+```
+Hence, we will not be able to implement the SI for the 2010 data set for USA.
+
 ## References
 * Basu, D. and Moraitis, T. (2023). Alternative Approaches to Labor Values and Prices of Production: Theory and Evidence. _Economics Department Working Paper Series_. 347. University of Massachusetts Amherst. Retrieved from https://scholarworks.umass.edu/econ_workingpaper/347  
