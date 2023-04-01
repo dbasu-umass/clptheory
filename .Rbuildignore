@@ -5,3 +5,4 @@
 ^data-raw$
 ^vignettes/ppltv\.Rmd$
 ^vignettes/lvpp\.Rmd$
+^cran-comments\.md$
