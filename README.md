@@ -296,6 +296,18 @@ colnames(comp2) <- c("SI","NI")
 #> nlv     1128        1128
 ```
 
+Regression-based tests of the deviation between use regressions, either
+log-log or level-level, of relative prices of production on relative
+labor value. The key the null (joint) hypothesis is that the intercept
+is 0 and the slope is 1.
+
+The F-stat in the log-log regression of relative prices of production on
+relative value is 143.91 for SI and 550.97 for NI. In both cases, we can
+strongly reject the null hypothesis that the intercept is 0 and the
+slope is 1. The corresponding F-stats for the level-level regressions
+are 35.75 (SI) and 266.39 (NI). Once again, the null hypothesis is
+strongly rejected.
+
 ## Example 2: Simple 3-Industry Set-up
 
 This example was presented on pages 46-57 of E. M. Ochoa’s dissertation
@@ -905,3 +917,11 @@ colnames(comp2) <- c("SI","NI")
 #> distangle 0.8647594 0.1271249 
 #> lrelpplv  3         3
 ```
+
+## References
+
+- Basu, D. and Moraitis, T. (2023). Alternative Approaches to Labor
+  Values and Prices of Production: Theory and Evidence. *Economics
+  Department Working Paper Series*. 347. University of Massachusetts
+  Amherst. Retrieved from
+  <https://scholarworks.umass.edu/econ_workingpaper/347>
