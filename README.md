@@ -6,19 +6,33 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of clptheory (*classical price theory*) is to create a suite of
-functions to implement the classical theory of prices. The functions in
-this package computes the uniform rate of profit, the vector of price of
-production and the vector of labor values for different specifications
-of the circulating capital model and the capital stock model. The
-functions also computes various regression- and non-regression-based
-measures of deviation between the vector of *all possible* relative
-prices of production and the vector of *all possible* relative labor
-values.
+The goal of `clptheory` (*classical price theory*) is to create a suite
+of functions to implement the classical theory of prices. The functions
+in this package computes the uniform rate of profit, the vector of price
+of production and the vector of labor values for different
+specifications of the circulating capital model and the capital stock
+model. The functions also computes various regression- and
+non-regression-based measures of deviation between the vector of *all
+possible* relative prices of production and the vector of *all possible*
+relative labor values.
 
 ## Installation
 
-You can install the development version of clptheory from
+The easiest way to get `clptheory` is to install it from CRAN. Use the
+following in an R console:
+
+``` r
+install.packages("clptheory")
+#> Installing package into '/tmp/Rtmp0C0jAi/temp_libpath6ec8367314fa'
+#> (as 'lib' is unspecified)
+#> Warning: package 'clptheory' is not available for this version of R
+#> 
+#> A version of this package for your version of R might be available elsewhere,
+#> see the ideas at
+#> https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-packages
+```
+
+You can install the development version of `clptheory` from
 [GitHub](https://github.com/) with:
 
 ``` r
