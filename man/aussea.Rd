@@ -5,7 +5,7 @@
 \alias{aussea}
 \title{Socio Economic Accounts}
 \format{
-A industry-level (53 industries) data set for USA over 15 years, 2000-2014.
+A industry-level (53 industries) data set for Australia over 15 years, 2000-2014.
 \describe{
 \item{country}{Country code.}
 \item{code}{Industry code.}
@@ -31,7 +31,7 @@ A industry-level (53 industries) data set for USA over 15 years, 2000-2014.
 }
 }
 \source{
-\url{doi:10.34894/PJ2M1C}
+\doi{10.34894/PJ2M1C}
 }
 \usage{
 aussea

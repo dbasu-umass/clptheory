@@ -2,8 +2,8 @@
 #'
 #' This is the socio economic accounts for the Australian economy extracted from the 2016 release of the World Input Output Database. It contains industry-level data on employment, capital stocks, gross output and value added at current and constant prices, in millions of local currency. The industry classification is consistent with the world input-output tables.
 #'
-#' @source <doi:10.34894/PJ2M1C>
-#' @format A industry-level (53 industries) data set for USA over 15 years, 2000-2014. 
+#' @source \doi{10.34894/PJ2M1C}
+#' @format A industry-level (53 industries) data set for Australia over 15 years, 2000-2014. 
 #' \describe{
 #' \item{country}{Country code.}
 #' \item{code}{Industry code.}

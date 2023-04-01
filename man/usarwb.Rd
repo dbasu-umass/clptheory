@@ -8,7 +8,7 @@
 Consumption expenditure on the output of 53 industries for USA for 15 years, 2000-2014.
 }
 \source{
-\url{doi:10.34894/PJ2M1C}
+\doi{10.34894/PJ2M1C}
 }
 \usage{
 usarwb

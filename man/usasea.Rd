@@ -31,7 +31,7 @@ A industry-level (53 industries) data set for USA over 15 years, 2000-2014.
 }
 }
 \source{
-\url{doi:10.34894/PJ2M1C}
+\doi{10.34894/PJ2M1C}
 }
 \usage{
 usasea
