@@ -71,22 +71,158 @@ The package contains the following three datasets.
 
 5.  `usarwb`: personal consumption expenditure on the output of the 53 industries of the input-output tables for the USA extracted from the 2016 release of the World Input Output Database; this data set contains data for 15 years, 2000-2014. (Note: This data set is not necessary for the analysis.)
 
+## Example 1: Analysis for Australia
+Let us conduct price of production analysis for Australia (AUS) and see how to use the functions in `clptheory` to
 
-## Examples
-These are examples of a 3-industry economy which shows you how to: 
-
-1. compute the uniform rate of profit and the vectors of labor values and prices of production for a basic circulating capital model using the Standard Interpretation; and
+1. compute the uniform rate of profit and the vectors of labor values and prices of production for a basic circulating capital model using the Standard Interpretation and the New Interpretation; and
 
 2. compute regression- and non-regression-based measures of deviation between the vector of _all possible_ relative prices of production and the vector of _all possible_ relative labor values.
 
+Let us load the package.
+```{r}
+# Load library
+library(clptheory)
+```
+
+
+### Data
+Let us create the data objects.
+```{r}
+ausdata <- clptheory::createdata(
+  country = "AUS", year = 2010, 
+  datasea = aussea, dataio = ausiot
+  )
+```
+
+### Standard Interpretation
+Let us now estimate the circulating capital model with SI.
+```{r}
+si1 <- clptheory::ppstdint1(
+  A = ausdata$Ahat,
+  l = ausdata$l,
+  b = ausdata$b,
+  Q = ausdata$Q,
+  l_simple = ausdata$l_simple
+)
+```
+
+### New Interpretation
+Let us now estimate the circulating capital model with NI.
+```{r}
+ni1 <- clptheory::ppnewint1(
+  A = ausdata$Ahat,
+  l = ausdata$l,
+  w = ausdata$wavg,
+  v = ausdata$vlp,
+  Q = ausdata$Q,
+  l_simple = ausdata$l_simple
+)
+```
+Let us see the uniform profit rate.
+```{r}
+cbind(si1$urop,ni1$urop)
+```
+
+### Non-Regression-Based Measures of Deviation
+Let us compute various non-regression-based measures of the deviation
+between the vector of *relative* labor values and the vector of
+*relative* prices of production for the SI.
+
+```{r}
+nrsi1 <- clptheory::nregtestrel(
+  x = si1$ppabs,
+  y = si1$lvalues,
+  w = ausdata$wagevector_all,
+  w_avg = ausdata$wavg,
+  mev = si1$mevg,
+  Q = ausdata$Q
+)
+```
+
+Let us do the same computation for the NI.
+
+```{r}
+nrni1 <- clptheory::nregtestrel(
+  x=ni1$ppabs,
+  y=ni1$lvalues,
+  w=ausdata$wagevector_all,
+  w_avg=ausdata$wavg,
+  mev=ni1$mevg,
+  Q=ausdata$Q
+  )
+```
+
+We can now compare the results for the analysis of the _circulating
+capital model_ from the SI approach and the NI approach for the
+non-regression-based measures of deviation between relative prices of
+production and relative values.
+
+```{r}
+comp1 <- cbind(nrsi1,nrni1)
+colnames(comp1) <- c("SI","NI")
+(comp1)
+```
+
+In the results above, we see the magnitudes of six different measures of
+the deviation between the vector of *relative* prices of production and
+the vector of *relative* labor values: root mean squared error (RMSE),
+meann absolute distance (MAD), mean absolute weighted distance (MAWD),
+classical distance measure (CDM), angle between the two vectors (angle
+in degrees), and distance computed using angle (distance).
+
+As an example, we can see that the CDM for SI is 0.789 and for NI is
+0.647. This can be interpreted as showing that the deviation between the
+vector of *relative* prices of production and the vector of *relative*
+labor values is 79 percent and 65 percent of the relative value vector
+according to the SI and NI methodology, respectively.
+
+The last row of the above results shows the length of (number of
+observations in) the vector of *relative* prices of production or the
+vector of *relative* labor values. Recall that the input-output matrix
+is 48 by 48. Hence, the *absolute* value and price of production vectors
+will each be of size 48. Thus, the size of the vector of *relative*
+prices of production (or labor value) should be $(48 \times 47)/2=1128$.
+
+### Regression-Based Measures of Deviation
+Let us compute various regression-based measures of the deviation
+between the vector of *relative* labor values and the vector of
+*relative* prices of production for the SI.
+
+```{r}
+rsi1 <- clptheory::regtestrel(
+  x = si1$ppabs,
+  y = si1$lvalues
+)
+```
+
+Let us do the same computation for the NI.
+
+```{r}
+rni1 <- clptheory::regtestrel(
+  x=ni1$ppabs,
+  y=ni1$lvalues
+  )
+```
+
+We can now compare the results for the analysis of the *circulating
+capital model* from the SI approach and the NI approach for the
+regression-based measures of deviation between relative prices of
+production and relative values.
+
+```{r}
+comp2 <- cbind(rsi1,rni1)
+colnames(comp2) <- c("SI","NI")
+(comp2)
+```
+
+
+
+## Example 2: Simple 3-Industry Set-up
 This example was presented on pages 46-57 of E. M. Ochoa's dissertation (Ochoa, E. M. 1984. Labor-Value and Prices of Production: An Interindustry Study of the U.S. Economy, 1947–1972. PhD thesis, _New School for Social Research_, New York, NY.). This example has also been discussed in Appendix B of Basu and Moraitis, 2023. (Basu, Deepankar and Moraitis, Athanasios, "Alternative Approaches to Labor Values and Prices of Production: Theory and Evidence" (2023). Economics Department Working Paper Series. 347. _UMass Amherst_. URL: https://scholarworks.umass.edu/econ_workingpaper/347/)
 
 ### The Data
 Let us load the library and create the data for our examples.
 ```{r data}
-# Load library
-library(clptheory)
-
 # Input-output matrix
 A <- matrix(
   data = c(0.265,0.968,0.00681,0.0121,0.391,0.0169,0.0408,0.808,0.165),
@@ -344,105 +480,4 @@ comp2 <- cbind(nrsi2,nrni2)
 colnames(comp2) <- c("SI","NI")
 (comp2)
 ```
-
-## Analysis for Australia
-Let us conduct price of production analysis for Australia (AUS).
-
-### Data
-Let us create the data objects.
-```{r}
-ausdata <- createdata(
-  country = "AUS", year = 2010, 
-  datasea = aussea, dataio = ausiot
-  )
-```
-
-### Standard Interpretation
-Let us now estimate the circulating capital model with SI.
-```{r}
-siaus <- ppstdint1(
-  A = ausdata$Ahat,
-  l = ausdata$l,
-  b = ausdata$b,
-  Q = ausdata$Q,
-  l_simple = ausdata$l_simple
-)
-```
-
-### New Interpretation
-Let us now estimate the circulating capital model with NI.
-```{r}
-niaus <- ppnewint1(
-  A = ausdata$Ahat,
-  l = ausdata$l,
-  w = ausdata$wavg,
-  v = ausdata$vlp,
-  Q = ausdata$Q,
-  l_simple = ausdata$l_simple
-)
-```
-Let us see the uniform profit rate.
-```{r}
-cbind(siaus$urop,niaus$urop)
-```
-
-### Measures of Deviation
-Let us compute various non-regression-based measures of the deviation
-between the vector of *relative* labor values and the vector of
-*relative* prices of production for the SI.
-
-```{r}
-nrsi1 <- clptheory::nregtestrel(
-  x = si1$ppabs,
-  y = si1$lvalues,
-  w = ausdata$wagevector_all,
-  w_avg = ausdata$wavg,
-  mev = si1$mevg,
-  Q = ausdata$Q
-)
-```
-
-Let us do the same computation for the NI.
-
-```{r}
-nrni1 <- clptheory::nregtestrel(
-  x=ni1$ppabs,
-  y=ni1$lvalues,
-  w=ausdata$wagevector_all,
-  w_avg=ausdata$wavg,
-  mev=ni1$mevg,
-  Q=ausdata$Q
-  )
-```
-
-We can now compare the results for the analysis of the *circulating
-capital model* from the SI approach and the NI approach for the
-non-regression-based measures of deviation between relative prices of
-production and relative values.
-
-```{r}
-comp1 <- cbind(nrsi1,nrni1)
-colnames(comp1) <- c("SI","NI")
-(comp1)
-```
-
-In the results above, we see the magnitudes of six different measures of
-the deviation between the vector of *relative* prices of production and
-the vector of *relative* labor values: root mean squared error (RMSE),
-meann absolute distance (MAD), mean absolute weighted distance (MAWD),
-classical distance measure (CDM), angle between the two vectors (angle
-in degrees), and distance computed using angle (distance).
-
-As an example, we can see that the CDM for SI is 0.789 and for NI is
-0.647. This can be interpreted as showing that the deviation between the
-vector of *relative* prices of production and the vector of *relative*
-labor values is 79 percent and 65 percent of the relative value vector
-according to the SI and NI methodology, respectively.
-
-The last row of the above results shows the length of (number of
-observations in) the vector of *relative* prices of production or the
-vector of *relative* labor values. Recall that the input-output matrix
-is 48 by 48. Hence, the *absolute* value and price of production vectors
-will each be of size 48. Thus, the size of the vector of *relative*
-prices of production (or labor value) should be $(48 \times 47)/2=1128$.
 
