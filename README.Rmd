@@ -472,4 +472,4 @@ colnames(comp2) <- c("SI","NI")
     Values and Prices of Production: Theory and Evidence. *Economics
     Department Working Paper Series*. 347. University of Massachusetts
     Amherst. Retrieved from
-    <https://scholarworks.umass.edu/econ_workingpaper/347>
+    <https://scholarworks.umass.edu/econ_workingpaper/347/>

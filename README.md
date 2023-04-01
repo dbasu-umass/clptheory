@@ -23,7 +23,7 @@ following in an R console:
 
 ``` r
 install.packages("clptheory")
-#> Installing package into '/tmp/Rtmp0C0jAi/temp_libpath6ec8367314fa'
+#> Installing package into '/tmp/Rtmp0C0jAi/temp_libpath6ec83c7012d2'
 #> (as 'lib' is unspecified)
 #> Warning: package 'clptheory' is not available for this version of R
 #> 
@@ -664,4 +664,4 @@ colnames(comp2) <- c("SI","NI")
   Values and Prices of Production: Theory and Evidence. *Economics
   Department Working Paper Series*. 347. University of Massachusetts
   Amherst. Retrieved from
-  <https://scholarworks.umass.edu/econ_workingpaper/347>
+  <https://scholarworks.umass.edu/econ_workingpaper/347/>
