@@ -737,15 +737,21 @@ colnames(comp2) <- c("SI","NI")
 
 ## Analysis for Australia
 
+Let us conduct price of production analysis for Australia (AUS).
+
+### Data
+
 Let us create the data objects.
 
 ``` r
 ausdata <- createdata(
-  country = "AUS", year = 2000, 
+  country = "AUS", year = 2010, 
   datasea = aussea, dataio = ausiot
   )
 #> c("C33", "M71", "M72", "M73", "M74_M75", "U")
 ```
+
+### Standard Interpretation
 
 Let us now estimate the circulating capital model with SI.
 
@@ -758,6 +764,8 @@ siaus <- ppstdint1(
   l_simple = ausdata$l_simple
 )
 ```
+
+### New Interpretation
 
 Let us now estimate the circulating capital model with NI.
 
@@ -776,26 +784,75 @@ Let us see the uniform profit rate.
 
 ``` r
 cbind(siaus$urop,niaus$urop)
-#>          [,1]     [,2]
-#> [1,] 1.467627 1.735584
+#>           [,1]     [,2]
+#> [1,] 0.6018444 0.973433
 ```
 
-## Analysis for Australia
+### Measures of Deviation
 
-Let us create the data objects.
+Let us compute various non-regression-based measures of the deviation
+between the vector of *relative* labor values and the vector of
+*relative* prices of production for the SI.
 
 ``` r
-usadata <- createdata(
-  country = "USA", year = 2000, 
-  datasea = usasea, dataio = usaiot
+nrsi1 <- clptheory::nregtestrel(
+  x = si1$ppabs,
+  y = si1$lvalues,
+  w = ausdata$wagevector_all,
+  w_avg = ausdata$wavg,
+  mev = si1$mevg,
+  Q = ausdata$Q
+)
+```
+
+Let us do the same computation for the NI.
+
+``` r
+nrni1 <- clptheory::nregtestrel(
+  x=ni1$ppabs,
+  y=ni1$lvalues,
+  w=ausdata$wagevector_all,
+  w_avg=ausdata$wavg,
+  mev=ni1$mevg,
+  Q=ausdata$Q
   )
-#> "U"
 ```
 
-Let us test if $M$ is irreducible.
+We can now compare the results for the analysis of the *circulating
+capital model* from the SI approach and the NI approach for the
+non-regression-based measures of deviation between relative prices of
+production and relative values.
 
 ``` r
-M <- (usadata$Ahat + usadata$b%*%usadata$l)
-popdemo::isIrreducible(M)
-#> [1] TRUE
+comp1 <- cbind(nrsi1,nrni1)
+colnames(comp1) <- c("SI","NI")
+(comp1)
+#>           SI        NI        
+#> rmse      21.0267   0.08327901
+#> mad       10.2423   0.0589563 
+#> mawd      5.531983  0.0220081 
+#> cdm       6.010217  0.2442277 
+#> angle     59.97441  4.712209  
+#> distangle 0.9996131 0.08222038
+#> lrelpplv  1128      1128
 ```
+
+In the results above, we see the magnitudes of six different measures of
+the deviation between the vector of *relative* prices of production and
+the vector of *relative* labor values: root mean squared error (RMSE),
+meann absolute distance (MAD), mean absolute weighted distance (MAWD),
+classical distance measure (CDM), angle between the two vectors (angle
+in degrees), and distance computed using angle (distance).
+
+As an example, we can see that the CDM for SI is 0.789 and for NI is
+0.647. This can be interpreted as showing that the deviation between the
+vector of *relative* prices of production and the vector of *relative*
+labor values is 79 percent and 65 percent of the relative value vector
+according to the SI and NI methodology, respectively.
+
+The last row of the above results shows the length of (number of
+observations in) the vector of *relative* prices of production or the
+vector of *relative* labor values. Recall that the input-output matrix
+is 48 by 48. Hence, the *absolute* value and price of production vectors
+will each be of size 48. Thus, the size of the vector of *relative*
+prices of production (or labor value) should be $(48 \times 47)/2=1128$.
