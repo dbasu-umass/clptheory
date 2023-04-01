@@ -281,8 +281,8 @@ createdata <- function(country,year,datasea,dataio){
   # Gross output vector (million of USD) (use correct order: X_tem)
   Q <- matrix(data=X_temp[,2], ncol=1)
   
-  # --- Consumption bundle (millions of USD)
-  rwb <- d2 %>%
+  # ------------ Create consumption bundle (millions of USD)
+  rwb <- dataio %>%
     dplyr::select(
       c("Year","Code","CONS_h")
     ) %>%
