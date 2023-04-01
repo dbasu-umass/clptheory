@@ -8,7 +8,7 @@
 Input Output table for Australia for 15 years, 2000-2014.
 }
 \source{
-\url{https://doi.org/10.34894/PJ2M1C}
+\url{doi:10.34894/PJ2M1C}
 }
 \usage{
 ausiot
