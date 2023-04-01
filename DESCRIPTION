@@ -1,9 +1,12 @@
 Package: clptheory
-Title: Computes uniform rate of profit, price of production and labor values
+Title: Compute price of production and labor values
 Version: 0.0.0.9000
 Authors@R: 
-    person("Deepankar", "Basu", , "dbasu@umass.edu", role = c("aut", "cre"))
-Description: Functions to compute the uniform rate of profit, the vector of price of production and the vector of labor values.
+    person("Deepankar", "Basu", , "dbasu@umass.edu", role = c("aut", "cre", "cph"))
+Description: Functions to compute the uniform rate of profit, the vector of price of 
+    production and the vector of labor values; and compute measures of deviation between
+    relative prices of production and relative values. You provide the input output data and 
+    'clptheory' does the calculations for you.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
