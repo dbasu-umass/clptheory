@@ -33,17 +33,9 @@
 
 createdata <- function(country,year,datasea,dataio){
   
-  # ---- The inputs
-  # Country
-  ctry <- country
-  # Year
-  yr <- year
-  # National IO data
-  d2 <- dataio
-  
   # ----------- Using SEA Data --------------------- #
   
-  # Create variables and store in data frame
+  # --- Create variables and store in data frame "d1"
   d1 <- datasea  %>%
     # Drop CHN, TWN because of missing observations of COMP
     dplyr::filter(
@@ -90,6 +82,14 @@ createdata <- function(country,year,datasea,dataio){
     arrange(country,year) %>%
     as.data.frame()
   
+  # ---- Inputs from function call
+  # Country
+  ctry <- country
+  # Year
+  yr <- year
+  
+  
+  # --- Start working with saved data frame "d1"
   
   # Industry codes and gross output
   X1 <- d1 %>%
@@ -230,15 +230,19 @@ createdata <- function(country,year,datasea,dataio){
   
   PS <- mean(PS1[,2], na.rm=TRUE)
   
+  
   # ----------- Using IO Data --------------------- #
   
-  # Prepare IO data for use and save as data frame
+  # --- Prepare IO data for use and save as data frame "d2"
   d2 <- dataio %>%
     dplyr::select(
       -c("Description","Origin",
          "CONS_h", "CONS_np","CONS_g","GFCF","INVEN","EXP","GO")
     ) %>%
     as.data.frame()
+  
+  
+  # ---- Start working with saved data frame "d2"
   
   # --- All sectors
   # Remove rows and columns for industries: 
@@ -278,7 +282,7 @@ createdata <- function(country,year,datasea,dataio){
   Q <- matrix(data=X_temp[,2], ncol=1)
   
   # --- Consumption bundle (millions of USD)
-  rwb <- dataio %>%
+  rwb <- d2 %>%
     dplyr::select(
       c("Year","Code","CONS_h")
     ) %>%
