@@ -323,12 +323,6 @@ nrsi1 <- nregtestrel(
   mev = si1$mevg,
   Q = Q
 )
-(nrsi1)
-```
-Let us now compute the various non-regression-based measures of deviation between the vector of all possible relative labor values and the vector of all possible relative prices of production.
-```{r}
-rsi1 <- regtestrel(x=si1$ppabs,y=si1$lvalues)
-(rsi1)
 ```
 
 #### Capital Stock Model
@@ -367,12 +361,6 @@ nrsi2 <- nregtestrel(
   mev = si2$mevg,
   Q = Q
 )
-(nrsi2)
-```
-Finally, let us conduct regression-based tests for deviation.
-```{r}
-rsi2 <- regtestrel(x=si2$ppabs,y=si2$lvalues)
-(rsi2)
 ```
 
 
@@ -415,12 +403,6 @@ nrni1 <- nregtestrel(
   mev=ni1$mevg,
   Q=Q
   )
-(nrni1)
-```
-Let us now compute the various regression-based measures of deviation between the vector of all possible relative labor values and the vector of all possible relative prices of production.
-```{r}
-rni1 <- regtestrel(x=ni1$ppabs,y=ni1$lvalues)
-(rni1)
 ```
 
 #### Capital Stock Model
@@ -459,14 +441,8 @@ nrni2 <- nregtestrel(
   mev=ni2$mevg,
   Q=Q
   )
-(nrni2)
-```
-Let us now compute the various regression-based measures of deviation between the vector of all possible relative labor values and the vector of all possible relative prices of production.
-```{r}
-rni2 <- regtestrel(x=ni2$ppabs,y=ni2$lvalues)
-(rni1)
-```
 
+```
 
 ## Comparison of SI and NI
 We can compare the results for the analysis of the _circulating capital model_ from the SI approach and the NI approach for the non-regression-based measures of deviation between relative prices of production and relative values.
