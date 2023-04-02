@@ -6,3 +6,4 @@
 ^vignettes/ppltv\.Rmd$
 ^vignettes/lvpp\.Rmd$
 ^cran-comments\.md$
+^CRAN-SUBMISSION$
