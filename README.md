@@ -18,28 +18,20 @@ relative labor values.
 
 ## Installation
 
+You can install the package `clptheory` from CRAN with:
+
+``` r
+# Uncomment the following line
+# install.packages("clptheory")
+```
+
 You can install the development version of `clptheory` from
 [GitHub](https://github.com/) with:
 
 ``` r
+# Uncomment the following two lines
 # install.packages("devtools")
-devtools::install_github("dbasu-umass/clptheory")
-#> Downloading GitHub repo dbasu-umass/clptheory@HEAD
-#> nloptr (1.2.2.3 -> 2.0.3) [CRAN]
-#> Installing 1 packages: nloptr
-#> Installing package into '/tmp/RtmpawXFbo/temp_libpath16bf3572a6654'
-#> (as 'lib' is unspecified)
-#> Warning in i.p(...): installation of package 'nloptr' had non-zero exit status
-#> ── R CMD build ─────────────────────────────────────────────────────────────────
-#> * checking for file ‘/tmp/RtmpOlrhfb/remotes1755e6322ed51/dbasu-umass-clptheory-e423f8f/DESCRIPTION’ ... OK
-#> * preparing ‘clptheory’:
-#> * checking DESCRIPTION meta-information ... OK
-#> * checking for LF line-endings in source and make files and shell scripts
-#> * checking for empty or unneeded directories
-#> Removed empty directory ‘clptheory/vignettes’
-#> * building ‘clptheory_0.1.0.tar.gz’
-#> Installing package into '/tmp/RtmpawXFbo/temp_libpath16bf3572a6654'
-#> (as 'lib' is unspecified)
+# devtools::install_github("dbasu-umass/clptheory")
 ```
 
 ## Main Functions

@@ -21,11 +21,18 @@ knitr::opts_chunk$set(
 The goal of `clptheory` (_classical price theory_) is to create a suite of functions to implement the classical theory of prices. The functions in this package computes the uniform rate of profit, the vector of price of production and the vector of labor values for different specifications of the circulating capital model and the capital stock model. The functions also computes various regression- and non-regression-based measures of deviation between the vector of _all possible_ relative prices of production and the vector of _all possible_ relative labor values.
 
 ## Installation
+You can install the package `clptheory` from CRAN with:
+```{r}
+# Uncomment the following line
+# install.packages("clptheory")
+```
+
 
 You can install the development version of `clptheory` from [GitHub](https://github.com/) with:
 ```{r}
+# Uncomment the following two lines
 # install.packages("devtools")
-devtools::install_github("dbasu-umass/clptheory")
+# devtools::install_github("dbasu-umass/clptheory")
 ```
 
 
