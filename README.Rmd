@@ -22,18 +22,12 @@ The goal of `clptheory` (_classical price theory_) is to create a suite of funct
 
 ## Installation
 
-The easiest way to get `clptheory` is to install it from CRAN. Use the following in an R console:
-```{r}
-install.packages("clptheory")
-
-```
-
 You can install the development version of `clptheory` from [GitHub](https://github.com/) with:
-
-``` r
+```{r}
 # install.packages("devtools")
 devtools::install_github("dbasu-umass/clptheory")
 ```
+
 
 ## Main Functions
 This package provides the following functions.

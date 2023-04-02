@@ -18,26 +18,28 @@ relative labor values.
 
 ## Installation
 
-The easiest way to get `clptheory` is to install it from CRAN. Use the
-following in an R console:
-
-``` r
-install.packages("clptheory")
-#> Installing package into '/tmp/Rtmp0C0jAi/temp_libpath6ec83c7012d2'
-#> (as 'lib' is unspecified)
-#> Warning: package 'clptheory' is not available for this version of R
-#> 
-#> A version of this package for your version of R might be available elsewhere,
-#> see the ideas at
-#> https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-packages
-```
-
 You can install the development version of `clptheory` from
 [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("dbasu-umass/clptheory")
+#> Downloading GitHub repo dbasu-umass/clptheory@HEAD
+#> nloptr (1.2.2.3 -> 2.0.3) [CRAN]
+#> Installing 1 packages: nloptr
+#> Installing package into '/tmp/RtmpawXFbo/temp_libpath16bf3572a6654'
+#> (as 'lib' is unspecified)
+#> Warning in i.p(...): installation of package 'nloptr' had non-zero exit status
+#> ── R CMD build ─────────────────────────────────────────────────────────────────
+#> * checking for file ‘/tmp/RtmpOlrhfb/remotes1755e6322ed51/dbasu-umass-clptheory-e423f8f/DESCRIPTION’ ... OK
+#> * preparing ‘clptheory’:
+#> * checking DESCRIPTION meta-information ... OK
+#> * checking for LF line-endings in source and make files and shell scripts
+#> * checking for empty or unneeded directories
+#> Removed empty directory ‘clptheory/vignettes’
+#> * building ‘clptheory_0.1.0.tar.gz’
+#> Installing package into '/tmp/RtmpawXFbo/temp_libpath16bf3572a6654'
+#> (as 'lib' is unspecified)
 ```
 
 ## Main Functions
