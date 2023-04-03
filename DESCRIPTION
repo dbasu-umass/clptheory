@@ -6,8 +6,8 @@ Authors@R:
 Description: Computes the uniform rate of profit, the vector of price of 
     production and the vector of labor values; and also compute measures of deviation 
     between relative prices of production and relative values.  
-    <[https://scholarworks.umass.edu/econ_workingpaper/347/]>. You provide the  
-    nput-output data and 'clptheory' does the calculations for you.
+    <https://scholarworks.umass.edu/econ_workingpaper/347/>. You provide the  
+    input-output data and 'clptheory' does the calculations for you.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
