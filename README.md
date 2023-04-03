@@ -21,17 +21,26 @@ relative labor values.
 You can install the package `clptheory` from CRAN with:
 
 ``` r
-# Uncomment the following line
-# install.packages("clptheory")
+
+install.packages("clptheory")
 ```
 
 You can install the development version of `clptheory` from
 [GitHub](https://github.com/) with:
 
 ``` r
-# Uncomment the following two lines
 # install.packages("devtools")
-# devtools::install_github("dbasu-umass/clptheory")
+devtools::install_github("dbasu-umass/clptheory")
+#> ps     (1.7.3   -> 1.7.4) [CRAN]
+#> nloptr (1.2.2.3 -> 2.0.3) [CRAN]
+#> ── R CMD build ─────────────────────────────────────────────────────────────────
+#> * checking for file ‘/tmp/RtmpH6oJwl/remotes1d067d0c518a/dbasu-umass-clptheory-14cb7aa/DESCRIPTION’ ... OK
+#> * preparing ‘clptheory’:
+#> * checking DESCRIPTION meta-information ... OK
+#> * checking for LF line-endings in source and make files and shell scripts
+#> * checking for empty or unneeded directories
+#> Removed empty directory ‘clptheory/vignettes’
+#> * building ‘clptheory_0.1.0.tar.gz’
 ```
 
 ## Main Functions
