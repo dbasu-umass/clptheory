@@ -21,12 +21,18 @@ relative labor values.
 You can install the package `clptheory` from CRAN with:
 
 ``` r
-
-install.packages("clptheory")
+# Uncomment the following line
+# install.packages("clptheory")
 ```
 
 You can install the development version of `clptheory` from
 [GitHub](https://github.com/) with:
+
+``` r
+# Uncomment the following two lines
+# install.packages("devtools")
+# devtools::install_github("dbasu-umass/clptheory")
+```
 
 ## Main Functions
 
