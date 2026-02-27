@@ -54,80 +54,72 @@
 #' # Compute prices of production
 #' ppstdint1(A = A,l = l,b = b,Q = Q,l_simple = l)
 #'
-ppstdint1 <- function(A, l, b, Q, l_simple){
-
+ppstdint1 <- function(A, b, Q, l_simple){
+  
+  # -- Inputs to the function
+  # A (nxn): input output matrix
+  # l_simple (1xn): direct labor vector (adjusted for complexity)
+  # b (nx1): real wage vector
+  # Q (nx1): gross output vector
+  
   # ---- M
-  M <- A + b%*%l
-
+  M <- (A + b%*%l_simple)
+  
   # Is M nonnegative?
   nn_M <- ifelse(min(M)>=0,1,0)
   # Is M irreducible?
+  require(popdemo)
   ir_M <- ifelse(popdemo::isIrreducible(M),1,0)
   
-  # Perron-Frobenius theorem applies only if nn_M==1 and ir_M==1
-  if(nn_M==0){
-    stop("M is not nonnegative. Perron-Frobenius Theorem will not apply.")
-  } else if(ir_M==0){
-    stop("M is not irreducible. Perron-Frobenius Theorem will not apply.")
-  } else{
-    
-    # ---- Uniform rate of profit
-    maxEigenv <- max(Mod(eigen(M)$values))
-    r <- (1/maxEigenv)-1
-    
-    # -- Maximal rate of profit (when b is the 0 vector)
-    R <- 1/(max(Mod(eigen(A)$values)))-1
-    
-    # ----- Solve for price of production vector
-    # Rel Price = First column of eigen vector matrix of M
-    # The vector has all real elements (of the same sign)
-    # If any element <0 then all elements <0; Hence, multiply with -1
-    p_rel_neg <- (-1)*Re(eigen(M)$vectors[,1])
-    p_rel_pos <- Re(eigen(M)$vectors[,1])
-    if (Re(eigen(M)$vectors[1,1])<0) {
-      p_rel <- p_rel_neg
-    }else{
-      p_rel <- p_rel_pos
-    }
-    
-    # ---- Vector of values
-    # Note: we use the labor input adjusted for complexity
-    I <- diag(ncol(A))
-    lambda <- l_simple%*%solve(I - A)
-    colnames(lambda) <- colnames(l_simple)
-    
-    # Normalization 1 using gross output
-    mev_num_1 <- sum(matrix(Q,ncol=1))
-    mev_den_1 <- (matrix(lambda,nrow=1)%*%matrix(Q,ncol=1))
-    mev_1 <- mev_num_1/mev_den_1
-    
-    # Normalization 2 using gross output
-    mev_num_2 <- sum(matrix(Q,ncol=1))
-    mev_den_2 <- (matrix(p_rel,nrow=1)%*%matrix(Q,ncol=1))
-    mev_2 <- mev_num_2/mev_den_2
-    
-    # ----- Absolute price of production vector
-    p_abs <- mev_2[1,1]*matrix(p_rel,nrow=1)
-    colnames(p_abs) <- colnames(l)
-    
-    # Direct prices
-    direct_p <- mev_1[1,1]*matrix(lambda, nrow = 1)
-    colnames(direct_p) <- colnames(l_simple)
-    
-    # ----- Results as a list
-    return(list(meig = maxEigenv,
-                urop = r,
-                mrop = R,
-                ppabs = p_abs,
-                pprel = p_rel,
-                lvalues = lambda,
-                dprice = direct_p,
-                mevg = mev_1[1,1],
-                mnonneg = nn_M,
-                mirred = ir_M
-              )
-           )
-  }
-
+  # ---- Uniform rate of profit
+  maxEigenv <- max(Mod(eigen(M)$values))
+  r <- (1/maxEigenv)-1
   
+  # -- Maximal rate of profit (when b is the 0 vector)
+  R <- 1/(max(Mod(eigen(A)$values)))-1
+  
+  # ----- Solve for price of production vector
+  # Rel Price = First column of eigenvector matrix of M
+  # The vector has all real elements (of the same sign)
+  # If any element <0 then all elements <0; Hence, multiply with -1
+  # transpose used because left eigenvector is needed
+  p_rel_neg <- (-1)*Re(eigen(t(M))$vectors[,1])
+  p_rel_pos <- Re(eigen(t(M))$vectors[,1])
+  if (Re(eigen(t(M))$vectors[1,1])<0) {
+    p_rel <- p_rel_neg
+  }else{
+    p_rel <- p_rel_pos
+  }
+  
+  # Normalization defines beta
+  mybeta <- (p_rel%*%Q)/sum(Q)
+  # Price of production vector
+  p_pp <- (1/mybeta[1,1])*p_rel
+  colnames(p_pp) <- colnames(l_simple)
+  
+  
+  # ---- Vector of values 
+  # Note: we use the labor input adjusted for complexity
+  I <- diag(ncol(A))
+  lambda <- l_simple%*%solve(I - A)
+  colnames(lambda) <- colnames(l_simple)
+  
+  # ---- Vector of Direct prices
+  # Normalization defines alpha
+  myalpha <- (lambda%*%Q)/sum(Q)
+  # direct prices
+  p_direct <- lambda/myalpha[1,1]
+  colnames(p_direct) <- colnames(lambda)
+  
+  # ----- Results as a list
+  return(list("Max Eigen Value (M)" = maxEigenv,
+              "Uniform Rate of Profit" = r,
+              "Maximal Rate of Profit" = R,
+              "Prices of Production" = p_pp,
+              "Direct prices" = p_direct,
+              "Values" = lambda,
+              "M: Nonnegative (1=Y,0=N)" = nn_M,
+              "M: Irreducible (1=Y,0=N)" = ir_M
+  )
+  )
 }
