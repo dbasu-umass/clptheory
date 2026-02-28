@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of `clptheory` (_classical price theory_) is to create a suite of functions to implement the classical theory of prices. The functions in this package computes the uniform rate of profit, the vector of price of production and the vector of labor values for different specifications of the circulating capital model and the capital stock model. The functions also computes various regression- and non-regression-based measures of deviation between the vector of _all possible_ relative prices of production and the vector of _all possible_ relative labor values.
+The goal of `clptheory` (_classical price theory_) is to create a suite of functions to implement the classical theory of prices. The functions in this package computes the uniform rate of profit, the vector of price of production and the vector of labor values for the circulating capital model and the capital stock model. The functions also computes various regression- and non-regression-based measures of deviation between the vector of relative prices of production and the vector of relative labor values.
 
 ## Installation
 You can install the package `clptheory` from CRAN with:
@@ -39,27 +39,11 @@ You can install the development version of `clptheory` from [GitHub](https://git
 ## Main Functions
 This package provides the following functions.
 
-1. `ppstdint1`: a function to estimate a basic circulating capital model (uniform wage rates across industries + not taking account of unproductive industries) with the Standard Interpretation;
+1. `ppstdint1`: a function to estimate a basic circulating capital model with the Standard Interpretation;
 
-2. `ppstdint2`: a function to estimate a circulating capital model (uniform wage rates across industries + takes account of unproductive industries) with the Standard Interpretation;
+4. `ppnewint1`: a function to estimate a basic circulating capital model with the New Interpretation;
 
-3. `ppstdint3`: a function to estimate a basic capital stock model (uniform wage rates across industries + not taking account of unproductive industries) with the Standard Interpretation;
-
-4. `ppnewint1`: a function to estimate a basic circulating capital model (uniform wage rates across industries + not taking account of unproductive industries) with the New Interpretation;
-
-5. `ppnewint2`: a function to estimate a circulating capital model (allows differential wage rates across industries + not taking account of unproductive industries) with the New Interpretation;
-
-6. `ppnewint3`: a function to estimate a circulating capital model (uniform wage rates across industries + takes account of unproductive industries) with the New Interpretation;
-
-7. `ppnewint4`: a function to estimate a circulating capital model (allows differential wage rates across industries + takes account of unproductive industries) with the New Interpretation;
-
-8. `ppnewint5`: a function to estimate a basic capital stock model (uniform wage rates across industries + not taking account of unproductive industries) with the New Interpretation;
-
-9. `ppnewint6`: a function to estimate a capital stock model (allows differential wage rates across industries + not taking account of unproductive industries) with the New Interpretation;
-
-10. `ppnewint7`: a function to estimate a capital stock model (uniform wage rates across industries + takes account of unproductive industries) with the New Interpretation;
-
-11. `ppnewint8`: a function to estimate a capital stock model (allows differential wage rates across industries + takes account of unproductive industries) with the New Interpretation;
+5. `ppsraffa1`: a function to estimate a circulating capital model with the Sraffian approach;
 
 12. `nregtestrel`: a function that computes various non-regression-based measures of deviation between the vector of _relative_ prices of production and the vector of _relative_ labor values;
 
