@@ -157,22 +157,11 @@ rownames(comp1) <- c(
 
 In the results above, we see the magnitudes of six different measures of
 the deviation between PP/MP, DP/MP, PP/DP: root mean squared error (RMSE),
-meann absolute distance (MAD), mean absolute weighted distance (MAWD),
-classical distance measure (CDM), angle between the two vectors (angle
-in degrees), and distance computed using angle (distance).
+meann absolute distance (MAD), mean absolute weighted distance (MAWD), angle between the two vectors (angle in degrees), and the d-distance computed using angle (distance).
 
-As an example, we can see that the CDM for SI is 0.789 and for NI is
-0.647. This can be interpreted as showing that the deviation between the
-vector of *relative* prices of production and the vector of *relative*
-labor values is 79 percent and 65 percent of the relative value vector
-according to the SI and NI methodology, respectively.
+As an example, we can see that the d-distance of the deviation between PP/MP, DP/MP, PP/DP for SI are 0.312, 0.275 and 0.043, respectively. This can be interpreted as showing that the deviation between PP/MP, DP/MP, PP/DP are 31.2 percent, 27.5 percent and 4.3 percent, respectively. The corresponding measures of deviation for NI are 0.206, 0.275 and 0.088, respectively. 
 
-The last row of the above results shows the length of (number of
-observations in) the vector of *relative* prices of production or the
-vector of *relative* labor values. Recall that the input-output matrix
-is 48 by 48. Hence, the *absolute* value and price of production vectors
-will each be of size 48. Thus, the size of the vector of *relative*
-prices of production (or labor value) should be $(48 \times 47)/2=1128$.
+It is interesting to note that the measure of deviation for DP/MP are the same in both SI and NI. The reason for this is as follows: the DP vector is just a rescaled value of the labor value vector; hence it is the same in both SI and NI. The MP vector is just a vector of 1s. Hence, this vector is also same for both SI and NI.
 
 
 ## References
