@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of `clptheory` (_classical price theory_) is to create a suite of functions to implement the classical theory of prices. The functions in this package computes the uniform rate of profit, the vector of price of production (PP), the vector of direct prices (DP) and the vector of labor values for the circulating capital model and the capital stock model. The functions also computes various non-regression-based measures of deviation between PP/MP, DP/MP and PPDP, where MP denotes the vector of market prices (which is a vector of 1s).
+The goal of `clptheory` (_classical price theory_) is to create a suite of functions to implement the classical theory of prices. The functions in this package computes the uniform rate of profit, the vector of price of production (PP), the vector of direct prices (DP) and the vector of labor values for the circulating capital model and the capital stock model. The functions also computes various non-regression-based measures of deviation between PP/MP, DP/MP and PP/DP, where MP denotes the vector of market prices (which is a vector of 1s).
 
 ## Installation
 You can install the package `clptheory` from CRAN with:
@@ -106,14 +106,14 @@ ni1 <- clptheory::ppnewint1(
   l_simple = ausdata$l_simple
 )
 ```
-Let us see the uniform profit rate.
+Let us compare the uniform profit rates from SI and NI.
 ```{r}
 cbind(si1$urop,ni1$urop)
 ```
 
 ### Non-Regression-Based Measures of Deviation
 Let us compute various non-regression-based measures of the deviation
-between the vector of prices of production and the vector of market prices, between the vector of direct prices and market prices, and between the vector of prices of production and the direct prices  for the SI.
+between PP/MP, DP/MP and PP/DP for the SI.
 
 ```{r}
 nrsi1 <- clptheory::nonregdist(
@@ -139,8 +139,7 @@ nrni1 <- clptheory::nonregdist(
 
 We can now compare the results for the analysis of the _circulating
 capital model_ from the SI approach and the NI approach for the
-non-regression-based measures of deviation between relative prices of
-production and relative values.
+non-regression-based measures of deviation between PP/MP, DP/MP and PP/DP.
 
 ```{r}
 comp1 <- cbind(nrsi1,nrni1)
@@ -394,8 +393,17 @@ We can compare the results for the analysis of the _circulating capital model_ f
 
 comp1 <- cbind(nrsi1,nrni1)
 
+rownames(comp1) <- c(
+  "RMSE_PPMP", "RMSE_DPMP","RMSE_PPDP",
+  "MAD_PPMP", "MAD_DPMP","MAD_PPDP",
+  "MAWD_PPMP", "MAWD_DPMP","MAWD_PPDP",
+  "Angle_PPMP", "Angle_DPMP","Angle_PPDP",
+  "DDist_PPMP", "DDist_DPMP","DDist_PPDP"
+)
+
 colnames(comp1) <- c("SI","NI")
 
+# ---- The results
 (comp1)
 ```
 
@@ -404,8 +412,17 @@ We can compare the results for the analysis of the _capital stock model_ from th
 
 comp2 <- cbind(nrsi2, nrni2)
 
+rownames(comp2) <- c(
+  "RMSE_PPMP", "RMSE_DPMP","RMSE_PPDP",
+  "MAD_PPMP", "MAD_DPMP","MAD_PPDP",
+  "MAWD_PPMP", "MAWD_DPMP","MAWD_PPDP",
+  "Angle_PPMP", "Angle_DPMP","Angle_PPDP",
+  "DDist_PPMP", "DDist_DPMP","DDist_PPDP"
+)
+
 colnames(comp2) <- c("SI","NI")
 
+# ---- The results
 (comp2)
 ```
 

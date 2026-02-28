@@ -13,7 +13,7 @@ in this package computes the uniform rate of profit, the vector of price
 of production (PP), the vector of direct prices (DP) and the vector of
 labor values for the circulating capital model and the capital stock
 model. The functions also computes various non-regression-based measures
-of deviation between PP/MP, DP/MP and PPDP, where MP denotes the vector
+of deviation between PP/MP, DP/MP and PP/DP, where MP denotes the vector
 of market prices (which is a vector of 1s).
 
 ## Installation
@@ -140,7 +140,7 @@ ni1 <- clptheory::ppnewint1(
 )
 ```
 
-Let us see the uniform profit rate.
+Let us compare the uniform profit rates from SI and NI.
 
 ``` r
 cbind(si1$urop,ni1$urop)
@@ -151,10 +151,7 @@ cbind(si1$urop,ni1$urop)
 ### Non-Regression-Based Measures of Deviation
 
 Let us compute various non-regression-based measures of the deviation
-between the vector of prices of production and the vector of market
-prices, between the vector of direct prices and market prices, and
-between the vector of prices of production and the direct prices for the
-SI.
+between PP/MP, DP/MP and PP/DP for the SI.
 
 ``` r
 nrsi1 <- clptheory::nonregdist(
@@ -180,8 +177,8 @@ nrni1 <- clptheory::nonregdist(
 
 We can now compare the results for the analysis of the *circulating
 capital model* from the SI approach and the NI approach for the
-non-regression-based measures of deviation between relative prices of
-production and relative values.
+non-regression-based measures of deviation between PP/MP, DP/MP and
+PP/DP.
 
 ``` r
 comp1 <- cbind(nrsi1,nrni1)
@@ -540,25 +537,34 @@ production and relative values.
 
 comp1 <- cbind(nrsi1,nrni1)
 
+rownames(comp1) <- c(
+  "RMSE_PPMP", "RMSE_DPMP","RMSE_PPDP",
+  "MAD_PPMP", "MAD_DPMP","MAD_PPDP",
+  "MAWD_PPMP", "MAWD_DPMP","MAWD_PPDP",
+  "Angle_PPMP", "Angle_DPMP","Angle_PPDP",
+  "DDist_PPMP", "DDist_DPMP","DDist_PPDP"
+)
+
 colnames(comp1) <- c("SI","NI")
 
+# ---- The results
 (comp1)
-#>           SI        NI        
-#> rmseppmp  2.071395  25.77936  
-#> rmsedpmp  1.920455  1.920455  
-#> rmseppdp  0.1081    9.51179   
-#> madppmp   1.595628  16.59728  
-#> maddpmp   1.490535  1.490535  
-#> madppdp   0.1019051 9.493214  
-#> mawdppmp  1.061069  9.484922  
-#> mawddpmp  0.9800192 0.9800192 
-#> mawdppdp  0.1238156 9.135781  
-#> angleppmp 54.29756  53.93064  
-#> angledpmp 53.49691  53.49691  
-#> angleppdp 7.526052  3.967176  
-#> ddistppmp 0.9126053 0.9069022 
-#> ddistdpmp 0.9001488 0.9001488 
-#> ddistppdp 0.13126   0.06922645
+#>            SI        NI        
+#> RMSE_PPMP  2.071395  25.77936  
+#> RMSE_DPMP  1.920455  1.920455  
+#> RMSE_PPDP  0.1081    9.51179   
+#> MAD_PPMP   1.595628  16.59728  
+#> MAD_DPMP   1.490535  1.490535  
+#> MAD_PPDP   0.1019051 9.493214  
+#> MAWD_PPMP  1.061069  9.484922  
+#> MAWD_DPMP  0.9800192 0.9800192 
+#> MAWD_PPDP  0.1238156 9.135781  
+#> Angle_PPMP 54.29756  53.93064  
+#> Angle_DPMP 53.49691  53.49691  
+#> Angle_PPDP 7.526052  3.967176  
+#> DDist_PPMP 0.9126053 0.9069022 
+#> DDist_DPMP 0.9001488 0.9001488 
+#> DDist_PPDP 0.13126   0.06922645
 ```
 
 We can compare the results for the analysis of the *capital stock model*
@@ -570,25 +576,34 @@ values.
 
 comp2 <- cbind(nrsi2, nrni2)
 
+rownames(comp2) <- c(
+  "RMSE_PPMP", "RMSE_DPMP","RMSE_PPDP",
+  "MAD_PPMP", "MAD_DPMP","MAD_PPDP",
+  "MAWD_PPMP", "MAWD_DPMP","MAWD_PPDP",
+  "Angle_PPMP", "Angle_DPMP","Angle_PPDP",
+  "DDist_PPMP", "DDist_DPMP","DDist_PPDP"
+)
+
 colnames(comp2) <- c("SI","NI")
 
+# ---- The results
 (comp2)
-#>           SI        NI       
-#> rmseppmp  1.942444  27.46998 
-#> rmsedpmp  1.923002  1.923002 
-#> rmseppdp  0.269714  11.44563 
-#> madppmp   1.484443  18.08056 
-#> maddpmp   1.48889   1.48889  
-#> madppdp   0.1933954 11.2945  
-#> mawdppmp  0.9980861 10.40486 
-#> mawddpmp  0.9826291 0.9826291
-#> mawdppdp  0.1752105 10.64949 
-#> angleppmp 52.85015  53.00857 
-#> angledpmp 53.37635  53.37635 
-#> angleppdp 14.95225  10.46335 
-#> ddistppmp 0.8900543 0.8925295
-#> ddistdpmp 0.8982692 0.8982692
-#> ddistppdp 0.2602261 0.1823662
+#>            SI        NI       
+#> RMSE_PPMP  1.942444  27.46998 
+#> RMSE_DPMP  1.923002  1.923002 
+#> RMSE_PPDP  0.269714  11.44563 
+#> MAD_PPMP   1.484443  18.08056 
+#> MAD_DPMP   1.48889   1.48889  
+#> MAD_PPDP   0.1933954 11.2945  
+#> MAWD_PPMP  0.9980861 10.40486 
+#> MAWD_DPMP  0.9826291 0.9826291
+#> MAWD_PPDP  0.1752105 10.64949 
+#> Angle_PPMP 52.85015  53.00857 
+#> Angle_DPMP 53.37635  53.37635 
+#> Angle_PPDP 14.95225  10.46335 
+#> DDist_PPMP 0.8900543 0.8925295
+#> DDist_DPMP 0.8982692 0.8982692
+#> DDist_PPDP 0.2602261 0.1823662
 ```
 
 ## References
