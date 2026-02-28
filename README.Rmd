@@ -143,7 +143,9 @@ non-regression-based measures of deviation between PP/MP, DP/MP and PP/DP.
 
 ```{r}
 comp1 <- cbind(nrsi1,nrni1)
+
 colnames(comp1) <- c("SI","NI")
+
 rownames(comp1) <- c(
   "RMSE_PPMP", "RMSE_DPMP","RMSE_PPDP",
   "MAD_PPMP", "MAD_DPMP","MAD_PPDP",
@@ -200,12 +202,6 @@ Q <- matrix(
   data = c(26530, 18168, 73840),
   ncol=1)
 
-
-# Market prices vector
-m <- matrix(
-  data = c(4, 60, 7),
-  nrow=1
-)
 
 # Capital stock coefficient matrix
 K <- matrix(
@@ -299,6 +295,10 @@ What is the vector of labor values?
 ```{r}
 si2$lvalues
 ```
+What is the vector of direct prices?
+```{r}
+si2$dp
+```
 What is the vector of prices of production?
 ```{r}
 si2$pp
@@ -336,6 +336,10 @@ What is the vector of labor values?
 ```{r}
 ni1$lvalues
 ```
+What is the vector of direct prices?
+```{r}
+ni1$dp
+```
 What is the vector of prices of production?
 ```{r}
 ni1$pp
@@ -371,6 +375,10 @@ ni2$urop
 What is the vector of labor values?
 ```{r}
 ni2$lvalues
+```
+What is the vector of direct prices?
+```{r}
+ni2$dp
 ```
 What is the vector of prices of production?
 ```{r}

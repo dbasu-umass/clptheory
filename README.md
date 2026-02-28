@@ -182,7 +182,9 @@ PP/DP.
 
 ``` r
 comp1 <- cbind(nrsi1,nrni1)
+
 colnames(comp1) <- c("SI","NI")
+
 rownames(comp1) <- c(
   "RMSE_PPMP", "RMSE_DPMP","RMSE_PPDP",
   "MAD_PPMP", "MAD_DPMP","MAD_PPDP",
@@ -276,12 +278,6 @@ Q <- matrix(
   data = c(26530, 18168, 73840),
   ncol=1)
 
-
-# Market prices vector
-m <- matrix(
-  data = c(4, 60, 7),
-  nrow=1
-)
 
 # Capital stock coefficient matrix
 K <- matrix(
@@ -401,6 +397,14 @@ si2$lvalues
 #> [1,] 0.5192079 8.309406 0.9407729
 ```
 
+What is the vector of direct prices?
+
+``` r
+si2$dp
+#>           [,1]     [,2]      [,3]
+#> [1,] 0.2627846 4.205606 0.4761495
+```
+
 What is the vector of prices of production?
 
 ``` r
@@ -450,6 +454,14 @@ What is the vector of labor values?
 ni1$lvalues
 #>           [,1]     [,2]      [,3]
 #> [1,] 0.4398417 7.739431 0.8979541
+```
+
+What is the vector of direct prices?
+
+``` r
+ni1$dp
+#>          [,1]     [,2]      [,3]
+#> [1,] 0.238526 4.197091 0.4869603
 ```
 
 What is the vector of prices of production?
@@ -502,6 +514,14 @@ What is the vector of labor values?
 ni2$lvalues
 #>           [,1]     [,2]      [,3]
 #> [1,] 0.5192079 8.309406 0.9407729
+```
+
+What is the vector of direct prices?
+
+``` r
+ni2$dp
+#>           [,1]     [,2]      [,3]
+#> [1,] 0.2627846 4.205606 0.4761495
 ```
 
 What is the vector of prices of production?
