@@ -20,13 +20,11 @@ A list with the following elements:
 \item{meig}{Maximum eigen value of M}
 \item{urop}{Uniform rate of profit (as a fraction)}
 \item{mrop}{Maximum rate of profit (as a fraction)}
-\item{ppabs}{Price of production vector (absolute)}
-\item{pprel}{Price of production vector (relative)}
+\item{pp}{Price of production vector}
+\item{dp}{Direct prices}
 \item{lvalues}{Labor values vector}
-\item{dprice}{Direct price vector}
-\item{mevg}{Monetary expression of value using gross output}
-\item{mnonneg}{Is M Nonnegative? (1=Y,0=N)}
-\item{mirred}{Is M Irreducible? (1=Y,0=N)}
+\item{Mnonneg}{Is M Nonnegative? (1=Y,0=N)}
+\item{Mirred}{Is M Irreducible? (1=Y,0=N)}
 }
 \description{
 This function computes the uniform rate of profit, prices of production and labor values for a basic circulating capital model using the Standard Interpretation.

@@ -14,13 +14,11 @@
 #' \item{meig}{Maximum eigen value of M}
 #' \item{urop}{Uniform rate of profit (as a fraction)}
 #' \item{mrop}{Maximum rate of profit (as a fraction)}
-#' \item{ppabs}{Price of production vector (absolute)}
-#' \item{pprel}{Price of production vector (relative)}
+#' \item{pp}{Price of production vector}
+#' \item{dp}{Direct prices}
 #' \item{lvalues}{Labor values vector}
-#' \item{dprice}{Direct price vector}
-#' \item{mevg}{Monetary expression of value using gross output}
-#' \item{mnonneg}{Is M Nonnegative? (1=Y,0=N)}
-#' \item{mirred}{Is M Irreducible? (1=Y,0=N)}
+#' \item{Mnonneg}{Is M Nonnegative? (1=Y,0=N)}
+#' \item{Mirred}{Is M Irreducible? (1=Y,0=N)}
 #'
 #'@references Basu, Deepankar and Moraitis, Athanasios, "Alternative Approaches to Labor Values andPrices of Production: Theory and Evidence" (2023). Economics Department Working Paper Series. 347. URL: https://scholarworks.umass.edu/econ_workingpaper/347/
 #'
@@ -111,14 +109,14 @@ ppstdint1 <- function(A, b, Q, l_simple){
   colnames(p_direct) <- colnames(lambda)
   
   # ----- Results as a list
-  return(list("Max Eigen Value (M)" = maxEigenv,
-              "Uniform Rate of Profit" = r,
-              "Maximal Rate of Profit" = R,
-              "Prices of Production" = p_pp,
-              "Direct prices" = p_direct,
-              "Values" = lambda,
-              "M: Nonnegative (1=Y,0=N)" = nn_M,
-              "M: Irreducible (1=Y,0=N)" = ir_M
+  return(list(meig = maxEigenv,
+              urop = r,
+              mrop = R,
+              pp = p_pp,
+              dp = p_direct,
+              lvalues = lambda,
+              Mnonneg = nn_M,
+              Mirred = ir_M
   )
   )
 }
