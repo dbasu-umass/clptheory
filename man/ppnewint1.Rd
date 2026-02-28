@@ -4,12 +4,10 @@
 \alias{ppnewint1}
 \title{Circulating capital model 1 using the New Interpretation.}
 \usage{
-ppnewint1(A, l, w, v, Q, l_simple)
+ppnewint1(A, w, v, Q, l_simple)
 }
 \arguments{
 \item{A}{input-output matrix (n x n).}
-
-\item{l}{vector of complex labor input (1 x n).}
 
 \item{w}{uniform nominal wage rate (scalar).}
 
@@ -24,16 +22,14 @@ A list with the following elements:
 \item{meig}{Maximum eigen value of A}
 \item{urop}{Uniform rate of profit (as a fraction)}
 \item{mrop}{Maximum rate of profit (as a fraction)}
-\item{ppabs}{Price of production vector (absolute)}
-\item{pprel}{Price of production vector (relative)}
+\item{pp}{Price of production vector}
+\item{dp}{Direct prices}
 \item{lvalues}{Labor values vector}
-\item{mevn}{Monetary expression of value using net output}
-\item{mevg}{Monetary expression of value using gross output}
 \item{Anonneg}{Is A Nonnegative? (1=Y,0=N)}
 \item{Airred}{Is A Irreducible? (1=Y,0=N)}
 }
 \description{
-This function computes the uniform rate of profit, prices of production and labor values for a basic circulating capital model using the New Interpretation. The model has uniform wage rates across industries and does not take account of unproductive labor for labor value calculations.
+This function computes the uniform rate of profit, prices of production and labor values for a basic circulating capital model using the New Interpretation.
 }
 \examples{
 
@@ -67,7 +63,7 @@ wavg <- m\%*\%b
 # Value of labor power
 v <- 2/3
 # Compute prices of production
-ppnewint1(A = A,l = l,w = wavg[1,1],v=v,Q = Q,l_simple = l)
+ppnewint1(A = A,w = wavg[1,1],v=v,Q = Q,l_simple = l)
 
 }
 \references{

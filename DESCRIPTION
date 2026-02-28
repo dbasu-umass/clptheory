@@ -11,12 +11,10 @@ Description: Computes the uniform rate of profit, the vector of price of
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.3
 Imports:
   popdemo,
   stats,
-  car,
-  utils,
   dplyr,
   magrittr
 Depends: 

@@ -1,12 +1,12 @@
 #' Circulating capital model 1 using the Standard Interpretation.
 #'
-#' This function computes the uniform rate of profit, prices of production and labor values for a basic circulating capital model using the Standard Interpretation. The model has uniform wage rates across industries and does not take into account unproductive labor for labor value calculations.
+#' This function computes the uniform rate of profit, prices of production and labor values for a basic circulating capital model using the Standard Interpretation.
 #'
 #' @param A input-output matrix (n x n).
-#' @param l vector of complex labor input (1 x n).
 #' @param b vector real wage bundle (n x 1).
 #' @param Q gross output vector (n x 1).
 #' @param l_simple vector of simple labor input (1 x n).
+#'
 #'
 #' @importFrom popdemo isIrreducible
 #'
@@ -52,7 +52,7 @@
 #' # Direct labor input vector (simple)
 #' l_simple <- l
 #' # Compute prices of production
-#' ppstdint1(A = A,l = l,b = b,Q = Q,l_simple = l)
+#' ppstdint1(A = A,b = b,Q = Q,l_simple = l)
 #'
 ppstdint1 <- function(A, b, Q, l_simple){
   
@@ -68,7 +68,6 @@ ppstdint1 <- function(A, b, Q, l_simple){
   # Is M nonnegative?
   nn_M <- ifelse(min(M)>=0,1,0)
   # Is M irreducible?
-  require(popdemo)
   ir_M <- ifelse(popdemo::isIrreducible(M),1,0)
   
   # ---- Uniform rate of profit

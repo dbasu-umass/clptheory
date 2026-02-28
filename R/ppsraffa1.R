@@ -46,7 +46,7 @@
 #' # Direct labor input vector (simple)
 #' l_simple <- l
 #' # Profit share
-#' v <- 1/3
+#' pshare <- 1/3
 #' # Compute prices of production
 #' ppsraffa1(A = A,pshare=pshare,Q = Q,l_simple = l)
 #'
@@ -65,7 +65,6 @@ ppsraffa1 <- function(A,Q,pshare,l_simple){
   # Is H nonnegative?
   nn_H <- ifelse(min(H)>=0,1,0)
   # Is H irreducible?
-  require(popdemo)
   ir_H <- ifelse(popdemo::isIrreducible(H),1,0)
   
   # ---- Maximal rate of profit

@@ -3,13 +3,13 @@
 #' This function computes the uniform rate of profit, prices of production and labor values for a basic circulating capital model using the New Interpretation.
 #'
 #' @param A input-output matrix (n x n).
-#' @param l vector of complex labor input (1 x n).
 #' @param w uniform nominal wage rate (scalar).
 #' @param v value of labor power (scalar)
 #' @param Q gross output vector (n x 1).
 #' @param l_simple vector of simple labor input (1 x n).
 #'
 #' @importFrom popdemo isIrreducible
+#' @importFrom stats uniroot
 #'
 #' @return A list with the following elements:
 #' \item{meig}{Maximum eigen value of A}
@@ -80,7 +80,6 @@ ppnewint1 <- function(A, w, v, Q, l_simple){
   # Is A nonnegative?
   nn_A <- ifelse(min(A)>=0,1,0)
   # Is A irreducible?
-  require(popdemo)
   ir_A <- ifelse(popdemo::isIrreducible(A),1,0)
   
   # -- Maximum rate of profit
@@ -100,7 +99,7 @@ ppnewint1 <- function(A, w, v, Q, l_simple){
   # Find root to get uniform rate of profit
   # Note: upper bound should be kept less than
   # R because the function blows up at R
-  r <- uniroot(myfunc,c(0,(R-0.00001)))$root
+  r <- stats::uniroot(myfunc,c(0,(R-0.00001)))$root
   
   # ----- Solve for price of production vector
   p_pp <- (1+r)*(w*l_simple)%*%solve(I-(1+r)*A)
