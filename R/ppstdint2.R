@@ -24,7 +24,7 @@
 #' \item{Mnonneg}{Is M Nonnegative? (1=Y,0=N)}
 #' \item{Mirred}{Is M Irreducible? (1=Y,0=N)}
 #'
-#'@references Basu, Deepankar and Moraitis, Athanasios, "Alternative Approaches to Labor Values andPrices of Production: Theory and Evidence" (2023). Economics Department Working Paper Series. 347. URL: https://scholarworks.umass.edu/econ_workingpaper/347/
+#'@references Basu, Deepankar and Moraitis, Athanasios, "Alternative Approaches to Labor Values and Prices of Production: Theory and Evidence" (2023). Economics Department Working Paper Series. 347. URL: https://scholarworks.umass.edu/econ_workingpaper/347/
 #'
 #' @export
 #'

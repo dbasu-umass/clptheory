@@ -59,5 +59,5 @@ ppstdint1(A = A,b = b,Q = Q,l_simple = l)
 
 }
 \references{
-Basu, Deepankar and Moraitis, Athanasios, "Alternative Approaches to Labor Values andPrices of Production: Theory and Evidence" (2023). Economics Department Working Paper Series. 347. URL: https://scholarworks.umass.edu/econ_workingpaper/347/
+Basu, Deepankar and Moraitis, Athanasios, "Alternative Approaches to Labor Values and Prices of Production: Theory and Evidence" (2023). Economics Department Working Paper Series. 347. URL: https://scholarworks.umass.edu/econ_workingpaper/347/
 }

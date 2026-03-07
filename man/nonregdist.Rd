@@ -69,5 +69,5 @@ nonregdist(x = x, y = y, Q = Q, w = w, w_avg = w_avg)
 
 }
 \references{
-Basu, Deepankar and Moraitis, Athanasios, "Alternative Approaches to Labor Values andPrices of Production: Theory and Evidence" (2023). Economics Department Working Paper Series. 347. URL: https://scholarworks.umass.edu/econ_workingpaper/347/
+Basu, Deepankar and Moraitis, Athanasios, "Alternative Approaches to Labor Values and Prices of Production: Theory and Evidence" (2023). Economics Department Working Paper Series. 347. URL: https://scholarworks.umass.edu/econ_workingpaper/347/
 }
