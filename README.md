@@ -57,20 +57,20 @@ This package provides the following functions.
 
 The package contains the following three datasets.
 
-1.  `aussea`: the socio economic accounts for the Australian economy
+1.  `aussea`: the socio economic accounts (SEA) for the Australian
+    economy extracted from the 2016 release of the World Input Output
+    Database (WIOD); this data set contains industry-level variables (53
+    industries) for the USA for 15 years, 2000-2014;
+
+2.  `ausiot`: input-output (IO) tables for the Australian economy
     extracted from the 2016 release of the World Input Output Database;
-    this data set contains industry-level variables (53 industries) for
-    the USA for 15 years, 2000-2014;
+    this data set contains 53-industry input-output tables for the USA
+    for 15 years, 2000-2014;
 
-2.  `ausiot`: input-output tables for the Australian economy extracted
+3.  `usasea`: the socio economic accounts (SEA) for the USA extracted
     from the 2016 release of the World Input Output Database; this data
-    set contains 53-industry input-output tables for the USA for 15
-    years, 2000-2014;
-
-3.  `usasea`: the socio economic accounts for the USA extracted from the
-    2016 release of the World Input Output Database; this data set
-    contains industry-level variables (53 industries) for the USA for 15
-    years, 2000-2014;
+    set contains industry-level variables (53 industries) for the USA
+    for 15 years, 2000-2014;
 
 4.  `usaiot`: input-output tables for the USA extracted from the 2016
     release of the World Input Output Database; this data set contains
@@ -82,7 +82,10 @@ The package contains the following three datasets.
     contains data for 15 years, 2000-2014. (Note: This data set is not
     necessary for the analysis.)
 
-## Example 1: Analysis for Australia
+To see the correct syntax, required inputs and the output of the
+functions, use the `help` function in R.
+
+## Example 1: Analysis for USA, 2010
 
 Let us conduct price of production analysis for Australia (AUS) and see
 how to use the functions in `clptheory` to
@@ -103,40 +106,51 @@ library(clptheory)
 
 ### Data
 
-Let us create the data objects.
+Let us create the data objects from the WIOD data base using the
+`createdata` function. To use this function, the user needs to supply
+the name of the country code (in this case “USA”), the year (in this
+case 2010), the name of the SEA data set (in this case `usasea`) and the
+name of the IO data set (in this case `usaiot`).
 
 ``` r
-ausdata <- clptheory::createdata(
-  country = "AUS", year = 2010, 
-  datasea = aussea, dataio = ausiot
+usadata <- clptheory::createdata(
+  country = "USA", year = 2010, 
+  datasea = usasea, dataio = usaiot
   )
-#> c("C33", "M71", "M72", "M73", "M74_M75", "U")
+#> "U"
 ```
 
 ### Standard Interpretation
 
-Let us now estimate the circulating capital model with SI.
+Let us now estimate the circulating capital model with SI with the
+`ppstdint1` function. To use this function, the user needs to supply the
+A (input-output) matrix, the b (real wage bundle) vector, the Q (gross
+output) vector, and the labor input (simple labor) vector.
 
 ``` r
 si1 <- clptheory::ppstdint1(
-  A = ausdata$Ahat,
-  b = ausdata$b,
-  Q = ausdata$Q,
-  l_simple = ausdata$l_simple
+  A = usadata$Ahat,
+  b = usadata$b,
+  Q = usadata$Q,
+  l_simple = usadata$l_simple
 )
 ```
 
 ### New Interpretation
 
-Let us now estimate the circulating capital model with NI.
+Let us now estimate the circulating capital model with NI with the
+`ppnewint1` function. To use this function, the user needs to supply the
+A (input-output) matrix, the average nominal wage rate (scalar), the v
+(value of labor power) scalar, the Q (gross output) vector, and the
+labor input (simple labor) vector.
 
 ``` r
 ni1 <- clptheory::ppnewint1(
-  A = ausdata$Ahat,
-  w = ausdata$wavg,
-  v = ausdata$vlp,
-  Q = ausdata$Q,
-  l_simple = ausdata$l_simple
+  A = usadata$Ahat,
+  w = usadata$wavg,
+  v = usadata$vlp,
+  Q = usadata$Q,
+  l_simple = usadata$l_simple
 )
 ```
 
@@ -145,21 +159,30 @@ Let us compare the uniform profit rates from SI and NI.
 ``` r
 cbind(si1$urop,ni1$urop)
 #>            [,1]      [,2]
-#> [1,] -0.1769005 0.3485714
+#> [1,] -0.2816745 0.3709973
 ```
+
+Here we see that the uniform rate of profit estimated by the SI and NI,
+respectively, are -28.17 percent and 37.10 percent.
 
 ### Non-Regression-Based Measures of Deviation
 
 Let us compute various non-regression-based measures of the deviation
-between PP/MP, DP/MP and PP/DP for the SI.
+between PP/MP, DP/MP and PP/DP for the SI using the `nonregdist`
+function. To use this function, the user must supply the price of
+production vector (in this case `si1$pp`), the direct prices vector (in
+this case `si1$dp`), the vector of nominal wage rates (in this case
+`usadata$wagevector_all`), the average wage rate as a scalar (in this
+case `usadata$wavg`) and the gross output vector (in this case
+`usadata$Q`).
 
 ``` r
 nrsi1 <- clptheory::nonregdist(
   x = si1$pp,
   y = si1$dp,
-  w = ausdata$wagevector_all,
-  w_avg = ausdata$wavg,
-  Q = ausdata$Q
+  w = usadata$wagevector_all,
+  w_avg = usadata$wavg,
+  Q = usadata$Q
 )
 ```
 
@@ -169,9 +192,9 @@ Let us do the same computation for the NI.
 nrni1 <- clptheory::nonregdist(
   x=ni1$pp,
   y=ni1$dp,
-  w=ausdata$wagevector_all,
-  w_avg=ausdata$wavg,
-  Q=ausdata$Q
+  w=usadata$wagevector_all,
+  w_avg=usadata$wavg,
+  Q=usadata$Q
   )
 ```
 
@@ -195,22 +218,22 @@ rownames(comp1) <- c(
 
 # ---- The results
 (comp1)
-#>            SI         NI        
-#> RMSE_PPMP  0.3123236  1.49563   
-#> RMSE_DPMP  0.2733907  0.2733907 
-#> RMSE_PPDP  0.04356873 1.541333  
-#> MAD_PPMP   0.2089791  1.409501  
-#> MAD_DPMP   0.1846344  0.1846344 
-#> MAD_PPDP   0.03339916 1.525458  
-#> MAWD_PPMP  0.3051267  1.462637  
-#> MAWD_DPMP  0.2634856  0.2634856 
-#> MAWD_PPDP  0.04477922 1.537114  
-#> Angle_PPMP 17.96719   11.84869  
-#> Angle_DPMP 15.78948   15.78948  
-#> Angle_PPDP 2.443587   5.045813  
-#> DDist_PPMP 0.3123034  0.2064304 
-#> DDist_DPMP 0.2747072  0.2747072 
-#> DDist_PPDP 0.0426454  0.08803759
+#>            SI         NI       
+#> RMSE_PPMP  0.327702   1.774267 
+#> RMSE_DPMP  0.2818772  0.2818772
+#> RMSE_PPDP  0.07994628 1.649635 
+#> MAD_PPMP   0.2691056  1.677533 
+#> MAD_DPMP   0.229908   0.229908 
+#> MAD_PPDP   0.06141611 1.623438 
+#> MAWD_PPMP  0.3391636  1.575482 
+#> MAWD_DPMP  0.2925821  0.2925821
+#> MAWD_PPDP  0.07164429 1.639208 
+#> Angle_PPMP 17.65202   12.59748 
+#> Angle_DPMP 15.15651   15.15651 
+#> Angle_PPDP 4.553346   6.429343 
+#> DDist_PPMP 0.3068689  0.2194249
+#> DDist_DPMP 0.2637604  0.2637604
+#> DDist_PPDP 0.07944997 0.1121543
 ```
 
 In the results above, we see the magnitudes of six different measures of
@@ -231,6 +254,154 @@ the same in both SI and NI. The reason for this is as follows: the DP
 vector is just a rescaled value of the labor value vector; hence it is
 the same in both SI and NI. The MP vector is just a vector of 1s. Hence,
 this vector is also same for both SI and NI.
+
+### Doing an analysis for many years
+
+*USA:* Let us compute the uniform rate of profit using the SI and NI for
+the USA for several years. To do so, we will write some code to loop
+over all the years in the data set: 2000-2014, i.e. 15 years.
+
+``` r
+# matrix to store results
+urop <- matrix(NA, nrow = 15, ncol = 3)
+
+# for loop
+for(i in 1:15){
+  # read data
+  usadata <- clptheory::createdata(
+  country = "USA", year = (1999+i), 
+  datasea = usasea, dataio = usaiot
+  )
+  # estimate SI
+  si1 <- clptheory::ppstdint1(
+  A = usadata$Ahat,
+  b = usadata$b,
+  Q = usadata$Q,
+  l_simple = usadata$l_simple
+  )
+  # estimate NI
+  ni1 <- clptheory::ppnewint1(
+  A = usadata$Ahat,
+  w = usadata$wavg,
+  v = usadata$vlp,
+  Q = usadata$Q,
+  l_simple = usadata$l_simple
+  )
+  # store result on the uniform rate of profit
+  urop[i,] <- c(1999+i,si1$urop,ni1$urop)
+}
+```
+
+Now let us see the results
+
+``` r
+# convert matrix of results to a data frame
+urop_result <- as.data.frame(urop)
+# supply column names
+colnames(urop_result) <- c("year","urop(SI)","urop(NI)")
+# print results
+(urop_result)
+#>    year   urop(SI)  urop(NI)
+#> 1  2000 -0.2066772 0.2858142
+#> 2  2001 -0.2124703 0.2891242
+#> 3  2002 -0.2276504 0.3135421
+#> 4  2003 -0.2348413 0.3223199
+#> 5  2004 -0.2386104 0.3296036
+#> 6  2005 -0.2375231 0.3336100
+#> 7  2006 -0.2379900 0.3414167
+#> 8  2007 -0.2416602 0.3248530
+#> 9  2008 -0.2492589 0.3087132
+#> 10 2009 -0.2784560 0.3494991
+#> 11 2010 -0.2816745 0.3709973
+#> 12 2011 -0.2864402 0.3584673
+#> 13 2012 -0.2736577 0.3556414
+#> 14 2013 -0.2815666 0.3595651
+#> 15 2014 -0.2767634 0.3530419
+# standard deviation of urop: SI
+stats::sd(urop_result[,c("urop(SI)")])
+#> [1] 0.02660856
+# standard deviation of urop: NI
+stats::sd(urop_result[,c("urop(NI)")])
+#> [1] 0.02586745
+```
+
+From the last two lines above, we see that the uniform rate of profit
+estimated by the SI has similar variability as the uniform rate of
+profit estimated by the NI. Moreover, the uniform rate of profit
+estimated by the SI is negative for all years!
+
+*Australia:* Let us compute the uniform rate of profit using the SI and
+NI for Australia for several years. Just like in the case of the USA, we
+will write some code to loop over all the years in the data set:
+2000-2014, i.e. 15 years.
+
+``` r
+# matrix to store results
+urop <- matrix(NA, nrow = 15, ncol = 3)
+
+# for loop
+for(i in 1:15){
+  # read data
+  ausdata <- clptheory::createdata(
+  country = "AUS", year = (1999+i), 
+  datasea = aussea, dataio = ausiot
+  )
+  # estimate SI
+  si1 <- clptheory::ppstdint1(
+  A = ausdata$Ahat,
+  b = ausdata$b,
+  Q = ausdata$Q,
+  l_simple = ausdata$l_simple
+  )
+  # estimate NI
+  ni1 <- clptheory::ppnewint1(
+  A = ausdata$Ahat,
+  w = ausdata$wavg,
+  v = ausdata$vlp,
+  Q = ausdata$Q,
+  l_simple = ausdata$l_simple
+  )
+  # store result on the uniform rate of profit
+  urop[i,] <- c(1999+i,si1$urop,ni1$urop)
+}
+```
+
+Now let us see the results
+
+``` r
+# convert matrix of results to a data frame
+urop_result <- as.data.frame(urop)
+# supply column names
+colnames(urop_result) <- c("year","urop(SI)","urop(NI)")
+# print results
+(urop_result)
+#>    year    urop(SI)  urop(NI)
+#> 1  2000  0.13938777 0.4383862
+#> 2  2001  0.26887556 0.4850732
+#> 3  2002  0.27466405 0.4756530
+#> 4  2003  0.09880047 0.4691115
+#> 5  2004 -0.10018376 0.4133871
+#> 6  2005 -0.09494687 0.4012927
+#> 7  2006 -0.04794979 0.4122654
+#> 8  2007 -0.16101663 0.3746102
+#> 9  2008 -0.12245767 0.3770067
+#> 10 2009 -0.02188953 0.4022079
+#> 11 2010 -0.17690047 0.3485714
+#> 12 2011 -0.20268669 0.3101514
+#> 13 2012 -0.27377312 0.3138961
+#> 14 2013 -0.31690479 0.3328282
+#> 15 2014 -0.26880265 0.3607879
+# standard deviation of urop: SI
+stats::sd(urop_result[,c("urop(SI)")])
+#> [1] 0.1875115
+# standard deviation of urop: NI
+stats::sd(urop_result[,c("urop(NI)")])
+#> [1] 0.05632964
+```
+
+From the last two lines, We now see that the uniform rate of profit
+estimated by the SI has much higher variability than the uniform rate of
+profit estimated by the NI.
 
 ## Example 2: Simple 3-Industry Set-up
 
