@@ -238,7 +238,7 @@ rownames(comp1) <- c(
 
 In the results above, we see the magnitudes of six different measures of
 the deviation between PP/MP, DP/MP, PP/DP: root mean squared error
-(RMSE), meann absolute distance (MAD), mean absolute weighted distance
+(RMSE), mean absolute distance (MAD), mean absolute weighted distance
 (MAWD), angle between the two vectors (angle in degrees), and the
 d-distance computed using angle (distance).
 
@@ -803,4 +803,4 @@ colnames(comp2) <- c("SI","NI")
   Values and Prices of Production: Theory and Evidence. *Economics
   Department Working Paper Series*. 347. University of Massachusetts
   Amherst. Retrieved from
-  <https://scholarworks.umass.edu/econ_workingpaper/347/>
+  <https://scholarworks.umass.edu/entities/publication/03270380-ed74-4f50-8c39-cc6325bfd05f>

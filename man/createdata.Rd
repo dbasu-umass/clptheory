@@ -36,6 +36,3 @@ createdata(country="USA",year=2010,datasea=usasea,dataio=usaiot)
 
 
 }
-\references{
-Basu, Deepankar and Moraitis, Athanasios, "Alternative Approaches to Labor Values and Prices of Production: Theory and Evidence" (2023). Economics Department Working Paper Series. 347. URL: https://scholarworks.umass.edu/econ_workingpaper/347/
-}

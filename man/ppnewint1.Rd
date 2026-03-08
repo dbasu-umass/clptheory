@@ -66,6 +66,3 @@ v <- 2/3
 ppnewint1(A = A,w = wavg[1,1],v=v,Q = Q,l_simple = l)
 
 }
-\references{
-Basu, Deepankar and Moraitis, Athanasios, "Alternative Approaches to Labor Values and Prices of Production: Theory and Evidence" (2023). Economics Department Working Paper Series. 347. URL: https://scholarworks.umass.edu/econ_workingpaper/347/
-}

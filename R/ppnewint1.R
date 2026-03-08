@@ -21,7 +21,6 @@
 #' \item{Anonneg}{Is A Nonnegative? (1=Y,0=N)}
 #' \item{Airred}{Is A Irreducible? (1=Y,0=N)}
 #' 
-#'@references Basu, Deepankar and Moraitis, Athanasios, "Alternative Approaches to Labor Values and Prices of Production: Theory and Evidence" (2023). Economics Department Working Paper Series. 347. URL: https://scholarworks.umass.edu/econ_workingpaper/347/
 #'
 #' @export
 #'

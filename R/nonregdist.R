@@ -29,7 +29,6 @@
 #' \item{ddistdpmp}{D-distance between direct prices and market prices}
 #' \item{ddistppdp}{D-distance between prices of production and direct prices}
 #'
-#'@references Basu, Deepankar and Moraitis, Athanasios, "Alternative Approaches to Labor Values and Prices of Production: Theory and Evidence" (2023). Economics Department Working Paper Series. 347. URL: https://scholarworks.umass.edu/econ_workingpaper/347/
 #'
 #' @export
 #'
