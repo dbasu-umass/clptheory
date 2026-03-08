@@ -389,19 +389,19 @@ What is the uniform rate of profti?
 ```{r}
 si2$urop
 ```
-What is the vector of labor values?
+This exactly matches what is reported in equation (37) on page 57 in Ochoa (1984). What is the vector of labor values?
 ```{r}
 si2$lvalues
 ```
-What is the vector of direct prices?
+This is exactly equal to what is reported in equation (11) on page 47 in Ochoa (1984). What is the vector of direct prices?
 ```{r}
 si2$dp
 ```
-What is the vector of prices of production?
+These are different from what is reported in equation (11) on page 48 in Ochoa (1984). The reason for this difference is that he uses a vector of market prices, `(4, 60, 7)` for normalization that is different from a vector of 1s (which is the common assumption in real world analysis). What is the vector of prices of production?
 ```{r}
 si2$pp
 ```
-Let us now compute the non-regression-based measures of deviation.
+These are different, once again because of the different normalization, from what is reported in equation (38) on page 57 in Ochoa (1984). Let us now compute the non-regression-based measures of deviation.
 ```{r}
 nrsi2 <- nonregdist(
   x = si2$pp,

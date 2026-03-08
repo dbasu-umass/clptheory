@@ -555,7 +555,8 @@ si2$urop
 #> [1] 0.2337492
 ```
 
-What is the vector of labor values?
+This exactly matches what is reported in equation (37) on page 57 in
+Ochoa (1984). What is the vector of labor values?
 
 ``` r
 si2$lvalues
@@ -563,7 +564,8 @@ si2$lvalues
 #> [1,] 0.5192079 8.309406 0.9407729
 ```
 
-What is the vector of direct prices?
+This is exactly equal to what is reported in equation (11) on page 47 in
+Ochoa (1984). What is the vector of direct prices?
 
 ``` r
 si2$dp
@@ -571,6 +573,10 @@ si2$dp
 #> [1,] 0.2627846 4.205606 0.4761495
 ```
 
+These are different from what is reported in equation (11) on page 48 in
+Ochoa (1984). The reason for this difference is that he uses a vector of
+market prices, `(4, 60, 7)` for normalization that is different from a
+vector of 1s (which is the common assumption in real world analysis).
 What is the vector of prices of production?
 
 ``` r
@@ -578,7 +584,9 @@ si2$pp
 #> [1] 0.3816756 4.2560306 0.4210263
 ```
 
-Let us now compute the non-regression-based measures of deviation.
+These are different, once again because of the different normalization,
+from what is reported in equation (38) on page 57 in Ochoa (1984). Let
+us now compute the non-regression-based measures of deviation.
 
 ``` r
 nrsi2 <- nonregdist(
