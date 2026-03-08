@@ -578,7 +578,19 @@ si2$dp
 These are different from what is reported in equation (11) on page 48 in
 Ochoa (1984). The reason for this difference is that he uses a vector of
 market prices, `(4, 60, 7)` for normalization that is different from a
-vector of 1s (which is the common assumption in real world analysis).
+vector of 1s (which is the common assumption in real world analysis). To
+use this vector of market prices, we can do the following:
+
+``` r
+# vector of market prices
+mktp <- c(4,60,7)
+# renormalize
+si2$dp <- si2$dp*(sum(Q)/sum(mktp*Q))
+# vector of direct prices
+(si2$dp)
+#>           [,1]      [,2]       [,3]
+#> [1,] 0.0181836 0.2910104 0.03294757
+```
 
 What is the vector of prices of production?
 
@@ -588,7 +600,18 @@ si2$pp
 ```
 
 These are different, once again because of the different normalization,
-from what is reported in equation (38) on page 57 in Ochoa (1984).
+from what is reported in equation (38) on page 57 in Ochoa (1984). We
+can redo this as we did for the direct prices.
+
+``` r
+# vector of market prices
+mktp <- c(4,60,7)
+# renormalize
+si2$pp <- si2$pp*(sum(Q)/sum(mktp*Q))
+# vector of direct prices
+(si2$pp)
+#> [1] 0.02641036 0.29449959 0.02913327
+```
 
 Let us now compute the non-regression-based measures of deviation.
 
@@ -787,14 +810,14 @@ colnames(comp2) <- c("SI","NI")
 # ---- The results
 (comp2)
 #>            SI        NI       
-#> RMSE_PPMP  1.942444  27.46998 
-#> RMSE_DPMP  1.923002  1.923002 
+#> RMSE_PPMP  0.8922238 27.46998 
+#> RMSE_DPMP  0.8947663 1.923002 
 #> RMSE_PPDP  0.269714  11.44563 
-#> MAD_PPMP   1.484443  18.08056 
-#> MAD_DPMP   1.48889   1.48889  
+#> MAD_PPMP   0.8833189 18.08056 
+#> MAD_DPMP   0.8859528 1.48889  
 #> MAD_PPDP   0.1933954 11.2945  
-#> MAWD_PPMP  0.9980861 10.40486 
-#> MAWD_DPMP  0.9826291 0.9826291
+#> MAWD_PPMP  0.9308042 10.40486 
+#> MAWD_DPMP  0.9308042 0.9826291
 #> MAWD_PPDP  0.1752105 10.64949 
 #> Angle_PPMP 52.85015  53.00857 
 #> Angle_DPMP 53.37635  53.37635 
