@@ -405,10 +405,10 @@ profit estimated by the NI.
 
 ## Example 2: Simple 3-Industry Set-up
 
-This example was presented on pages 46-57 of E. M. Ochoa’s dissertation
-(Ochoa, E. M. 1984. Labor-Value and Prices of Production: An
-Interindustry Study of the U.S. Economy, 1947–1972. PhD thesis, *New
-School for Social Research*, New York, NY.).
+This simple example of a capital stock model was presented on pages
+46-57 of E. M. Ochoa’s dissertation (Ochoa, E. M. 1984. Labor-Value and
+Prices of Production: An Interindustry Study of the U.S. Economy,
+1947–1972. PhD thesis, *New School for Social Research*, New York, NY.).
 
 ### The Data
 
@@ -472,67 +472,8 @@ Tax <- matrix(0,nrow=3,ncol=3)
 
 ### Standard Interpretation
 
-We will first implement the classical theory of prices for the
-circulating capital model and then turn to the capital stock model.
-
-#### Circulating Capital Model
-
-``` r
-
-# Estimate circulating capital model with SI
-si1 <- ppstdint1(
-  A = A,
-  b = b,
-  Q = Q,
-  l_simple = l
-)
-```
-
-What is the uniform rate of profit?
-
-``` r
-si1$urop
-#> [1] 0.3877843
-```
-
-What is the vector of labor values?
-
-``` r
-si1$lvalues
-#>           [,1]     [,2]      [,3]
-#> [1,] 0.4398417 7.739431 0.8979541
-```
-
-What is the vector of direct prices?
-
-``` r
-si1$dp
-#>          [,1]     [,2]      [,3]
-#> [1,] 0.238526 4.197091 0.4869603
-```
-
-What is the vector of prices of production?
-
-``` r
-si1$pp
-#> [1] 0.2606593 4.4614969 0.4139522
-```
-
-Let us now compute the various non-regression-based measures of
-deviation between the vector of all possible relative labor values and
-the vector of all possible relative prices of production.
-
-``` r
-nrsi1 <- nonregdist(
-  x = si1$pp,
-  y = si1$dp,
-  w = w,
-  w_avg = wavg,
-  Q = Q
-)
-```
-
-#### Capital Stock Model
+We will first now implement the classical theory of prices for the
+capital stock model.
 
 ``` r
 # Estimate model
@@ -575,7 +516,7 @@ si2$dp
 #> [1,] 0.2627846 4.205606 0.4761495
 ```
 
-These are different from what is reported in equation (11) on page 48 in
+These are different from what is reported in equation (12) on page 48 in
 Ochoa (1984). The reason for this difference is that he uses a vector of
 market prices, `(4, 60, 7)` for normalization that is different from a
 vector of 1s (which is the common assumption in real world analysis). To
@@ -584,13 +525,18 @@ use this vector of market prices, we can do the following:
 ``` r
 # vector of market prices
 mktp <- c(4,60,7)
-# renormalize
-si2$dp <- si2$dp*(sum(Q)/sum(mktp*Q))
-# vector of direct prices
+# normalization factor: kappa
+mykappa <- sum(mktp*as.vector(Q))/sum(as.vector(si2$lvalues)*as.vector(Q))
+# renormalize direct prices
+si2$dp <- mykappa * si2$lvalues
+# see new vector of direct prices
 (si2$dp)
-#>           [,1]      [,2]       [,3]
-#> [1,] 0.0181836 0.2910104 0.03294757
+#>          [,1]     [,2]     [,3]
+#> [1,] 3.797694 60.77831 6.881188
 ```
+
+Now we have the exact vector of direct prices reported in equation (12)
+on page 48 in Ochoa (1984).
 
 What is the vector of prices of production?
 
@@ -606,87 +552,22 @@ can redo this as we did for the direct prices.
 ``` r
 # vector of market prices
 mktp <- c(4,60,7)
-# renormalize
-si2$pp <- si2$pp*(sum(Q)/sum(mktp*Q))
-# vector of direct prices
+# renormalize price of production vector
+si2$pp <- si2$pp*(sum(mktp*as.vector(Q))/sum(as.vector(Q)))
+# see vector of prices of production
 (si2$pp)
-#> [1] 0.02641036 0.29449959 0.02913327
+#> [1]  5.515875 61.507034  6.084562
 ```
 
-Let us now compute the non-regression-based measures of deviation.
-
-``` r
-nrsi2 <- nonregdist(
-  x = si2$pp,
-  y = si2$dp,
-  w = w,
-  w_avg = wavg,
-  Q = Q
-)
-```
+Now we have the vector of direct prices that is very close (though not
+exactly equal) to what is reported in equation (38) on page 57 in Ochoa
+(1984). These small differences arise, most probably, from numerical
+issues. In any case, the differences are small enough to be ignored.
 
 ### New Interpretation
 
 We continue working with the 3-industry example and implement the New
 Interpretation of Marx’s labor theory of value.
-
-#### Circulating Capital Model
-
-``` r
-# Estimate circulating capital model with NI
-ni1 <- ppnewint1(
-  A = A,
-  w = wavg,
-  v = v,
-  Q = Q,
-  l_simple = l)
-```
-
-What is the uniform rate of profit?
-
-``` r
-ni1$urop
-#> [1] 0.2116339
-```
-
-What is the vector of labor values?
-
-``` r
-ni1$lvalues
-#>           [,1]     [,2]      [,3]
-#> [1,] 0.4398417 7.739431 0.8979541
-```
-
-What is the vector of direct prices?
-
-``` r
-ni1$dp
-#>          [,1]     [,2]      [,3]
-#> [1,] 0.238526 4.197091 0.4869603
-```
-
-What is the vector of prices of production?
-
-``` r
-ni1$pp
-#>          [,1]     [,2]     [,3]
-#> [1,] 2.621099 45.46782 4.702932
-```
-
-Let us now compute the various non-regression-based measures of
-deviation between the vector of all possible relative labor values and
-the vector of all possible relative prices of production.
-
-``` r
-nrni1 <- nonregdist(
-  x=ni1$pp,
-  y=ni1$dp,
-  w=w,
-  w_avg=wavg,
-  Q=Q)
-```
-
-#### Capital Stock Model
 
 ``` r
 ni2 <- ppnewint2(
@@ -717,114 +598,68 @@ ni2$lvalues
 #> [1,] 0.5192079 8.309406 0.9407729
 ```
 
-What is the vector of direct prices?
+What is the vector of direct prices (using the same normalization as for
+the SI above)?
 
 ``` r
-ni2$dp
-#>           [,1]     [,2]      [,3]
-#> [1,] 0.2627846 4.205606 0.4761495
+# vector of market prices
+mktp <- c(4,60,7)
+# normalization factor: kappa
+mykappa <- sum(mktp*as.vector(Q))/sum(as.vector(ni2$lvalues)*as.vector(Q))
+# renormalize direct prices
+ni2$dp <- mykappa * ni2$lvalues
+# see new vector of direct prices
+(ni2$dp)
+#>          [,1]     [,2]     [,3]
+#> [1,] 3.797694 60.77831 6.881188
 ```
 
-What is the vector of prices of production?
+What is the vector of prices of production (once again using the same
+normalization as in the SI)?
 
 ``` r
-ni2$pp
-#>          [,1]    [,2]     [,3]
-#> [1,] 3.904408 48.3205 5.016769
+# vector of market prices
+mktp <- c(4,60,7)
+# renormalize price of production vector
+ni2$pp <- ni2$pp*(sum(mktp*as.vector(Q))/sum(as.vector(Q)))
+# see vector of prices of production
+(ni2$pp)
+#>          [,1]     [,2]     [,3]
+#> [1,] 56.42547 698.3152 72.50102
 ```
 
-Let us now compute the various non-regression-based measures of
-deviation between the vector of all possible relative labor values and
-the vector of all possible relative prices of production.
+Let us compare the results from the SI and NI for direct price vectors
 
 ``` r
-nrni2 <- nonregdist(
-  x=ni2$pp,
-  y=ni2$dp,
-  w=w,
-  w_avg=wavg,
-  Q=Q
-  )
-```
-
-## Comparison of SI and NI
-
-We can compare the results for the analysis of the *circulating capital
-model* from the SI approach and the NI approach for the
-non-regression-based measures of deviation between relative prices of
-production and relative values.
-
-``` r
-
-comp1 <- cbind(nrsi1,nrni1)
-
-rownames(comp1) <- c(
-  "RMSE_PPMP", "RMSE_DPMP","RMSE_PPDP",
-  "MAD_PPMP", "MAD_DPMP","MAD_PPDP",
-  "MAWD_PPMP", "MAWD_DPMP","MAWD_PPDP",
-  "Angle_PPMP", "Angle_DPMP","Angle_PPDP",
-  "DDist_PPMP", "DDist_DPMP","DDist_PPDP"
+# bring together results on direct prices
+myresults <- as.data.frame(
+  cbind(as.vector(si2$dp),as.vector(ni2$dp))
 )
-
-colnames(comp1) <- c("SI","NI")
-
-# ---- The results
-(comp1)
-#>            SI        NI        
-#> RMSE_PPMP  2.071395  25.77936  
-#> RMSE_DPMP  1.920455  1.920455  
-#> RMSE_PPDP  0.1081    9.51179   
-#> MAD_PPMP   1.595628  16.59728  
-#> MAD_DPMP   1.490535  1.490535  
-#> MAD_PPDP   0.1019051 9.493214  
-#> MAWD_PPMP  1.061069  9.484922  
-#> MAWD_DPMP  0.9800192 0.9800192 
-#> MAWD_PPDP  0.1238156 9.135781  
-#> Angle_PPMP 54.29756  53.93064  
-#> Angle_DPMP 53.49691  53.49691  
-#> Angle_PPDP 7.526052  3.967176  
-#> DDist_PPMP 0.9126053 0.9069022 
-#> DDist_DPMP 0.9001488 0.9001488 
-#> DDist_PPDP 0.13126   0.06922645
+rownames(myresults) <- c("Ind1","Ind2","Ind3")
+colnames(myresults) <- c("SI", "NI")
+# see comparison
+(myresults)
+#>             SI        NI
+#> Ind1  3.797694  3.797694
+#> Ind2 60.778306 60.778306
+#> Ind3  6.881188  6.881188
 ```
 
-We can compare the results for the analysis of the *capital stock model*
-from the SI approach and the NI approach for the non-regression-based
-measures of deviation between relative prices of production and relative
-values.
+and for market prices
 
 ``` r
-
-comp2 <- cbind(nrsi2, nrni2)
-
-rownames(comp2) <- c(
-  "RMSE_PPMP", "RMSE_DPMP","RMSE_PPDP",
-  "MAD_PPMP", "MAD_DPMP","MAD_PPDP",
-  "MAWD_PPMP", "MAWD_DPMP","MAWD_PPDP",
-  "Angle_PPMP", "Angle_DPMP","Angle_PPDP",
-  "DDist_PPMP", "DDist_DPMP","DDist_PPDP"
+# bring together results on direct prices
+myresults <- as.data.frame(
+  cbind(as.vector(si2$pp),as.vector(ni2$pp))
 )
-
-colnames(comp2) <- c("SI","NI")
-
-# ---- The results
-(comp2)
-#>            SI        NI       
-#> RMSE_PPMP  0.8922238 27.46998 
-#> RMSE_DPMP  0.8947663 1.923002 
-#> RMSE_PPDP  0.269714  11.44563 
-#> MAD_PPMP   0.8833189 18.08056 
-#> MAD_DPMP   0.8859528 1.48889  
-#> MAD_PPDP   0.1933954 11.2945  
-#> MAWD_PPMP  0.9308042 10.40486 
-#> MAWD_DPMP  0.9308042 0.9826291
-#> MAWD_PPDP  0.1752105 10.64949 
-#> Angle_PPMP 52.85015  53.00857 
-#> Angle_DPMP 53.37635  53.37635 
-#> Angle_PPDP 14.95225  10.46335 
-#> DDist_PPMP 0.8900543 0.8925295
-#> DDist_DPMP 0.8982692 0.8982692
-#> DDist_PPDP 0.2602261 0.1823662
+rownames(myresults) <- c("Ind1","Ind2","Ind3")
+colnames(myresults) <- c("SI", "NI")
+# see comparison
+(myresults)
+#>             SI        NI
+#> Ind1  5.515875  56.42547
+#> Ind2 61.507034 698.31516
+#> Ind3  6.084562  72.50102
 ```
 
 ## References
