@@ -276,11 +276,13 @@ calculation of the labor value vector is the same in both SI and NI. The
 MP vector is just a vector of 1s. Hence, this vector is also same for
 both SI and NI.
 
-### Doing an analysis for many years
+## Example 2: Circulating capital model for multiple years
 
-*USA:* Let us compute the uniform rate of profit using the SI and NI for
-the USA for several years. To do so, we will write some code to loop
-over all the years in the data set: 2000-2014, i.e. 15 years.
+### USA
+
+Let us compute the uniform rate of profit using the SI and NI for the
+USA for several years. To do so, we will write some code to loop over
+all the years in the data set: 2000-2014, i.e. 15 years.
 
 ``` r
 # matrix to store results
@@ -351,10 +353,12 @@ estimated by the SI has similar variability as the uniform rate of
 profit estimated by the NI. Moreover, the uniform rate of profit
 estimated by the SI is negative for all years!
 
-*Australia:* Let us compute the uniform rate of profit using the SI and
-NI for Australia for several years. Just like in the case of the USA, we
-will write some code to loop over all the years in the data set:
-2000-2014, i.e. 15 years.
+### Australia
+
+Let us compute the uniform rate of profit using the SI and NI for
+Australia for several years. Just like in the case of the USA, we will
+write some code to loop over all the years in the data set: 2000-2014,
+i.e. 15 years.
 
 ``` r
 # matrix to store results
@@ -424,7 +428,7 @@ From the last two lines, we now see that the uniform rate of profit
 estimated by the SI has much higher variability than the uniform rate of
 profit estimated by the NI.
 
-## Example 2: Simple 3-Industry capital stock model
+## Example 3: Simple 3-Industry capital stock model
 
 This simple example of a capital stock model was presented on pages
 46-57 of E. M. Ochoa’s dissertation (Ochoa, E. M. 1984. Labor-Value and
