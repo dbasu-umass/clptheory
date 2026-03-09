@@ -41,17 +41,21 @@ This package provides the following functions.
 
 1. `ppstdint1`: a function to estimate a basic circulating capital model with the Standard Interpretation (SI);
 
-2. `ppnewint1`: a function to estimate a basic circulating capital model with the New Interpretation (NI);
+2. `ppstdint2`: a function to estimate a basic capital stock model with the Standard Interpretation (SI);
 
-3. `ppsraffa1`: a function to estimate a circulating capital model with the Sraffian approach;
+3. `ppnewint1`: a function to estimate a basic circulating capital model with the New Interpretation (NI);
 
-4. `nonregdist`: a function that computes various non-regression-based measures of deviation between the vector of prices of production, the vector of market prices and the vector of direct prices (labor values);
+4. `ppnewint2`: a function to estimate a basic capital stock model with the New Interpretation (NI);
 
-5. `createdata`: a function to create the data objects (matrices, vectors and scalars) necessary to implement the SI and NI.
+5. `ppsraffa1`: a function to estimate a circulating capital model with the Sraffian approach;
 
-The package contains the following three datasets.
+6. `nonregdist`: a function that computes various non-regression-based measures of deviation between the vector of prices of production, the vector of market prices and the vector of direct prices (labor values);
 
-1.  `aussea`: the socio economic accounts (SEA) for the Australian economy extracted from the 2016 release of the World Input Output Database (WIOD); this data set contains industry-level variables (53 industries) for the USA for 15 years, 2000-2014; 
+7. `createdata`: a function to create the data objects (matrices, vectors and scalars) necessary to implement the SI and NI using basic data from the World Input Output Database (WIOD).
+
+The package contains the following three data sets.
+
+1.  `aussea`: the socio-economic accounts (SEA) for the Australian economy extracted from the 2016 release of WIOD; this data set contains industry-level variables (53 industries) for the USA for 15 years, 2000-2014; 
 
 2. `ausiot`: input-output (IO) tables for the Australian economy extracted from the 2016 release of the World Input Output Database; this data set contains 53-industry input-output tables for the USA for 15 years, 2000-2014;
 
@@ -61,14 +65,18 @@ The package contains the following three datasets.
 
 5.  `usarwb`: personal consumption expenditure on the output of the 53 industries of the input-output tables for the USA extracted from the 2016 release of the World Input Output Database; this data set contains data for 15 years, 2000-2014. (Note: This data set is not necessary for the analysis.)
 
-To see the correct syntax, required inputs and the output of the functions, use the `help` function in R.
+To see the correct syntax, required inputs and the output of the functions, use the `help` function in R. For instance,
+```{r, eval=FALSE}
+help(ppstdint1, package = "clptheory")
+```
 
-## Example 1: Analysis for USA, 2010
-Let us conduct price of production analysis for Australia (AUS) and see how to use the functions in `clptheory` to
+
+## Example 1: Circulating capital model for the USA, 2010
+Let us conduct price of production analysis for Australia (AUS) and see how to use the functions in `clptheory` to:
 
 1. compute the uniform rate of profit and the vectors of labor values and prices of production for a basic circulating capital model using the Standard Interpretation and the New Interpretation; and
 
-2. compute various non-regression-based measures of deviation between PP/MP, DP/MP and PPDP.
+2. compute various non-regression-based measures of deviation between PP/MP, DP/MP and PP/DP.
 
 Let us load the package.
 ```{r}
@@ -87,7 +95,7 @@ usadata <- clptheory::createdata(
 ```
 
 ### Standard Interpretation
-Let us now estimate the circulating capital model with SI with the `ppstdint1` function. To use this function, the user needs to supply the A (input-output) matrix, the b (real wage bundle) vector, the Q (gross output) vector, and the labor input (simple labor) vector.
+Let us now estimate the circulating capital model with SI with the `ppstdint1` function. To use this function, the user needs to supply the A (input-output) matrix, the b (real wage bundle) vector, the Q (gross output) vector, and the labor input (simple labor) vector. These are supplied as elements of the list `usadata` created by the `createdata` function.
 ```{r}
 si1 <- clptheory::ppstdint1(
   A = usadata$Ahat,
@@ -98,7 +106,7 @@ si1 <- clptheory::ppstdint1(
 ```
 
 ### New Interpretation
-Let us now estimate the circulating capital model with NI with the `ppnewint1` function. To use this function, the user needs to supply the A (input-output) matrix, the average nominal wage rate (scalar), the v (value of labor power) scalar, the Q (gross output) vector, and the labor input (simple labor) vector. 
+Let us now estimate the circulating capital model with NI with the `ppnewint1` function. To use this function, the user needs to supply the A (input-output) matrix, the average nominal wage rate (scalar), the v (value of labor power) scalar, the Q (gross output) vector, and the labor input (simple labor) vector. These are supplied as elements of the list `usadata` created by the `createdata` function.
 ```{r}
 ni1 <- clptheory::ppnewint1(
   A = usadata$Ahat,
@@ -116,7 +124,7 @@ Here we see that the uniform rate of profit estimated by the SI and NI, respecti
 
 ### Non-Regression-Based Measures of Deviation
 Let us compute various non-regression-based measures of the deviation
-between PP/MP, DP/MP and PP/DP for the SI using the `nonregdist` function. To use this function, the user must supply the price of production vector (in this case `si1$pp`), the direct prices vector (in this case `si1$dp`), the vector of nominal wage rates (in this case `usadata$wagevector_all`), the average wage rate as a scalar (in this case `usadata$wavg`) and the gross output vector (in this case `usadata$Q`).
+between PP/MP, DP/MP and PP/DP for the SI using the `nonregdist` function. To use this function, the user must supply the price of production vector (in this case `si1$pp`), the direct prices vector (in this case `si1$dp`), the vector of nominal wage rates (in this case `usadata$wagevector_all`), the average wage rate as a scalar (in this case `usadata$wavg`) and the gross output vector (in this case `usadata$Q`). These are supplied as elements of the list `si1` created by the `ppstdint1` function and elements of the list `usadata` created by the `createdata` function.
 ```{r}
 nrsi1 <- clptheory::nonregdist(
   x = si1$pp,
@@ -127,8 +135,7 @@ nrsi1 <- clptheory::nonregdist(
 )
 ```
 
-Let us do the same computation for the NI.
-
+Let us do the same computation for the NI. Here, the necessary inputs are supplied as elements of the list `ni1` created by the `ppnewint1` function and elements of the list `usadata` created by the `createdata` function.
 ```{r}
 nrni1 <- clptheory::nonregdist(
   x=ni1$pp,
@@ -144,10 +151,11 @@ capital model_ from the SI approach and the NI approach for the
 non-regression-based measures of deviation between PP/MP, DP/MP and PP/DP.
 
 ```{r}
+# bring the results together
 comp1 <- cbind(nrsi1,nrni1)
-
+# provide column names to identify the methodology, i.e. SI or NI
 colnames(comp1) <- c("SI","NI")
-
+# provide rownames to identify measures
 rownames(comp1) <- c(
   "RMSE_PPMP", "RMSE_DPMP","RMSE_PPDP",
   "MAD_PPMP", "MAD_DPMP","MAD_PPDP",
@@ -166,7 +174,7 @@ mean absolute distance (MAD), mean absolute weighted distance (MAWD), angle betw
 
 As an example, we can see that the d-distance of the deviation between PP/MP, DP/MP, PP/DP for SI are 0.312, 0.275 and 0.043, respectively. This can be interpreted as showing that the deviation between PP/MP, DP/MP, PP/DP are 31.2 percent, 27.5 percent and 4.3 percent, respectively. The corresponding measures of deviation for NI are 0.206, 0.275 and 0.088, respectively. 
 
-It is interesting to note that the measure of deviation for DP/MP are the same in both SI and NI. The reason for this is as follows: the DP vector is just a rescaled value of the labor value vector; hence it is the same in both SI and NI. The MP vector is just a vector of 1s. Hence, this vector is also same for both SI and NI.
+A reader might be puzzled to note that the measure of deviation for DP/MP are the same in both SI and NI. The reason for this is as follows: the DP vector is just a re-scaled value of the labor value vector. The calculation of the labor value vector is the same in both SI and NI. The MP vector is just a vector of 1s. Hence, this vector is also same for both SI and NI.
 
 ### Doing an analysis for many years
 
@@ -263,13 +271,13 @@ stats::sd(urop_result[,c("urop(SI)")])
 # standard deviation of urop: NI
 stats::sd(urop_result[,c("urop(NI)")])
 ```
-From the last two lines, We now see that the uniform rate of profit estimated by the SI has much higher variability than the uniform rate of profit estimated by the NI. 
+From the last two lines, we now see that the uniform rate of profit estimated by the SI has much higher variability than the uniform rate of profit estimated by the NI. 
 
-## Example 2: Simple 3-Industry Set-up
+## Example 2: Simple 3-Industry capital stock model
 This simple example of a capital stock model was presented on pages 46-57 of E. M. Ochoa's dissertation (Ochoa, E. M. 1984. Labor-Value and Prices of Production: An Interindustry Study of the U.S. Economy, 1947–1972. PhD thesis, _New School for Social Research_, New York, NY.). 
 
 ### The Data
-Let us load the library and create the data for our examples.
+Let us create the data set for this example following pages 46-57 of Ochoa (1984).
 ```{r data}
 # Input-output matrix
 A <- matrix(
@@ -310,7 +318,7 @@ K <- matrix(
 # Diagonal matrix of turnover times
 t <- diag(c(0.317, 0.099, 0.187))
 
-# Uniform nominal wage rate
+# average nominal wage rate
 wavg <- 3.765
 
 # Vector of nominal wage rates
@@ -348,7 +356,9 @@ What is the uniform rate of profti?
 ```{r}
 si2$urop
 ```
-This exactly matches what is reported in equation (37) on page 57 in Ochoa (1984). Now let us compute the vector of labor values:
+This exactly matches what is reported in equation (37) on page 57 in Ochoa (1984). 
+
+Now let us compute the vector of labor values:
 ```{r}
 si2$lvalues
 ```
@@ -358,7 +368,7 @@ What is the vector of direct prices?
 ```{r}
 si2$dp
 ```
-These are different from what is reported in equation (12) on page 48 in Ochoa (1984). The reason for this difference is that he uses a vector of market prices, `(4, 60, 7)` for normalization that is different from a vector of 1s (which is the common assumption in real world analysis). To use this vector of market prices, we can do the following:
+These are different from what is reported in equation (12) on page 48 in Ochoa (1984). The reason for this difference is that he uses a vector of market prices, `(4, 60, 7)` for normalization that is different from a vector of 1s (which is the common assumption in real world analysis). To use Ochoa's vector of market prices, we can do the following:
 ```{r}
 # vector of market prices
 mktp <- c(4,60,7)
@@ -387,8 +397,7 @@ si2$pp <- si2$pp*(sum(mktp*as.vector(Q))/sum(as.vector(Q)))
 Now we have the vector of direct prices that is very close (though not exactly equal) to what is reported in equation (38) on page 57 in Ochoa (1984). These small differences arise, most probably, from numerical issues. In any case, the differences are small enough to be ignored.
 
 ### New Interpretation
-We continue working with the 3-industry example and implement the New Interpretation of Marx's labor theory of value. 
-
+We continue working with the 3-industry example and implement the New Interpretation of Marx's labor theory of value. Please note that Ochoa (1984) did not implement the NI. We are doing this solely to compare the results between the SI and the NI for his example. 
 ```{r}
 ni2 <- ppnewint2(
   A = A,
