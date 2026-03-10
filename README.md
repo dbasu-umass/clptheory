@@ -62,7 +62,7 @@ This package provides the following functions.
     vectors and scalars) necessary to implement the SI and NI using
     basic data from the World Input Output Database (WIOD).
 
-The package contains the following three data sets.
+The package contains the following data sets.
 
 1.  `aussea`: the socio-economic accounts (SEA) for the Australian
     economy extracted from the 2016 release of WIOD; this data set
