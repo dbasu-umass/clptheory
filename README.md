@@ -694,8 +694,7 @@ colnames(myresults) <- c("SI", "NI")
 
 ## References
 
-- Basu, D. and Moraitis, T. (2023). Alternative Approaches to Labor
-  Values and Prices of Production: Theory and Evidence. *Economics
-  Department Working Paper Series*. 347. University of Massachusetts
-  Amherst. Retrieved from
-  <https://scholarworks.umass.edu/entities/publication/03270380-ed74-4f50-8c39-cc6325bfd05f>
+- Moraitis, T. and Basu, D. Alternative Approaches to Labor Values and
+  Prices of Production: Theory and Evidence. *Structural Change and
+  Economic Dynamics*, 2026. Available here:
+  <https://doi.org/10.1016/j.strueco.2026.03.009>
