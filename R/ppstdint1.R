@@ -1,4 +1,4 @@
-#' Circulating capital model 1 using the Standard Interpretation.
+#' Circulating capital model using the Standard Interpretation.
 #'
 #' This function computes the uniform rate of profit, prices of production and labor values for a basic circulating capital model using the Standard Interpretation.
 #'

@@ -1,6 +1,6 @@
-#' Circulating capital model 1 using the Standard Interpretation.
+#' Nonregression-based measures of distance between MP, DP, PP
 #'
-#' This function computes different measures of distance between prices of production, market prices and direct prices.
+#' This function computes different measures of distance between prices of production (PP), market prices (MP) and direct prices (DP).
 #'
 #' @param x price of production vector (1 x n).
 #' @param y direct prices vector (1 x n).

@@ -1,4 +1,4 @@
-#' Circulating capital model 1 using the New Interpretation.
+#' Circulating capital model using the Sraffian method.
 #'
 #' This function computes the uniform rate of profit, prices of production and labor values for a basic circulating capital model using the Sraffian method. 
 #'

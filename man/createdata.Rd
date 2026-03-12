@@ -28,7 +28,7 @@ A list with the following elements:
 \item{pshare}{Average profit share}
 }
 \description{
-This function creates the data objects (matrices, vectors and scalars) necessary to implement the SI and NI.
+This function creates the data objects (matrices, vectors and scalars) necessary to implement the SI and NI from the WIOD.
 }
 \examples{
 

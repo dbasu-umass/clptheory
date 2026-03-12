@@ -1,6 +1,6 @@
 #' Create data set for analysis.
 #'
-#' This function creates the data objects (matrices, vectors and scalars) necessary to implement the SI and NI.
+#' This function creates the data objects (matrices, vectors and scalars) necessary to implement the SI and NI from the WIOD.
 #'
 #' @param country country code as a character (e.g. "USA").
 #' @param year year (eg. 2000).

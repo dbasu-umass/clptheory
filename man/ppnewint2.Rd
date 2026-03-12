@@ -2,7 +2,7 @@
 % Please edit documentation in R/ppnewint2.R
 \name{ppnewint2}
 \alias{ppnewint2}
-\title{Capital stock model 1 using the New Interpretation.}
+\title{Capital stock model using the New Interpretation.}
 \usage{
 ppnewint2(A, l, w, v, Q, D, K, t, Tax)
 }

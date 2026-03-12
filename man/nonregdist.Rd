@@ -2,7 +2,7 @@
 % Please edit documentation in R/nonregdist.R
 \name{nonregdist}
 \alias{nonregdist}
-\title{Circulating capital model 1 using the Standard Interpretation.}
+\title{Nonregression-based measures of distance between MP, DP, PP}
 \usage{
 nonregdist(x, y, w, w_avg, Q)
 }
@@ -36,7 +36,7 @@ A list with the following elements:
 \item{ddistppdp}{D-distance between prices of production and direct prices}
 }
 \description{
-This function computes different measures of distance between prices of production, market prices and direct prices.
+This function computes different measures of distance between prices of production (PP), market prices (MP) and direct prices (DP).
 }
 \examples{
 

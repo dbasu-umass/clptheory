@@ -2,7 +2,7 @@
 % Please edit documentation in R/ppstdint1.R
 \name{ppstdint1}
 \alias{ppstdint1}
-\title{Circulating capital model 1 using the Standard Interpretation.}
+\title{Circulating capital model using the Standard Interpretation.}
 \usage{
 ppstdint1(A, b, Q, l_simple)
 }

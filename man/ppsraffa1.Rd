@@ -2,7 +2,7 @@
 % Please edit documentation in R/ppsraffa1.R
 \name{ppsraffa1}
 \alias{ppsraffa1}
-\title{Circulating capital model 1 using the New Interpretation.}
+\title{Circulating capital model using the Sraffian method.}
 \usage{
 ppsraffa1(A, Q, pshare, l_simple)
 }

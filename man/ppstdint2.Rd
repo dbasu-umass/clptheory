@@ -2,7 +2,7 @@
 % Please edit documentation in R/ppstdint2.R
 \name{ppstdint2}
 \alias{ppstdint2}
-\title{Capital stock model 1 using the Standard Interpretation.}
+\title{Capital stock model using the Standard Interpretation.}
 \usage{
 ppstdint2(A, l, b, Q, D, K, t, Tax)
 }

@@ -1,4 +1,4 @@
-#' Capital stock model 1 using the Standard Interpretation.
+#' Capital stock model using the Standard Interpretation.
 #'
 #' This function computes the uniform rate of profit, prices of production and labor values for a capital stock model using the Standard Interpretation.
 #'

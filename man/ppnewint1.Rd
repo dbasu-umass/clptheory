@@ -2,7 +2,7 @@
 % Please edit documentation in R/ppnewint1.R
 \name{ppnewint1}
 \alias{ppnewint1}
-\title{Circulating capital model 1 using the New Interpretation.}
+\title{Circulating capital model using the New Interpretation.}
 \usage{
 ppnewint1(A, w, v, Q, l_simple)
 }
