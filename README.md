@@ -694,7 +694,7 @@ colnames(myresults) <- c("SI", "NI")
 
 ## References
 
-- Moraitis, T. and Basu, D. Alternative Approaches to Labor Values and
-  Prices of Production: Theory and Evidence. *Structural Change and
+- Moraitis, T. and Basu, D. “Alternative Approaches to Labor Values and
+  Prices of Production: Theory and Evidence.” *Structural Change and
   Economic Dynamics*, 2026. Available here:
   <https://doi.org/10.1016/j.strueco.2026.03.009>
