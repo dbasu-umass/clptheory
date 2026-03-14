@@ -72,7 +72,7 @@ help(ppstdint1, package = "clptheory")
 
 
 ## Example 1: Circulating capital model for the USA, 2010
-Let us conduct price of production analysis for Australia (AUS) and see how to use the functions in `clptheory` to:
+Let us conduct price of production analysis for the USA and see how to use the functions in `clptheory` to:
 
 1. compute the uniform rate of profit and the vectors of labor values and prices of production for a basic circulating capital model using the Standard Interpretation and the New Interpretation; and
 
