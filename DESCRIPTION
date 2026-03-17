@@ -5,8 +5,8 @@ Authors@R:
     person("Deepankar", "Basu", , "dbasu@umass.edu", role = c("aut", "cre", "cph"))
 Description: Computes the uniform rate of profit, the vector of price of 
     production and the vector of direct prices; and also compute measures of deviation 
-    between relative prices of production and relative values.  
-    <https://scholarworks.umass.edu/econ_workingpaper/347/>. You provide the  
+    between market prices, direct prices and prices of production.  
+    <https://doi.org/10.1016/j.strueco.2026.03.009>. You provide the  
     input-output data and 'clptheory' does the calculations for you.
 License: MIT + file LICENSE
 Encoding: UTF-8
