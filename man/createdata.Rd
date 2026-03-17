@@ -24,7 +24,8 @@ A list with the following elements:
 \item{wavg}{The average or uniform nominal wage rate}
 \item{wagevector_all}{The vector of nominal wage rates}
 \item{vlp}{Value of labor power}
-\item{b}{The consumption or real wage bundle}
+\item{b}{Real wage bundle (consumption/total hours)}
+\item{b1}{Real wage bundle (share of PCE * min wage)}
 \item{pshare}{Average profit share}
 }
 \description{

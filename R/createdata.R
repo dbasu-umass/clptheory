@@ -18,7 +18,8 @@
 #' \item{wavg}{The average or uniform nominal wage rate}
 #' \item{wagevector_all}{The vector of nominal wage rates}
 #' \item{vlp}{Value of labor power}
-#' \item{b}{The consumption or real wage bundle}
+#' \item{b}{Real wage bundle (consumption/total hours)}
+#' \item{b1}{Real wage bundle (share of PCE * min wage)}
 #' \item{pshare}{Average profit share}
 #'
 #'
@@ -305,6 +306,7 @@ createdata <- function(country,year,datasea,dataio){
   
   # Consumption bundle (USD/hour)
   b <-  matrix(data=d5,ncol = 1)/sum(Lh_temp[,2])
+  b1 <- min(W_temp[,2], na.rm = TRUE) * (matrix(data=d5,ncol = 1)/sum(matrix(data=d5,ncol = 1)))
   
   
   # ---- Return list of data objects
@@ -318,6 +320,7 @@ createdata <- function(country,year,datasea,dataio){
       "wagevector_all" = as.vector(W),
       "vlp" = V,
       "b" = b,
+      "b1" = b1,
       "pshare" = PS
     )
   )

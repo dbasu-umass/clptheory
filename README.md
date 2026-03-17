@@ -136,9 +136,26 @@ output) vector, and the labor input (simple labor) vector. These are
 supplied as elements of the list `usadata` created by the `createdata`
 function.
 
+There are *at least* two different ways in which the real wage bundle
+(vector) can be computed. The first method, which is more common in the
+SI literature, is to compute it as the product of the vector of *shares*
+of personal consumption expenditure (PCE) and the minimum wage rate
+(which is a scalar); the second method, which is equally intuitive, is
+to compute it as the vector of total PCE divided by the total hours of
+work (which is a scalar). We implement both these definitions below.
+
 ``` r
 si1 <- clptheory::ppstdint1(
   A = usadata$Ahat,
+  # real wage bundle = vector of share of PCE * min wage
+  b = usadata$b1,
+  Q = usadata$Q,
+  l_simple = usadata$l_simple
+)
+
+si2 <- clptheory::ppstdint1(
+  A = usadata$Ahat,
+  # real wage bundle = vector of PCE / total labor hours
   b = usadata$b,
   Q = usadata$Q,
   l_simple = usadata$l_simple
@@ -167,13 +184,74 @@ ni1 <- clptheory::ppnewint1(
 Let us compare the uniform profit rates from SI and NI.
 
 ``` r
-cbind(si1$urop,ni1$urop)
-#>            [,1]      [,2]
-#> [1,] -0.2816745 0.3709973
+cbind(si1$urop,si2$urop,ni1$urop)
+#>           [,1]       [,2]      [,3]
+#> [1,] 0.5463579 -0.2816745 0.3709973
 ```
 
 Here we see that the uniform rate of profit estimated by the SI and NI,
-respectively, are -28.17 percent and 37.10 percent.
+respectively, are 54.64 percent, -28.17 percent and 37.10 percent. Thus,
+computing the real wage bundle as the vector of PCE divided by total
+hours of work gives rise to a negative uniform rate of profit in the SI.
+
+### Negative uniform profit rate
+
+Let us investigate why the uniform rate of profit computed from the SI
+is negative. Recall that the uniform rate of profit computed from the SI
+is $(1/\lambda(M))-1$, where $M=A+bl$ is the augmented input matrix and
+$\lambda(M)$ is the maximal eigenvalue of $M$. Thus, the uniform rate of
+profit is negative when $(1/\lambda(M))<1$, that is, when $\lambda(M)>1$
+(the matrix $M$ is not productive). We can check this from the output of
+the SI:
+
+``` r
+# maximal eigenvalue of M
+(si2$meig)
+#> [1] 1.392127
+```
+
+Thus, we see that the maximal eigenvalue of $\lambda(M)$ is `1.392`,
+which is indeed larger than $1$. Let us first check whether the
+conditions for applying the Perron-Frobenius theorem valid?
+
+``` r
+# Is M nonnegative (1=Y)
+(si2$Mnonneg)
+#> [1] 1
+# Is M irreducible (1=Y)
+(si2$Mirred)
+#> [1] 1
+```
+
+Yes, the conditions are satisfied: $M$ is nonnegative and irreducible.
+
+Our conjecture is that the negative uniform rate of profit arises
+because the real wage bundle `b` is *too large*, i.e. so large as to
+make the matrix $M$ non-productive (see page 349-50 in Basu, 2021). We
+can check this *indirectly* by checking whether the maximum profit rate,
+$R$, is positive because $R=(1/\lambda(A))-1$, where $\lambda(A)$ is the
+maximal eigenvalue of the input-output matrix $A$.
+
+``` r
+# maximal rate of profit
+(si2$mrop)
+#> [1] 1.557706
+```
+
+Here we see that $R$ is positive, which implies that \$(A)\<1 so that
+the matrix $A$ is productive. Hence, our conjecture seems to be correct:
+a large real wage bundle is driving down the uniform rate of profit to
+negative territory.
+
+At this point, it is pertinent to point out that the method of computing
+the uniform profit rate in the SI does not *per se* ensure that the
+uniform rate of profit is positive. It depends on how the real wage
+bundle (vector) is computed. In fact, We have just seen a case where the
+uniform rate of profit is negative (when the real wage bundle is
+computed as the vector of PCE per hour of work). On the other other
+hand, the computation of the uniform rate of profit in the NI ensures
+that the answer is always positive (see page 353-55 in Basu, 2021). This
+is one advantage of using the NI over the SI.
 
 ### Non-Regression-Based Measures of Deviation
 
@@ -234,22 +312,22 @@ rownames(comp1) <- c(
 
 # ---- The results
 (comp1)
-#>            SI         NI       
-#> RMSE_PPMP  0.327702   1.774267 
-#> RMSE_DPMP  0.2818772  0.2818772
-#> RMSE_PPDP  0.07994628 1.649635 
-#> MAD_PPMP   0.2691056  1.677533 
-#> MAD_DPMP   0.229908   0.229908 
-#> MAD_PPDP   0.06141611 1.623438 
-#> MAWD_PPMP  0.3391636  1.575482 
-#> MAWD_DPMP  0.2925821  0.2925821
-#> MAWD_PPDP  0.07164429 1.639208 
-#> Angle_PPMP 17.65202   12.59748 
-#> Angle_DPMP 15.15651   15.15651 
-#> Angle_PPDP 4.553346   6.429343 
-#> DDist_PPMP 0.3068689  0.2194249
-#> DDist_DPMP 0.2637604  0.2637604
-#> DDist_PPDP 0.07944997 0.1121543
+#>            SI        NI       
+#> RMSE_PPMP  0.230377  1.774267 
+#> RMSE_DPMP  0.2818772 0.2818772
+#> RMSE_PPDP  0.1816673 1.649635 
+#> MAD_PPMP   0.1888116 1.677533 
+#> MAD_DPMP   0.229908  0.229908 
+#> MAD_PPDP   0.1359609 1.623438 
+#> MAWD_PPMP  0.2324022 1.575482 
+#> MAWD_DPMP  0.2925821 0.2925821
+#> MAWD_PPDP  0.1547199 1.639208 
+#> Angle_PPMP 12.13116  12.59748 
+#> Angle_DPMP 15.15651  15.15651 
+#> Angle_PPDP 9.671902  6.429343 
+#> DDist_PPMP 0.2113334 0.2194249
+#> DDist_DPMP 0.2637604 0.2637604
+#> DDist_PPDP 0.1686062 0.1121543
 ```
 
 In the results above, we see the magnitudes of six different measures of
@@ -258,12 +336,12 @@ the deviation between PP/MP, DP/MP, PP/DP: root mean squared error
 (MAWD), angle between the two vectors (angle in degrees), and the
 d-distance computed using angle (distance).
 
-As an example, we can see that the d-distance of the deviation between
-PP/MP, DP/MP, PP/DP for SI are 0.312, 0.275 and 0.043, respectively.
+As an example, we can see that the *d-distance* of the deviation between
+PP/MP, DP/MP, PP/DP for SI are 0.211, 0.264 and 0.169, respectively.
 This can be interpreted as showing that the deviation between PP/MP,
-DP/MP, PP/DP are 31.2 percent, 27.5 percent and 4.3 percent,
-respectively. The corresponding measures of deviation for NI are 0.206,
-0.275 and 0.088, respectively.
+DP/MP, PP/DP are 21.1 percent, 26.4 percent and 16.9 percent,
+respectively. The corresponding measures of deviation for NI are 0.219,
+0.264 and 0.112, respectively.
 
 A reader might be puzzled to note that the measure of deviation for
 DP/MP are the same in both SI and NI. The reason for this is as follows:
@@ -294,7 +372,7 @@ for(i in 1:15){
   # estimate SI
   si1 <- clptheory::ppstdint1(
   A = usadata$Ahat,
-  b = usadata$b,
+  b = usadata$b1,
   Q = usadata$Q,
   l_simple = usadata$l_simple
   )
@@ -320,25 +398,25 @@ urop_result <- as.data.frame(urop)
 colnames(urop_result) <- c("year","urop(SI)","urop(NI)")
 # print results
 (urop_result)
-#>    year   urop(SI)  urop(NI)
-#> 1  2000 -0.2066772 0.2858142
-#> 2  2001 -0.2124703 0.2891242
-#> 3  2002 -0.2276504 0.3135421
-#> 4  2003 -0.2348413 0.3223199
-#> 5  2004 -0.2386104 0.3296036
-#> 6  2005 -0.2375231 0.3336100
-#> 7  2006 -0.2379900 0.3414167
-#> 8  2007 -0.2416602 0.3248530
-#> 9  2008 -0.2492589 0.3087132
-#> 10 2009 -0.2784560 0.3494991
-#> 11 2010 -0.2816745 0.3709973
-#> 12 2011 -0.2864402 0.3584673
-#> 13 2012 -0.2736577 0.3556414
-#> 14 2013 -0.2815666 0.3595651
-#> 15 2014 -0.2767634 0.3530419
+#>    year  urop(SI)  urop(NI)
+#> 1  2000 0.4537127 0.2858142
+#> 2  2001 0.4623717 0.2891242
+#> 3  2002 0.4832424 0.3135421
+#> 4  2003 0.4915553 0.3223199
+#> 5  2004 0.4955940 0.3296036
+#> 6  2005 0.5017683 0.3336100
+#> 7  2006 0.5067786 0.3414167
+#> 8  2007 0.4932053 0.3248530
+#> 9  2008 0.4975868 0.3087132
+#> 10 2009 0.5374173 0.3494991
+#> 11 2010 0.5463579 0.3709973
+#> 12 2011 0.5390641 0.3584673
+#> 13 2012 0.5328071 0.3556414
+#> 14 2013 0.5291820 0.3595651
+#> 15 2014 0.5159078 0.3530419
 # standard deviation of urop: SI
 stats::sd(urop_result[,c("urop(SI)")])
-#> [1] 0.02660856
+#> [1] 0.02775876
 # standard deviation of urop: NI
 stats::sd(urop_result[,c("urop(NI)")])
 #> [1] 0.02586745
@@ -370,7 +448,7 @@ for(i in 1:15){
   # estimate SI
   si1 <- clptheory::ppstdint1(
   A = ausdata$Ahat,
-  b = ausdata$b,
+  b = ausdata$b1,
   Q = ausdata$Q,
   l_simple = ausdata$l_simple
   )
@@ -396,25 +474,25 @@ urop_result <- as.data.frame(urop)
 colnames(urop_result) <- c("year","urop(SI)","urop(NI)")
 # print results
 (urop_result)
-#>    year    urop(SI)  urop(NI)
-#> 1  2000  0.13938777 0.4383862
-#> 2  2001  0.26887556 0.4850732
-#> 3  2002  0.27466405 0.4756530
-#> 4  2003  0.09880047 0.4691115
-#> 5  2004 -0.10018376 0.4133871
-#> 6  2005 -0.09494687 0.4012927
-#> 7  2006 -0.04794979 0.4122654
-#> 8  2007 -0.16101663 0.3746102
-#> 9  2008 -0.12245767 0.3770067
-#> 10 2009 -0.02188953 0.4022079
-#> 11 2010 -0.17690047 0.3485714
-#> 12 2011 -0.20268669 0.3101514
-#> 13 2012 -0.27377312 0.3138961
-#> 14 2013 -0.31690479 0.3328282
-#> 15 2014 -0.26880265 0.3607879
+#>    year  urop(SI)  urop(NI)
+#> 1  2000 1.5308253 0.4383862
+#> 2  2001 1.8481513 0.4850732
+#> 3  2002 1.7031252 0.4756530
+#> 4  2003 1.2458479 0.4691115
+#> 5  2004 0.9934422 0.4133871
+#> 6  2005 0.9331798 0.4012927
+#> 7  2006 0.9631239 0.4122654
+#> 8  2007 0.7701843 0.3746102
+#> 9  2008 0.7694284 0.3770067
+#> 10 2009 0.8928096 0.4022079
+#> 11 2010 0.6229650 0.3485714
+#> 12 2011 0.4590227 0.3101514
+#> 13 2012 0.4658874 0.3138961
+#> 14 2013 0.5718644 0.3328282
+#> 15 2014 0.6846815 0.3607879
 # standard deviation of urop: SI
 stats::sd(urop_result[,c("urop(SI)")])
-#> [1] 0.1875115
+#> [1] 0.4360764
 # standard deviation of urop: NI
 stats::sd(urop_result[,c("urop(NI)")])
 #> [1] 0.05632964
@@ -689,6 +767,10 @@ colnames(myresults) <- c("SI", "NI")
 ```
 
 ## References
+
+- Basu, D. *The Logic of Capital: An Introduction to Marxist Economic
+  Theory.* 2021. Cambridge University Press. Available here:
+  <https://doi.org/10.1017/9781108937559>
 
 - Moraitis, T. and Basu, D. “Alternative Approaches to Labor Values and
   Prices of Production: Theory and Evidence.” *Structural Change and
