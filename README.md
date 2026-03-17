@@ -589,7 +589,7 @@ si2 <- ppstdint2(
 )
 ```
 
-What is the uniform rate of profti?
+What is the uniform rate of profit?
 
 ``` r
 si2$urop
