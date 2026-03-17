@@ -89,12 +89,8 @@ The package contains the following data sets.
     contains data for 15 years, 2000-2014. (Note: This data set is not
     necessary for the analysis.)
 
-To see the correct syntax, required inputs and the output of the
-functions, use the `help` function in R. For instance,
-
-``` r
-help(ppstdint1, package = "clptheory")
-```
+To see the correct syntax, the required inputs and the output of the
+functions, use the `help` function in R.
 
 ## Example 1: Circulating capital model for the USA, 2010
 

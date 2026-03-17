@@ -65,11 +65,7 @@ The package contains the following data sets.
 
 5.  `usarwb`: personal consumption expenditure on the output of the 53 industries of the input-output tables for the USA extracted from the 2016 release of the World Input Output Database; this data set contains data for 15 years, 2000-2014. (Note: This data set is not necessary for the analysis.)
 
-To see the correct syntax, required inputs and the output of the functions, use the `help` function in R. For instance,
-```{r, eval=FALSE}
-help(ppstdint1, package = "clptheory")
-```
-
+To see the correct syntax, the required inputs and the output of the functions, use the `help` function in R. 
 
 ## Example 1: Circulating capital model for the USA, 2010
 Let us conduct price of production analysis for the USA and see how to use the functions in `clptheory` to:
