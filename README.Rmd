@@ -499,8 +499,8 @@ colnames(myresults) <- c("SI", "NI")
 ```
 
 ## References
-- Basu, D. *The Logic of Capital: An Introduction to Marxist Economic Theory.* 2021. Cambridge University Press. Available here: <https://doi.org/10.1017/9781108937559>
+- Basu, D. *The Logic of Capital: An Introduction to Marxist Economic Theory.* 2021. Cambridge University Press. Available here: <doi:10.1017/9781108937559>
 
 -   Moraitis, T. and Basu, D. "Alternative Approaches to Labor
     Values and Prices of Production: Theory and Evidence." *Structural Change and Economic Dynamics*, 2026. Available here:
-    <https://doi.org/10.1016/j.strueco.2026.03.009>
+    <doi:10.1016/j.strueco.2026.03.009>

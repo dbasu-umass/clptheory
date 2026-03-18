@@ -6,7 +6,7 @@ Authors@R:
 Description: Computes the uniform rate of profit, the vector of price of 
     production and the vector of direct prices; and also compute measures of deviation 
     between market prices, direct prices and prices of production.  
-    <https://doi.org/10.1016/j.strueco.2026.03.009>. You provide the  
+    <doi:10.1016/j.strueco.2026.03.009>. You provide the  
     input-output data and 'clptheory' does the calculations for you.
 License: MIT + file LICENSE
 Encoding: UTF-8
